@@ -39,10 +39,6 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 					$count = $rs_order['order_status'];
 					if ($count = 1) {
 						include('mystatus.php');
-					} elseif ($count = 2) {
-						include('mystatus.php');
-					} elseif ($count = 3) {
-						include('mystatus.php');
 					} elseif ($count = 4) {
 						include('mystatus.php');
 					}
