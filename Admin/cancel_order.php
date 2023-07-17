@@ -36,7 +36,7 @@
 						<?php
 
 						$query_my_order = "SELECT o.* ,o.member_name
-FROM tbl_order as o WHERE o.order_status=1 ";
+FROM tbl_order as o WHERE o.order_status=0 ";
 						$rs_my_order = mysqli_query($conn, $query_my_order);
 						//echo ($query_my_order);//test query
 						?>
@@ -50,7 +50,6 @@ FROM tbl_order as o WHERE o.order_status=1 ";
 									<th>ເບີໂທລະສັບ</th>
 									<th>ສະຖານະ</th>
 									<th>ວັນທີເດືອນປີສັ່ງຊື້</th>
-									<th>Review</th>
 								</tr>
 
 							</thead>
@@ -61,7 +60,6 @@ FROM tbl_order as o WHERE o.order_status=1 ";
 									<th>phone</th>
 									<th>status</th>
 									<th>date</th>
-									<th>review</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -79,18 +77,13 @@ FROM tbl_order as o WHERE o.order_status=1 ";
 										<td>
 											<?php $st = $rs['order_status'];
 											$count = $rs['order_status'];
-											if ($count == 1) {
+											if ($count == 0) {
 												include('mystatus.php');
 											}
 											?>
 										</td>
 										<td>
 											<?= $rs['order_date'] ?>
-										</td>
-										<td>
-											<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>&act=view"
-												target="_blank" class="btn btn-success btn-xs"><i
-													class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
 										</td>
 									</tr>
 								<?php } ?>

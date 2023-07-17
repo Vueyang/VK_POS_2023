@@ -12,7 +12,7 @@ ORDER BY o.order_id DESC
 $rs_my_order = mysqli_query($conn, $query_my_order);
 //echo ($query_my_order);//test query
 ?>
-<table id="example1" class="table table-bordered  table-hover table-striped">
+<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
 	<thead>
 		<tr class="danger">
 			<th width="7%">

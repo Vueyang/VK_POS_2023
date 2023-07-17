@@ -108,9 +108,9 @@ if ($last != 1) {
 							<div class="input-group">
 								<input type="text" name="p_id" class="form-control" placeholder="Scan Barcode"
 									autofocus>
-								<!-- <span class="input-group-append">
-					 <button class="btn btn-outline-success" type="submit">ค้นหา</button>
-					 </span> -->
+								<span class="input-group-append">
+									<button class="btn btn-outline-success" type="submit">ຄົ້ນຫາ</button>
+								</span>
 							</div>
 						</form>
 						<br>

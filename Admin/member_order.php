@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-	<link href="./css_js/css/styles.css" rel="stylesheet" />
-	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-</head>
 <?php
 
 $query_my_order = "SELECT o.* ,o.member_name
@@ -14,7 +5,8 @@ FROM tbl_order as o WHERE o.order_status=1 ";
 $rs_my_order = mysqli_query($conn, $query_my_order);
 //echo ($query_my_order);//test query
 ?>
-<table id="datatablesSimple">
+
+<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
 	<thead>
 
 		<tr>
@@ -27,7 +19,16 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 		</tr>
 
 	</thead>
-
+	<tfoot>
+		<tr>
+			<th>code</th>
+			<th>name</th>
+			<th>phone</th>
+			<th>status</th>
+			<th>date</th>
+			<th>review</th>
+		</tr>
+	</tfoot>
 	<tbody>
 		<?php foreach ($rs_my_order as $rs) { ?>
 			<tr>
@@ -52,19 +53,10 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 					<?= $rs['order_date'] ?>
 				</td>
 				<td>
-					<a href="review_detail.php?order_id=<?php echo $rs_order['order_id']; ?>&act=view" target="_blank"
+					<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>&act=view" target="_blank"
 						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
 				</td>
 			</tr>
 		<?php } ?>
 	</tbody>
 </table>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script src="./css_js/js/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="./css_js/assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-	crossorigin="anonymous"></script>
-<script src="./css_js/js/datatables-simple-demo.js"></script>
