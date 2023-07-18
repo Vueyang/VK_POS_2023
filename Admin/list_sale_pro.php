@@ -7,8 +7,7 @@ $menu = "sale_pro";
 <?php
 
 
-$query_product = " SELECT * FROM product_new " or die
-	("Error : " . mysqlierror($query_product));
+$query_product = " SELECT * FROM product_new ";
 $rs_product = mysqli_query($conn, $query_product);
 
 // $query_product = " SELECT * FROM tbl_product ORDER BY rand()" or die

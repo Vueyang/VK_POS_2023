@@ -88,7 +88,7 @@ FROM tbl_order as o WHERE o.order_status=1 ";
 											<?= $rs['order_date'] ?>
 										</td>
 										<td>
-											<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>&act=view"
+											<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>"
 												target="_blank" class="btn btn-success btn-xs"><i
 													class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
 										</td>
