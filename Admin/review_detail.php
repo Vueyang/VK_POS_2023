@@ -2,7 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include("header.php"); ?>
+<?php include("header.php");
+
+//echo '<pre>';
+//print_r($_SESSION);
+//echo '</pre>';
+//exit();
+error_reporting(error_reporting() & ~E_NOTICE);
+session_start();
+$mem_id = $_SESSION['mem_id'];
+//$mem_address = $_SESSION['mem_address'];
+?>
 
 <head>
 	<meta charset="UTF-8">
@@ -111,11 +121,17 @@
 				</div>
 				<br>
 				<div align="end">
-					<a href="list_sale_approved.php"><button type="button"
-							class="btn btn-outline-warning">ກັບຄືນ</button></a>
-					<a href="pay_order_subccess.php"><button type="button"
-							class="btn btn-outline-success">ຢືນຢັນ</button></a>
-					<a href="cancel_order.php"><button type="button" class="btn btn-outline-danger">ຍົກເລີກ</button></a>
+					<?php if ($mem_id != "") { ?>
+						<input type="hidden" name="mem_id" value="<?php echo $mem_id; ?>">
+						<a href="list_sale_approved.php"><button type="button"
+								class="btn btn-outline-warning">ກັບຄືນ</button></a>
+						<a href="confirm_customer.php?order_id=<?= $row['order_id'] ?>"><button type="button"
+								class="btn btn-outline-success">ຢືນຢັນ</button></a>
+						<a href="confirm_cancel_order.php?order_id=<?= $row['order_id'] ?>"><button type="button"
+								class="btn btn-outline-danger">ຍົກເລີກ</button></a>
+					<?php }
+
+					?>
 				</div>
 
 			</div>

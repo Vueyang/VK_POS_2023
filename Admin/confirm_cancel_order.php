@@ -13,7 +13,7 @@ $mem_id = $_POST['mem_id'];
 //$mem_address = $_SESSION['mem_address'];
 
 $order_id = @$_GET['order_id'];
-$sql = "UPDATE tbl_order SET order_status = 2 WHERE order_id = '$order_id'";
+$sql = "UPDATE tbl_order SET order_status = 0 WHERE order_id = '$order_id'";
 $result = mysqli_query($conn, $sql);
 if ($result) {
 	echo "<script>window.location='bill_detail_confirm.php'</script>";

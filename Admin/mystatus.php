@@ -5,11 +5,11 @@ if ($st == 0) {
 	echo '</font>';
 } elseif ($st == 1) {
 	echo '<font color="Gold">';
-	echo 'ລໍຖ້າຊຳລະເງີນ';
+	echo 'ລໍຖ້າການຢືນຢັນ';
 	echo '</font>';
 } elseif ($st == 2) {
 	echo '<font color="green">';
-	echo 'ຊຳລະເງີນແລ້ວ';
+	echo 'ຢືນຢັນສຳເລັດແລ້ວ';
 	echo '</font>';
 } elseif ($st == 3) {
 	echo '<font color="blue">';

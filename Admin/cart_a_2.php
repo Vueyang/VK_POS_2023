@@ -85,7 +85,7 @@ if ($act == 'update') {
 
 
 				$pqty = $row['amount']; //ประกาศตัวแปรจำนวนสินค้าใน stock
-				echo "<input type='text' name='amount[$p_id]' value='$qty' size='2'class='form-control' min='0'max='$pqty'/>";
+				echo "<input type='number' name='amount[$p_id]' value='$qty' size='2'class='form-control' min='0'max='$pqty'/>";
 
 
 				echo "<td align='right'>" . number_format($sum, 0) . "</td>";
