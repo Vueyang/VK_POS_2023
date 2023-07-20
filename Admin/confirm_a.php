@@ -20,19 +20,20 @@ $mem_address = $_SESSION['mem_address'];
 ?>
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<!--<section class="content-header">
 	<div class="container-fluid">
 		<h1>ລາຍການສີນຄ້າທີ່ສັ່ງຊື້ທັງໝົດ</h1>
-	</div><!-- /.container-fluid -->
-</section>
+	</div>
+	<!-- /.container-fluid
+</section>-->
 
 <!-- Main content -->
-<section class="content">
+<section class="content mt-4">
 
 
-	<div class="card card-gray">
+	<div class="card card-gray ">
 		<div class="card-header ">
-			<h3 class="card-title">ຢືນຢັນການສັ່ງຊື້</h3>
+			<h2>ລາຍການສີນຄ້າທີ່ສັ່ງຊື້ທັງໝົດ</h2>
 		</div>
 		<br>
 		<div class="card-body">

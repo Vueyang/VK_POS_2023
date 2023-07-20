@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include("header.php"); ?>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>VK_POS_2023</title>
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="./css_js/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./assets/adminlte.min.css">
+	<link rel="stylesheet" href="./assets/adminlte.min.css">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -17,121 +21,130 @@
 </style>
 
 <body>
-	<div class="container">
-		<div class="row border mt-4">
-			<?php
-
-			$order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
-			//echo $order_id;
-			$sqlpay = "SELECT d.* , p.* ,
-				m.mem_name,o.order_date,o.order_status,o.pay_amount2
-				FROM tbl_order_detail AS d
-				INNER JOIN product_new AS p ON d.pro_id=p.pro_id
-				INNER JOIN tbl_order AS o ON d.order_id=o.order_id
-				INNER JOIN tbl_member as m ON o.mem_id=m.mem_id
-				WHERE d.order_id=$order_id";
-			$querypay = mysqli_query($conn, $sqlpay);
-			$rowmember = mysqli_fetch_array($querypay);
-			$st = $rowmember['order_status'];
-
-			?>
-			<div class="bg-success p-2 fs-3 text-center" style="--bs-bg-opacity: .5;">
-				ການສັ່ງຊື້ສຳເລັດແລ້ວ
+	<div class="content" style="padding:20px;">
+		<div class="card card-gray">
+			<div class="card-header ">
+				<div align="start">
+					<h4>ການກວດສອບລາຍລະອຽກການສັ່ງຊື້</h4>
+				</div>
 			</div>
-			<div class="col">
-				<label for="text" class="fs-5">ລະຫັດການສັ່ງຊື້:</label>
-				<?= $order_id; ?> <br>
-				<label for="text" class="fs-5">ຊື່ ແລະ ນາມສະກຸນ (ລູກຄ້າ):</label>
-				<?= $rowmember['member_name'] ?>
-				<br>
-				<label for="text" class="fs-5">ທີ່ຢູ່ການຈັດສົ່ງສີນຄ້າ:</label>
-				<?= $rowmember['member_address'] ?> <br>
-				<label for="text" class="fs-5">ເບີໂທລະສັບ:</label>
-				<?= $rowmember['member_phone'] ?> <br>
-				<h5>ວ/ດ/ປ :
-					<?php echo $rowmember['order_date']; ?>
-				</h5>
-				<h5>ຜູ້ທຳລາຍການ :
-					<?php echo $rowmember['mem_name']; ?>
-					<br />
-					ສະຖານະ :
+			<br>
+			<div class="card-body">
+				<div class="row">
 					<?php
-					$cont = $st;
-					if ($cont == 1) {
-						include('mystatus.php');
-					}
-					?>
 
-				</h5>
-
-				<table border="0" align="center" class="table table-hover table-bordered table-striped">
-					<tr>
-						<td width="5%" align="center">ລຳດັບ</td>
-						<td width="10%" align="center">ຮູບ</td>
-						<td width="35%" align="center">ຊື່ສີນຄ້າ</td>
-						<td width="10%" align="center">ລາຄາ/ໜ່ວຍ</td>
-						<td width="10%" align="center">ຈຳນວນ</td>
-						<td width="15%" align="center">ລວມ(ກີບ)</td>
-					</tr>
-					<?php
-					$total = 0;
-					foreach ($querypay as $rspay) {
-						$total += $rspay['total']; //ราคารวม ทั้ง ตระกร้า
-						echo "<tr>";
-						echo "<td>" . @$i += 1 . "</td>";
-						echo "<td>" . "<img src='image/" . $rspay['image'] . "' width='100%'>" . "</td>";
-						echo "<td>" . $rspay["pro_name"] . "</td>";
-						echo "<td align='right'>" . number_format($rspay["price"], 0) . "</td>";
-						echo "<td align='right'>";
-						echo "<input type='number' name='p_c_qty' value='$rspay[p_c_qty]' size='2'class='form-control' disabled/></td>";
-						echo "<td align='right'>" . number_format($rspay['total'], 0) . "</td>";
-					}
-					include('../convertnumtothai.php');
-					?>
-					<tr>
-						<td></td>
-						<td align='right' colspan="3">
-							<b>ລາຄາລວມທັງໝົດ
-								(
-								<?php echo Convert($total); ?> )
-							</b>
-							<br>
-							<b>ຍອດເງີນທີ່ຮັບຊຳລະ
-								(
-								<?php echo Convert($rowmember['pay_amount2']); ?> )
-							</b>
-							<br>
+					$order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
+					//echo $order_id;
+					
+					$sql_d = "SELECT * FROM tbl_order o, tbl_order_detail d, product_new p WHERE d.pro_id=p.pro_id and o.order_id= d.order_id and d.order_id = $order_id ORDER BY o.order_status = 1 ";
+					$result_d = mysqli_query($conn, $sql_d);
+					$row = mysqli_fetch_array($result_d)
+						?>
+					<div class="col">
+						<h5>ລະຫັດການສັ່ງຊື້:
+							<?= $order_id; ?> <br>
+						</h5>
+						<h5>ຊື່ ແລະ ນາມສະກຸນ (ລູກຄ້າ):
+							<?= $row['member_name'] ?>
+						</h5>
+						<h5>ທີ່ຢູ່ການຈັດສົ່ງສີນຄ້າ:
+							<?= $row['member_address'] ?>
+						</h5>
+						<h5>ເບີໂທລະສັບ:
+							<?= $row['member_phone'] ?> <br>
+						</h5>
+						<h5>ວັນເດືອນປີສັ່ງຊື້ :
+							<?php echo $row['order_date']; ?>
+						</h5>
+						<h5>
+							ສະຖານະ :
 							<?php
-							$pay_amount3 = $rowmember['pay_amount2'] - $total;
-							//echo $pay_amount3;
+							$st = $row['order_status'];
+							$cont = $row['order_status'];
+							if ($cont == 1) {
+								include('mystatus.php');
+							}
 							?>
-							<b>ເງີນທອນ
-								(
-								<?php echo Convert($pay_amount3); ?> )
 
-							</b>
+						</h5>
 
-						</td>
-						<td align='right' colspan='2'>
-							<b>
-								<?php echo number_format($total, 0); ?> Kip
-							</b>
-							<br>
-							<b>
-								<?php echo number_format($rowmember['pay_amount2'], 0); ?> Kip
-							</b>
-							<br>
-							<b>
-								<?php echo number_format($pay_amount3, 0); ?> Kip
-							</b>
-						</td>
-					</tr>
-				</table>
+						<table border="0" align="center" class="table table-hover table-bordered table-striped">
+							<tr>
+								<td width="5%" align="center">ລຳດັບ</td>
+								<td width="10%" align="center">ຮູບ</td>
+								<td width="35%" align="center">ຊື່ສີນຄ້າ</td>
+								<td width="10%" align="center">ຈຳນວນ</td>
+								<td width="10%" align="center">ລາຄາ/ໜ່ວຍ</td>
+								<td width="15%" align="center">ລວມ(ກີບ)</td>
+							</tr>
+							<?php
+							$total = 0;
+							foreach ($result_d as $rspay) {
+								$total += $rspay['total']; //ราคารวม ทั้ง ตระกร้า
+								echo "<tr>";
+								echo "<td>" . @$i += 1 . "</td>";
+								echo "<td>" . "<img src='image/" . $rspay['image'] . "' width='100%'>" . "</td>";
+								echo "<td>" . $rspay["pro_name"] . "</td>";
+								echo "<td align='right'>" . number_format($rspay["price"], 0) . "</td>";
+								echo "<td align='right'>";
+								echo "<input type='number' name='p_c_qty' value='$rspay[p_c_qty]' size='2'class='form-control' disabled/></td>";
+								echo "<td align='right'>" . number_format($rspay['total'], 0) . "</td>";
+							}
+							include('../convertnumtothai.php');
+							?>
+							<tr>
+								<td></td>
+								<td align='right' colspan="3">
+									<b>ລາຄາລວມທັງໝົດ
+										(
+										<?php echo Convert($total); ?> )
+									</b>
+								</td>
+								<td align='right' colspan='2'>
+									<b>
+										<?php echo number_format($total, 0); ?> Kip
+									</b>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<br>
+				<div align="end">
+					<a href="list_sale_approved.php"><button type="button"
+							class="btn btn-outline-warning">ກັບຄືນ</button></a>
+					<a href="pay_order_subccess.php"><button type="button"
+							class="btn btn-outline-success">ຢືນຢັນ</button></a>
+					<a href="cancel_order.php"><button type="button" class="btn btn-outline-danger">ຍົກເລີກ</button></a>
+				</div>
+
 			</div>
 		</div>
-		<br>
-		<a class="btn btn-success" onclick="window.print()">Print</a>
 	</div>
+	<?php include('footer.php'); ?>
+	<script>
+		$(function () {
+			$(".datatable").DataTable();
+			// $('#example2').DataTable({
+			//   "paging": true,
+			//   "lengthChange": false,
+			//   "searching": false,
+			//   "ordering": true,
+			//   "info": true,
+			//   "autoWidth": false,
+			// http://fordev22.com/
+			// });
+		});
+	</script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script src="./css_js/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="./css_js/assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+	crossorigin="anonymous"></script>
+<script src="./css_js/js/datatables-simple-demo.js"></script>
 
 </html>

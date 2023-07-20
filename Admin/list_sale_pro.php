@@ -7,8 +7,8 @@ $menu = "sale_pro";
 <?php
 
 
-$query_product = " SELECT * FROM product_new ";
-$rs_product = mysqli_query($conn, $query_product);
+$query_product_new = " SELECT * FROM product_new ";
+$rs_product = mysqli_query($conn, $query_product_new);
 
 // $query_product = " SELECT * FROM tbl_product ORDER BY rand()" or die
 // ("Error : ".mysqlierror($query_product));
@@ -20,9 +20,9 @@ $rs_product = mysqli_query($conn, $query_product);
 
 <?php
 
-$query = mysqli_query($conn, "SELECT COUNT(pro_id) FROM `product_new`");
+$query1 = mysqli_query($conn, "SELECT COUNT(pro_id) FROM `product_new`");
 
-$row = mysqli_fetch_row($query);
+$row = mysqli_fetch_row($query1);
 
 $rows = $row[0];
 $page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
