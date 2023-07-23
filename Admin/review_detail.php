@@ -64,7 +64,7 @@ $mem_id = $_SESSION['mem_id'];
 							<?= $row['member_phone'] ?> <br>
 						</h5>
 						<h5>ວັນເດືອນປີສັ່ງຊື້ :
-							<?php echo $row['order_date']; ?>
+							<?php echo date('d/m/Y H:i:s:m', strtotime($row['order_date'])); ?>
 						</h5>
 						<h5>
 							ສະຖານະ :

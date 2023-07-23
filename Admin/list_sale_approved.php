@@ -67,6 +67,7 @@ FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
 							<thead>
 
 								<tr>
+									<th>ລຳດັບ</th>
 									<th>ລະຫັດການສັ່ງຊື້</th>
 									<th>ຊື່ລູກຄ້າ</th>
 									<th>ລວມເປັນເງີນ</th>
@@ -81,6 +82,9 @@ FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
 							<tbody>
 								<?php foreach ($rs_my_order as $rs) { ?>
 									<tr>
+										<td>
+											<?= $l += 1 ?>
+										</td>
 										<td>
 											<?= $rs['order_id'] ?>
 										</td>
@@ -102,7 +106,7 @@ FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
 											?>
 										</td>
 										<td>
-											<?= $rs['order_date'] ?>
+											<?php echo date('d/m/Y H:i:s:m', strtotime($rs['order_date'])); ?>
 										</td>
 										<td>
 											<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>"

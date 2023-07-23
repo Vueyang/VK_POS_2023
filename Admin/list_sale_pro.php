@@ -124,16 +124,17 @@ if ($last != 1) {
 										<div class="card" style="">
 											<img width="100%" src="./image/<?php echo $rs_prd['image']; ?>" class="card-img-top"
 												alt="<?php echo $rs_prd['pro_name']; ?>"
-												title="<?php echo $rs_prd['pro_name']; ?>" width="50px" height="120px">
+												title="<?php echo $rs_prd['pro_name']; ?>" width="40px" height="160px">
 											<div class="card-body">
-												<h5 class="card-title">
-													<?php echo $rs_prd['pro_name']; ?>
-												</h5>
-												<p class="card-text">
-													<?php echo number_format($rs_prd['price'], 0); ?> ກີບ
-												</p>
+												<center>
+													<h4 class="card-text">
+														<?php echo $rs_prd['pro_name']; ?>
+													</h4>
+													<p class="card-text text-danger h5">
+														<?php echo number_format($rs_prd['price'], 0); ?> ກີບ
+													</p>
 
-
+												</center>
 												<?php if ($rs_prd['amount'] > 0) { ?>
 													<center>
 
@@ -179,29 +180,13 @@ if ($last != 1) {
 			</div>
 
 		</div>
+		<div class="card-footer" align="end">
+			<div id="pagination_controls">
 
+				<?php echo $paginationCtrls; ?>
 
-
-
-
-
-
-
-
-
-		<div class="card-footer">
-			<center>
-				<div id="pagination_controls">
-
-					<?php echo $paginationCtrls; ?>
-
-				</div>
-			</center>
+			</div>
 		</div>
-
-
-
-
 </section>
 <!-- /.content -->
 

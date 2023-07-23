@@ -45,7 +45,7 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 					?>
 				</td>
 				<td>
-					<?php echo date('d/m/y H:i:s', strtotime($rs_order['order_date'])); ?>
+					<?php echo date('d/m/y H:i:s:m', strtotime($rs_order['order_date'])); ?>
 				</td>
 				<td>
 					<a href="list_sale.php?order_id=<?php echo $rs_order['order_id']; ?>&act=view" target="_blank"

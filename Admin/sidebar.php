@@ -105,7 +105,7 @@
 
 
 				<li class="nav-item">
-					<a href="" class="nav-link <?php if ($menu == "type") {
+					<a href="add_to_card.php" class="nav-link <?php if ($menu == "type") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fa fa-copy"></i>

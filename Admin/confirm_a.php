@@ -157,7 +157,6 @@ $mem_address = $_SESSION['mem_address'];
 		//   "ordering": true,
 		//   "info": true,
 		//   "autoWidth": false,
-		// http://fordev22.com/
 		// });
 	});
 </script>

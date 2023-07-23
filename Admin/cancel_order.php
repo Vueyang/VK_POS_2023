@@ -83,7 +83,7 @@ FROM tbl_order as o WHERE o.order_status=0 ";
 											?>
 										</td>
 										<td>
-											<?= $rs['order_date'] ?>
+											<?= date('d/m/Y H:i:s:m', strtotime($rs['order_date'])) ?>
 										</td>
 									</tr>
 								<?php } ?>
