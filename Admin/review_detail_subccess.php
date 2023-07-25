@@ -77,9 +77,7 @@ $mem_id = $_SESSION['mem_id'];
 							?>
 
 						</h5>
-						<h5>ພະນັກງານຜູ້ທຳລາຍການນີ້:
-							<?= $_SESSION['mem_name'] ?>
-						</h5>
+
 						<table border="0" align="center" class="table table-hover table-bordered table-striped">
 							<tr>
 								<td width="5%" align="center">ລຳດັບ</td>

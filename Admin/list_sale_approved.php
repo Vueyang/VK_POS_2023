@@ -44,83 +44,87 @@
 						</div>
 					</div>
 				</form>
-				<div class="row">
-					<div class="col">
-						<?php
-						$dt1 = @$_POST['dt1'];
-						$dt2 = @$_POST['dt2'];
-						$date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query ເອົາຂໍ້ມູນຈາກວັນທີ່ທີ່ເຮົາເລືອກຈາກເລີ່ມຕົ້ນຖືວັນທີ່ເຮົາຕ້ອງການມາສະແດງ
-						if (($dt1 != "") & ($dt2 != "")) {
-							echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
-							$query_my_order = "SELECT o.* ,o.member_name
+				<form name="form" method="POST" action="?t_id=<?php echo $t_id; ?>&b_id=<?php echo $b_id; ?>">
+					<div class="row">
+						<div class="col">
+							<?php
+							$dt1 = @$_POST['dt1'];
+							$dt2 = @$_POST['dt2'];
+							$date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query ເອົາຂໍ້ມູນຈາກວັນທີ່ທີ່ເຮົາເລືອກຈາກເລີ່ມຕົ້ນຖືວັນທີ່ເຮົາຕ້ອງການມາສະແດງ
+							if (($dt1 != "") & ($dt2 != "")) {
+								echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
+								$query_my_order = "SELECT o.* ,o.member_name
 FROM tbl_order as o WHERE o.order_status=1 and order_date BETWEEN '$dt1' and '$date_to_date' ORDER BY order_date DESC";
-						} else {
-							$query_my_order = "SELECT o.* ,o.member_name
+							} else {
+								$query_my_order = "SELECT o.* ,o.member_name
 FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
-						}
+							}
 
-						$rs_my_order = mysqli_query($conn, $query_my_order);
-						//echo ($query_my_order);//test query
-						?>
+							$rs_my_order = mysqli_query($conn, $query_my_order);
+							//echo ($query_my_order);//test query
+							?>
 
-						<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
-							<thead>
+							<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
+								<thead>
 
-								<tr>
-									<th>ລຳດັບ</th>
-									<th>ລະຫັດການສັ່ງຊື້</th>
-									<th>ຊື່ລູກຄ້າ</th>
-									<th>ລວມເປັນເງີນ</th>
-									<th>ເບີໂທລະສັບ</th>
-									<th>ສະຖານະ</th>
-									<th>ວັນທີເດືອນປີສັ່ງຊື້</th>
-									<th>Review</th>
-								</tr>
-
-							</thead>
-
-							<tbody>
-								<?php foreach ($rs_my_order as $rs) { ?>
 									<tr>
-										<td>
-											<?= $l += 1 ?>
-										</td>
-										<td>
-											<?= $rs['order_id'] ?>
-										</td>
-										<td>
-											<?= $rs['member_name'] ?>
-										</td>
-										<td>
-											<?= number_format($rs['pay_amount']) ?>
-										</td>
-										<td>
-											<?= $rs['member_phone'] ?>
-										</td>
-										<td>
-											<?php $st = $rs['order_status'];
-											$count = $rs['order_status'];
-											if ($count == 1) {
-												include('mystatus.php');
-											}
-											?>
-										</td>
-										<td>
-											<?php echo date('d/m/Y H:i:s:m', strtotime($rs['order_date'])); ?>
-										</td>
-										<td>
-											<a href="review_detail.php?order_id=<?php echo $rs['order_id']; ?>"
-												target="_blank" class="btn btn-success btn-xs"><i
-													class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
-										</td>
+										<th>ລຳດັບ</th>
+										<th>ລະຫັດການສັ່ງຊື້</th>
+										<th>ຊື່ລູກຄ້າ</th>
+										<th>ລວມເປັນເງີນ</th>
+										<th>ເບີໂທລະສັບ</th>
+										<th>ສະຖານະ</th>
+										<th>ວັນທີເດືອນປີສັ່ງຊື້</th>
+										<th>Review</th>
 									</tr>
-								<?php } ?>
-							</tbody>
-						</table>
+
+								</thead>
+
+								<tbody>
+									<?php foreach ($rs_my_order as $rs) { ?>
+										<tr>
+											<td>
+												<?= $l += 1 ?>
+											</td>
+											<td>
+												<?= $rs['order_id'] ?>
+											</td>
+											<td>
+												<?= $rs['member_name'] ?>
+											</td>
+											<td>
+												<?= number_format($rs['pay_amount']) ?>
+											</td>
+											<td>
+												<?= $rs['member_phone'] ?>
+											</td>
+											<td>
+												<?php $st = $rs['order_status'];
+												$count = $rs['order_status'];
+												if ($count == 1) {
+													include('mystatus.php');
+												}
+												?>
+											</td>
+											<td>
+												<?php echo date('d/m/Y H:i:s:m', strtotime($rs['order_date'])); ?>
+											</td>
+											<td>
+												<button
+													class="btn btn-primary grid d-flex hstack gap-3 justify-content-center"
+													type="button"
+													onclick="window.location='review_detail.php?order_id=<?= $rs['order_id'] ?>';"><i
+														class="nav-icon fas fa-clipboard-list"></i>ເບີ່ງລາຍການ</button>
+											</td>
+										</tr>
+									<?php } ?>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
-			<div class="card-footer">
+			<div class=" card-footer">
 
 			</div>
 

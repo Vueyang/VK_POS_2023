@@ -29,8 +29,6 @@ $mem_address = $_SESSION['mem_address'];
 
 <!-- Main content -->
 <section class="content mt-4">
-
-
 	<div class="card card-gray ">
 		<div class="card-header ">
 			<h2>ລາຍການສີນຄ້າທີ່ສັ່ງຊື້ທັງໝົດ</h2>
@@ -43,7 +41,6 @@ $mem_address = $_SESSION['mem_address'];
 						<div class="col-12 col-sm-12 col-md-12">
 							<form id="frmcart" name="frmcart" method="post" action="saveorder_a.php">
 								<?php if ($p_id != '') { ?>
-
 									<h4>ຢືນຢັນລາຍການສັ່ງຊື້<br>
 										ຊື່ຜູ້ :
 										<?php echo $row_member['mem_name']; ?> <br />Address :
@@ -162,5 +159,3 @@ $mem_address = $_SESSION['mem_address'];
 </script>
 
 </body>
-
-</html>

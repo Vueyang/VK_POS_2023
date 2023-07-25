@@ -50,6 +50,8 @@ FROM tbl_order as o WHERE o.order_status=0 ";
 									<th>ເບີໂທລະສັບ</th>
 									<th>ສະຖານະ</th>
 									<th>ວັນທີເດືອນປີສັ່ງຊື້</th>
+									<th>ວັນທີເດືອນປີຍົກເລີກການສັ່ງຊື້</th>
+									<th>review</th>
 								</tr>
 
 							</thead>
@@ -60,6 +62,8 @@ FROM tbl_order as o WHERE o.order_status=0 ";
 									<th>phone</th>
 									<th>status</th>
 									<th>date</th>
+									<th>confirm_date</th>
+									<th>review</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -84,6 +88,14 @@ FROM tbl_order as o WHERE o.order_status=0 ";
 										</td>
 										<td>
 											<?= date('d/m/Y H:i:s:m', strtotime($rs['order_date'])) ?>
+										</td>
+										<td>
+											<?= date('d/m/Y H:i:s:m', strtotime($rs['confirm_date'])) ?>
+										</td>
+										<td>
+											<a href="review_detail_cancelOk.php?order_id=<?php echo $rs['order_id']; ?>"
+												target="_blank" class="btn btn-success btn-xs"><i
+													class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
 										</td>
 									</tr>
 								<?php } ?>

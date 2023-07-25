@@ -1,6 +1,5 @@
 <?php include('connetdb.php'); ?>
-<!DOCTYPE html>
-<html lang="en">
+<?php $menu = "list_sale_approved" ?>;
 
 <?php include("header.php");
 
@@ -15,9 +14,7 @@ $mem_id = $_SESSION['mem_id'];
 ?>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>VK_POS_2023</title>
+
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="./css_js/css/styles.css" rel="stylesheet" />
 	<link rel="stylesheet" href="./assets/adminlte.min.css">
@@ -38,11 +35,9 @@ $mem_id = $_SESSION['mem_id'];
 					<h4>ການກວດສອບລາຍລະອຽກການສັ່ງຊື້</h4>
 				</div>
 			</div>
-			<br>
 			<div class="card-body">
 				<div class="row">
 					<?php
-
 					$order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
 					//echo $order_id;
 					
@@ -77,7 +72,9 @@ $mem_id = $_SESSION['mem_id'];
 							?>
 
 						</h5>
-
+						<h5>ພະນັກງານຜູ້ທຳລາຍການນີ້:
+							<?= $_SESSION['mem_name'] ?>
+						</h5>
 						<table border="0" align="center" class="table table-hover table-bordered table-striped">
 							<tr>
 								<td width="5%" align="center">ລຳດັບ</td>
@@ -162,5 +159,3 @@ $mem_id = $_SESSION['mem_id'];
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 	crossorigin="anonymous"></script>
 <script src="./css_js/js/datatables-simple-demo.js"></script>
-
-</html>

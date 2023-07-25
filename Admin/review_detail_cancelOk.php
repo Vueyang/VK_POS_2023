@@ -46,7 +46,7 @@ $mem_id = $_SESSION['mem_id'];
 					$order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
 					//echo $order_id;
 					
-					$sql_d = "SELECT * FROM tbl_order o, tbl_order_detail d, product_new p WHERE d.pro_id=p.pro_id and o.order_id= d.order_id and d.order_id = $order_id ORDER BY o.order_status = 2 ";
+					$sql_d = "SELECT * FROM tbl_order o, tbl_order_detail d, product_new p WHERE d.pro_id=p.pro_id and o.order_id= d.order_id and d.order_id = $order_id ORDER BY o.order_status = 0 ";
 					$result_d = mysqli_query($conn, $sql_d);
 					$row = mysqli_fetch_array($result_d)
 						?>
@@ -71,7 +71,7 @@ $mem_id = $_SESSION['mem_id'];
 							<?php
 							$st = $row['order_status'];
 							$cont = $row['order_status'];
-							if ($cont == 2) {
+							if ($cont == 0) {
 								include('mystatus.php');
 							}
 							?>
