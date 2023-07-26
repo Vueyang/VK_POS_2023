@@ -226,3 +226,15 @@
 	})
 </script>
 <?php } ?>
+
+
+<?php if (isset($_GET['confirm_order_error'])) { ?>
+<script>
+	Swal.fire({
+		title: 'Error',
+		text: 'ຂໍ້ມູນມີບາງຢ່າງຜິດພາບ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>

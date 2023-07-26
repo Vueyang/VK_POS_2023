@@ -24,16 +24,13 @@ $order_id = @$_GET['order_id'];
 $sql = "UPDATE tbl_order SET order_status = 0, mem_id = '$mem_id', confirm_date = '$datetime' WHERE order_id = '$order_id'";
 $result = mysqli_query($conn, $sql);
 if ($result) {
-	//echo "<script>window.location='cancel_order.php'</script>";
 	echo "<script type='text/javascript'>";
-	//echo "alert('แก้ไขข้อมูลเรียบร้อย');";
 	echo "window.location = 'cancel_order.php?order_cancel=cl'; ";
 	echo "</script>";
 } else {
 	echo "<script type='text/javascript'>";
-	echo "window.location = 'list_mem.php?order_cancel_error=cl'; ";
+	echo "window.location = 'list_sale_approved.php?order_cancel_error=cl'; ";
 	echo "</script>";
-	//echo "<script>alert('ຂໍ້ມູນມີບາງຢ່າງຜິດພາບ')</script>";
 }
 mysqli_close($conn);
 ?>

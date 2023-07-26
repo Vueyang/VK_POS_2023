@@ -31,7 +31,7 @@
 						class="btn btn-outline-success">ຢືນຢັນສຳເລັດແລ້ວ</button></a>
 				<a href="cancel_order.php"><button type="button" class="btn btn-outline-danger">ຍົກເລີກແລ້ວ</button></a>
 				<br>
-				<form name="frm" method="POST" action="list_sale_approved.php">
+				<form name="frm" method="POST" action="pay_orde_subccess.php">
 					<div class="row mt-4">
 						<div class="col-sm-2">
 							<input type="date" name="dt1" class="form-control">
@@ -44,7 +44,7 @@
 						</div>
 					</div>
 				</form>
-				<div class="row">
+				<form name="form" method="POST" action="?=t_id<?php echo $t_id ?>&b_id<?php echo $b_id ?>">
 					<div class="col">
 						<?php
 						$dt1 = @$_POST['dt1'];
@@ -53,7 +53,7 @@
 						if (($dt1 != "") & ($dt2 != "")) {
 							echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
 							$query_my_order = "SELECT o.* ,o.member_name
-FROM tbl_order as o WHERE o.order_status=1 and order_date BETWEEN '$dt1' and '$date_to_date' ORDER BY order_date DESC";
+FROM tbl_order as o WHERE o.order_status=2 and order_date BETWEEN '$dt1' and '$date_to_date' ORDER BY order_date DESC";
 						} else {
 							$query_my_order = "SELECT o.* ,o.member_name
 FROM tbl_order as o WHERE o.order_status=2 ORDER BY order_date DESC";
@@ -74,6 +74,7 @@ FROM tbl_order as o WHERE o.order_status=2 ORDER BY order_date DESC";
 									<th>ເບີໂທລະສັບ</th>
 									<th>ສະຖານະ</th>
 									<th>ວັນທີເດືອນປີສັ່ງຊື້</th>
+									<th>ວັນທີເດືອນປີຢືນຢັນ</th>
 									<th>Review</th>
 								</tr>
 
@@ -109,16 +110,22 @@ FROM tbl_order as o WHERE o.order_status=2 ORDER BY order_date DESC";
 											<?php echo date('d/m/Y H:i:s:m', strtotime($rs['order_date'])); ?>
 										</td>
 										<td>
-											<a href="review_detail_subccess.php?order_id=<?php echo $rs['order_id']; ?>"
-												target="_blank" class="btn btn-success btn-xs"><i
-													class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
+											<?php echo date('d/m/Y H:i:s:m', strtotime($rs['confirm_date'])); ?>
+										</td>
+										<td>
+											<button class="btn btn-primary grid d-flex hstack gap-3 justify-content-center"
+												type="button"
+												onclick="window.location='review_detail_subccess.php?order_id=<?= $rs['order_id'] ?>';"><i
+													class="nav-icon fas fa-clipboard-list"></i>ເບີ່ງລາຍການ</button>
 										</td>
 									</tr>
 								<?php } ?>
 							</tbody>
 						</table>
 					</div>
-				</div>
+				</form>
+			</div>
+			<div class="row">
 			</div>
 			<div class="card-footer">
 

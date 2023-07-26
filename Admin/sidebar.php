@@ -16,13 +16,14 @@
 
 	<a href="" class="brand-link bg-gray">
 		<img src="./image/vk.jpg" alt="AdminLTE Logo" class="brand-image">
-		<span class="brand-text font-weight-light">FD22 | POS System</span>
+		<span class="brand-text font-weight-light">VK2023 | POS System</span>
 	</a>
 
 	<!-- Sidebar -->
+	<br>
 	<div class="sidebar">
 		<!-- Sidebar user (optional) -->
-		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+		<div class="user-panel mt-2 pb-3 mb-3 d-flex">
 			<div class="image">
 				<img src="./image/<?php echo $_SESSION['mem_img']; ?>" class="img-circle elevation-2" alt="User Image">
 				<!-- <img src="../assets/img/FD22.png" class="img-circle elevation-2" alt="User Image"> -->
@@ -39,6 +40,22 @@
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<!-- nav-compact -->
+
+			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+			   with font-awesome or any other icon font library -->
+				<li class="nav-header">Dashboard</li>
+				<li class="nav-item">
+					<a href="report_p5.php" class="nav-link <?php if ($menu == "report_p5") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-crown text-fuchsia"></i>
+						<p>5 ອັນດັບສີນຄ້າຍອດຂາຍດີ</p>
+					</a>
+				</li>
+			</ul>
+			<hr>
 			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
@@ -122,24 +139,9 @@
 					</a>
 				</li>
 			</ul>
-			<hr>
-			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
-				data-accordion="false">
-				<!-- Add icons to the links using the .nav-icon class
-			   with font-awesome or any other icon font library -->
-				<li class="nav-header">Dashboard</li>
-				<li class="nav-item">
-					<a href="report_p5.php" class="nav-link <?php if ($menu == "report_p5") {
-						echo "active";
-					} ?> ">
-						<i class="nav-icon fas fa-crown text-fuchsia"></i>
-						<p>5 ອັນດັບສີນຄ້າຍອດຂາຍດີ</p>
-					</a>
-				</li>
-			</ul>
-			<hr>
 
-			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+
+			<!--<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
 
 				<li class="nav-item">
@@ -149,7 +151,7 @@
 					</a>
 				</li>
 
-			</ul>
+			</ul>-->
 		</nav>
 		<!-- /.sidebar-menu -->
 		<!-- http://fordev22.com/ -->

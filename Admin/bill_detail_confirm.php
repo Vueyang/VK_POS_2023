@@ -11,6 +11,7 @@
 error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
 $mem_id = $_SESSION['mem_id'];
+//$order_id = $_POST['order_id'];
 //$mem_address = $_SESSION['mem_address'];
 ?>
 
@@ -32,13 +33,10 @@ $mem_id = $_SESSION['mem_id'];
 
 <body>
 	<div class="content" style="padding:20px;">
-		<div class="card card-gray">
-			<div class="card-header ">
-				<div align="start">
-					<h4>ການກວດສອບລາຍລະອຽກການສັ່ງຊື້</h4>
-				</div>
-			</div>
-			<br>
+		<div class="card card-gray mt-4">
+			<center class="mt-4">
+				<h4>ຮ້ານ VK_POS_2023</h4>
+			</center>
 			<div class="card-body">
 				<div class="row">
 					<?php
@@ -52,7 +50,7 @@ $mem_id = $_SESSION['mem_id'];
 						?>
 					<div class="col">
 						<h5>ລະຫັດການສັ່ງຊື້:
-							<?= $order_id; ?> <br>
+							<?= $order_id; ?>
 						</h5>
 						<h5>ຊື່ ແລະ ນາມສະກຸນ (ລູກຄ້າ):
 							<?= $row['member_name'] ?>
@@ -61,7 +59,7 @@ $mem_id = $_SESSION['mem_id'];
 							<?= $row['member_address'] ?>
 						</h5>
 						<h5>ເບີໂທລະສັບ:
-							<?= $row['member_phone'] ?> <br>
+							<?= $row['member_phone'] ?>
 						</h5>
 						<h5>ວັນເດືອນປີສັ່ງຊື້ :
 							<?php echo date('d/m/Y H:i:s:m', strtotime($row['order_date'])); ?>
@@ -123,19 +121,8 @@ $mem_id = $_SESSION['mem_id'];
 				</div>
 				<br>
 				<div align="end">
-					<?php if ($mem_id != "") { ?>
-						<input type="hidden" name="mem_id" value="<?php echo $mem_id; ?>">
-						<a href="list_sale_approved.php"><button type="button"
-								class="btn btn-outline-warning">ກັບຄືນ</button></a>
-						<a href="confirm_customer.php?order_id=<?= $row['order_id'] ?>"><button type="button"
-								class="btn btn-outline-success">ຢືນຢັນ</button></a>
-						<a href="confirm_cancel_order.php?order_id=<?= $row['order_id'] ?>"><button type="button"
-								class="btn btn-outline-danger">ຍົກເລີກ</button></a>
-					<?php }
-
-					?>
+					<a href="#" target="" class="btn btn-success" onclick="window.print()">Print</a>
 				</div>
-
 			</div>
 		</div>
 	</div>
