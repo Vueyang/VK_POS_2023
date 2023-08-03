@@ -23,9 +23,9 @@ include('connetdb.php')
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
-				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊີກ</h3>
+				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊິກ</h3>
 				<div align="right">
-					<a class=" btn btn-primary" href="frm_add_mem.php"><i class="fa fa-plus"></i>ເພີ່ມສີນຄ້າໄໝ່</a>
+					<a class=" btn btn-primary" href="frm_add_mem.php"><i class="fa fa-plus"></i>ເພີ່ມສະມາຊິກ</a>
 				</div>
 			</div>
 			<br>
@@ -50,7 +50,7 @@ include('connetdb.php')
 									<th>ນາມສະກຸນ</th>
 									<th>ເບີໂທ</th>
 									<th>ອີແມວ</th>
-									<th>ຜູ້ຈັກການລະບົບ</th>
+									<th>ໜຳແໜ່ງ</th>
 									<th>review</th>
 
 								</tr>

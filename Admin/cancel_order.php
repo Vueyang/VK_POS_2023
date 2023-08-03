@@ -120,7 +120,7 @@ FROM tbl_order as o WHERE o.order_status=0 ORDER BY order_date DESC";
 												<button
 													class="btn btn-primary grid d-flex hstack gap-3 justify-content-center"
 													type="button"
-													onclick="window.location='review_detail.php?order_id=<?= $rs['order_id'] ?>';"><i
+													onclick="window.location='review_detail_cancelOK.php?order_id=<?= $rs['order_id'] ?>';"><i
 														class="nav-icon fas fa-clipboard-list"></i>ເບີ່ງລາຍການ</button>
 											</td>
 										</tr>

@@ -1,6 +1,6 @@
 <?php
 $menu = "report_p5"
-?>
+	?>
 <?php include("header.php"); ?>
 <?php
 
@@ -11,8 +11,8 @@ INNER JOIN tbl_order as ord ON ord.order_id=o.order_id
 WHERE ord.order_status =4
 GROUP BY o.pro_id ORDER BY  totol DESC LIMIT 5
 "
-or die
-("Error : ".mysqlierror($query_my_order));
+	or die
+	("Error : " . mysqlierror($query_my_order));
 $rs_my_order = mysqli_query($conn, $query_my_order);
 //echo ($query_my_order);//test query
 //exit();
@@ -52,15 +52,15 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 						</thead>
 						<tbody>
 							<?php
-                foreach($rs_my_order as $rs_order){
-                echo"<tr>";
-                  echo "<td>".$rs_order['pro_name']."</td>";
-                  echo "<td>".$rs_order['totol']."</td>";
-                  
-                  
-                echo"</tr>";
-                }
-                ?>
+							foreach ($rs_my_order as $rs_order) {
+								echo "<tr>";
+								echo "<td>" . $rs_order['pro_name'] . "</td>";
+								echo "<td>" . $rs_order['totol'] . "</td>";
+
+
+								echo "</tr>";
+							}
+							?>
 
 						</tbody>
 					</table>
@@ -81,76 +81,76 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 
 
 <script>
-// Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
+	// Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
 
-// Create the chart
-Highcharts.chart('container', {
-	data: {
-		table: 'datatable',
-	},
-	chart: {
-		type: 'column'
-	},
-	title: {
-		text: 'ລາຍງານພາບລວມຍອດຂາຍ 5 ອັນດັບທີ່ຂາຍດີ',
-		style: {
-
-		}
-	},
-	accessibility: {
-		announceNewData: {
-			enabled: true
-		}
-	},
-	xAxis: {
-		type: 'category'
-	},
-	yAxis: {
-		title: {
-			text: 'ຍອດຂາຍ'
-		}
-
-	},
-	legend: {
-		enabled: false
-	},
-	plotOptions: {
-		series: {
-			colorByPoint: true,
-
-			borderWidth: 2,
-			dataLabels: {
-				enabled: true,
-
-				style: {
-
-				},
-			}
-		}
-	},
-	/*xAxis: {
-		//gridLineWidth: 1,
-		labels: {
-			style: {
-
-				font: '11px Trebuchet MS, Verdana, sans-serif'
-			}
+	// Create the chart
+	Highcharts.chart('container', {
+		data: {
+			table: 'datatable',
+		},
+		chart: {
+			type: 'column'
 		},
 		title: {
-			text: 'สินค้า',
+			text: 'ລາຍງານພາບລວມຍອດຂາຍ 5 ອັນດັບທີ່ຂາຍດີ',
 			style: {
 
-				fontWeight: 'bold',
-				fontSize: '12px',
-				fontFamily: 'Trebuchet MS, Verdana, sans-serif'
 			}
-		}
-	},*/
-	tooltip: {
-		headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-		pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> of total<br/>'
-	},
-});
+		},
+		accessibility: {
+			announceNewData: {
+				enabled: true
+			}
+		},
+		xAxis: {
+			type: 'category'
+		},
+		yAxis: {
+			title: {
+				text: 'ຍອດຂາຍ'
+			}
+
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			series: {
+				colorByPoint: true,
+
+				borderWidth: 2,
+				dataLabels: {
+					enabled: true,
+
+					style: {
+
+					},
+				}
+			}
+		},
+		/*xAxis: {
+			//gridLineWidth: 1,
+			labels: {
+				style: {
+	
+					font: '11px Trebuchet MS, Verdana, sans-serif'
+				}
+			},
+			title: {
+				text: 'สินค้า',
+				style: {
+	
+					fontWeight: 'bold',
+					fontSize: '12px',
+					fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+				}
+			}
+		},*/
+		tooltip: {
+			headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+			pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> of total<br/>'
+		},
+	});
 </script>
 
 
@@ -159,18 +159,18 @@ Highcharts.chart('container', {
 
 <?php include('footer2.php'); ?>
 <script>
-$(function() {
-	$(".datatable").DataTable();
-	// $('#example2').DataTable({
-	//   "paging": true,
-	//   "lengthChange": false,
-	//   "searching": false,
-	//   "ordering": true,
-	//   "info": true,
-	//   "autoWidth": false,
-	// http://fordev22.com/
-	// });
-});
+	$(function () {
+		$(".datatable").DataTable();
+		// $('#example2').DataTable({
+		//   "paging": true,
+		//   "lengthChange": false,
+		//   "searching": false,
+		//   "ordering": true,
+		//   "info": true,
+		//   "autoWidth": false,
+		// http://fordev22.com/
+		// });
+	});
 </script>
 
 </body>

@@ -1,7 +1,7 @@
 <?php
 $menu = "member";
 include('connetdb.php')
-?>
+	?>
 <?php include("header.php"); ?>
 <?php
 $query_member = "SELECT * FROM tbl_member";
@@ -14,25 +14,25 @@ $rs_member = mysqli_query($conn, $query_member);
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$('#blah').attr('src', e.target.result);
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#blah').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
 		}
-		reader.readAsDataURL(input.files[0]);
 	}
-}
 </script>
 <style>
-.button {
-	display: flex;
-	justify-content: space-between;
-}
+	.button {
+		display: flex;
+		justify-content: space-between;
+	}
 
-.fa {
-	padding: 5px;
-}
+	.fa {
+		padding: 5px;
+	}
 </style>
 <!-- /.content -->
 <section class="content" style="padding: 20px 20px;">
@@ -48,7 +48,11 @@ function readURL(input) {
 						<select class="form-select" name="ref_l_id" id="ref_l_id" required>
 							<option value="">-- ກະລຸນາເລືອກຜູ້ໃຊ້ລະບົບ --</option>
 							<option value="1">ຜູ້ໃຊ້ລະບົບ(Admin)</option>
-							<option value="2">ພະນັກງານ</option>
+							<option value="2">ຜູ້ຈັກການ</option>
+							<option value="3">ພະນັກງານການຕະຫຼາດ</option>
+							<option value="4">ພະນັກງານບັນຊີ</option>
+							<option value="5">ພະນັກງານຂາຍ</option>
+
 						</select>
 					</div>
 				</div>
@@ -135,18 +139,18 @@ function readURL(input) {
 </section>
 <?php include('footer.php'); ?>
 <script>
-$(function() {
-	$(".datatable").DataTable();
-	// $('#example2').DataTable({
-	//   "paging": true,
-	//   "lengthChange": false,
-	//   "searching": false,
-	//   "ordering": true,
-	//   "info": true,
-	//   "autoWidth": false,
-	// http://fordev22.com/
-	// });
-});
+	$(function () {
+		$(".datatable").DataTable();
+		// $('#example2').DataTable({
+		//   "paging": true,
+		//   "lengthChange": false,
+		//   "searching": false,
+		//   "ordering": true,
+		//   "info": true,
+		//   "autoWidth": false,
+		// http://fordev22.com/
+		// });
+	});
 </script>
 
 </body>

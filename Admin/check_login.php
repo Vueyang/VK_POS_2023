@@ -34,7 +34,7 @@ if (isset($_POST['mem_username'])) {
       if ($_SESSION["ref_l_id"] == "1") { //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
         //echo "Are Your Admin";
         //exit();
-        Header("Location:report_p5.php");
+        Header("Location:Dashboard.php");
 
       } elseif ($_SESSION["ref_l_id"] == "2") {
 

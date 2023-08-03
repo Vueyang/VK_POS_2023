@@ -47,6 +47,14 @@
 			   with font-awesome or any other icon font library -->
 				<li class="nav-header">Dashboard</li>
 				<li class="nav-item">
+					<a href="Dashboard.php" class="nav-link <?php if ($menu == "Dashboard") {
+						echo "active";
+					} ?> ">
+						<i class="fas fa-tachometer-alt"></i>
+						<p>Dashboard</p>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a href="report_p5.php" class="nav-link <?php if ($menu == "report_p5") {
 						echo "active";
 					} ?> ">

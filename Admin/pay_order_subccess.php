@@ -117,11 +117,19 @@ FROM tbl_order as o WHERE o.order_status=2 ORDER BY order_date DESC";
 												type="button"
 												onclick="window.location='review_detail_subccess.php?order_id=<?= $rs['order_id'] ?>';"><i
 													class="nav-icon fas fa-clipboard-list"></i>ເບີ່ງລາຍການ</button>
+											<button class="btn btn-primary grid d-flex hstack gap-3 justify-content-center"
+												type="button"
+												onclick="window.location='print_b.php?order_id=<?= $rs['order_id'] ?>';"><i
+													class="nav-icon fas fa-clipboard-list"></i>Exprot PDF</button>
+											<button class="btn btn-primary grid d-flex hstack gap-3 justify-content-center"
+												type="button" onclick="window.location='Report.pdf';"><i
+													class="nav-icon fas fa-clipboard-list"></i>Exprot PDF</button>
 										</td>
 									</tr>
 								<?php } ?>
 							</tbody>
 						</table>
+
 					</div>
 				</form>
 			</div>
