@@ -12,16 +12,12 @@
 </head>
 
 <body>
-	<section class="content-header">
-		<div class="container-fluid">
-		</div><!-- /.container-fluid -->
-	</section>
 	<!-- Main content -->
 	<section class="content">
 		<div class="card card-gray">
 			<div class="card-header ">
 				<div align="start">
-					<h4>ລາຍການລູກຄ້າສັ່ງຊື້</h4>
+					<h4>ຍົກເລີກການສັ່ງຊື້ສຳເລັດ</h4>
 				</div>
 			</div>
 			<br>

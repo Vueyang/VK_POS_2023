@@ -111,6 +111,14 @@
 						<p>ຂໍ້ມູນສີນຄ້າ </p>
 					</a>
 				</li>
+				<li class="nav-item">
+					<a href="product_stock.php" class="nav-link <?php if ($menu == "product_stock") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fa fa-box-open "></i>
+						<p>ຂໍ້ມູນສີນຄ້າທີຄົງເຫຼືອ < 10 ອັນ </p>
+					</a>
+				</li>
 			</ul>
 			<hr>
 			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"

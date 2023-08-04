@@ -20,7 +20,7 @@
 		<div class="card card-gray">
 			<div class="card-header ">
 				<div align="start">
-					<h4>ລາຍການລູກຄ້າສັ່ງຊື້</h4>
+					<h4>ຢືນຢັນການສັ່ງຊື້ສຳເລັດ</h4>
 				</div>
 			</div>
 			<br>

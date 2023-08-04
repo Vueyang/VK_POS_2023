@@ -3,7 +3,7 @@
 <?php
 $menu = "Dashboard";
 include("header.php");
-//include('') ?>
+include('connetdb.php') ?>
 
 <head>
 	<meta charset="UTF-8">
@@ -13,6 +13,30 @@ include("header.php");
 	<link href="./css_js/css/styles.css" rel="stylesheet" />
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<?php
+// Function Status pedding status(1)
+$sql1 = "SELECT COUNT(order_id) AS amount_no FROM tbl_order WHERE order_status = '1'";
+$result1 = mysqli_query($conn, $sql1);
+$row1 = mysqli_fetch_array($result1);
+
+
+// Function Status success status(2)
+$sql2 = "SELECT COUNT(order_id) AS amount_success FROM tbl_order WHERE order_status = '2'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_array($result2);
+
+
+// Function Status success status(0)
+$sql3 = "SELECT COUNT(order_id) AS amount_cancel FROM tbl_order WHERE order_status = '0'";
+$result3 = mysqli_query($conn, $sql3);
+$row3 = mysqli_fetch_array($result3);
+
+
+// Function Product Stock < 10 
+$sql4 = "SELECT COUNT(pro_id) AS amount_pro_stock FROM product_new WHERE amount < 10";
+$result4 = mysqli_query($conn, $sql4);
+$row4 = mysqli_fetch_array($result4);
+?>
 
 <body>
 	<div id="layoutSidenav_content">
@@ -26,36 +50,59 @@ include("header.php");
 
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-warning text-white mb-4">
-							<div class="card-body">Warning Card</div>
+							<div class="card-body">
+								<h4>ລໍຖ້າການຢືນຢັນ</h4>
+								<h3>
+									<?php echo $row1['amount_no'] ?> ຄົນ
+								</h3>
+							</div>
+
 							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="#">View Details</a>
+								<a class="small text-white stretched-link"
+									href="list_sale_approved.php">ເບີ່ງລາຍລະອຽດ</a>
 								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-success text-white mb-4">
-							<div class="card-body">Success Card</div>
+							<div class="card-body">
+								<h4>ຢືນຢັນສຳເລັດ</h4>
+								<h3>
+									<?php echo $row2['amount_success'] ?> ຄົນ
+								</h3>
+							</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="#">View Details</a>
+								<a class="small text-white stretched-link"
+									href="pay_order_subccess.php">ເບີ່ງລາຍລະອຽດ</a>
 								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-danger text-white mb-4">
-							<div class="card-body">Danger Card</div>
+							<div class="card-body">
+								<h4>ຍົກເລີກ</h4>
+								<h3>
+									<?php echo $row3['amount_cancel'] ?> ຄົນ
+								</h3>
+							</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="#">View Details</a>
+								<a class="small text-white stretched-link" href="cancel_order.php">ເບີ່ງລາຍລະອຽດ</a>
 								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
 							</div>
 						</div>
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-primary text-white mb-4">
-							<div class="card-body">Primary Card</div>
+							<div class="card-body">
+								<h4>ຈຳນວນສີນຄ້າຄົງເຫຼືອ < 10</h4>
+										<h3>
+											<?php echo $row4['amount_pro_stock'] ?>
+										</h3>
+							</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="#">View Details</a>
+								<a class="small text-white stretched-link" href="product_stock.php">ເບີ່ງລາຍລະອຽດ</a>
 								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
 							</div>
 						</div>
