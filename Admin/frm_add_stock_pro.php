@@ -31,85 +31,49 @@ $menu = "product_stock";
 		}
 	}
 </script>
+<?php
+$pro_id = $_GET['id'];
+
+$sql = "SELECT * FROM product_new WHERE pro_id = '$pro_id'";
+$result = mysqli_query($conn, $sql);
+$rs = mysqli_fetch_array($result);
+?>
 
 <body>
-
 	<!-- Main content -->
 	<br>
 	<section class="content ">
 		<div class="card card-gray">
-			<div class="card-header ">
-
-				<h3 class="card-title " style="font-size: 2rem;">ລາຍການສີນຄ້າທີຍັງເຫຼືອໜ້ອຍກວ່າ 10 ອັນ</h3>
+			<!-- Modal Header -->
+			<div class="alert card-header h4 text-center" role="alert">
+				ຟອນເພີ່ມສະຕ໋ອນສີນຄ້າ
 			</div>
-			<br>
-			<div class="card-body">
-				<div class="row">
-					<div class="col">
-						<?php
+			<!-- Modal body -->
 
-						$nquery = "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id and amount < 10 GROUP BY p.pro_id ";
-
-						$rs_my_order = mysqli_query($conn, $nquery);
-						//echo ($query_my_order);//test query
-						?>
-
-						<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
-							<thead>
-
-								<tr>
-									<th>ລຳດັບ</th>
-									<th>ລະຫັດ</th>
-									<th>ຊື່ສີນຄ້າ</th>
-									<th>ປະເພດສີນຄ້າ</th>
-									<th>ລາຄາ</th>
-									<th>ຈຳນວນ</th>
-									<th>ຮູບ</th>
-									<th>review</th>
-
-								</tr>
-
-							</thead>
-
-							<tbody>
-								<?php foreach ($rs_my_order as $rs) { ?>
-									<tr>
-										<td>
-											<?= $l += 1 ?>
-										</td>
-										<td>
-											<?= $rs['pro_id'] ?>
-										</td>
-										<td>
-											<?= $rs['pro_name'] ?>
-										</td>
-										<td>
-											<?= $rs['type_name'] ?>
-										</td>
-										<td>
-											<?= $rs['price'] ?>
-										</td>
-										<td>
-											<?= $rs['amount']; ?>
-										</td>
-										<td><img src="./image/<?= $rs["image"] ?>" width="100px" height="80px"> </td>
-										<td>
-											<a class="btn btn-primary"
-												href="frm_add_stock_pro.php?id=<?= $rs['pro_id'] ?>">ເພີ່ມສະຕ໋ອນສີນຄ້າ</a>
-										</td>
-									</tr>
-								<?php }
-								mysqli_close($conn)
-									?>
-							</tbody>
-						</table>
+			<div class="col-sm-12">
+				<form name="frm-stock" method="POST" action="add_stock_pro.php">
+					<label for="text">ລະຫັດສີນຄ້າ:</label>
+					<input type="text" name="pro_id" class="form-control" value="<?= $rs['pro_id'] ?>" readonly required
+						placeholder="ລະຫັດສີນຄ້າ">
+					<br>
+					<label for="text">ຊື່ສີນຄ້າ:</label>
+					<input type="text" name="pro_name" class="form-control" value="<?= $rs['pro_name'] ?>" readonly
+						required placeholder="ຊື່ສີນຄ້າ">
+					<br>
+					<label for="text">ຈຳນວນ:</label>
+					<input type="number" name="p_amount" class="form-control" value="<?= $rs['amount'] ?>" required
+						placeholder="ຈຳນວນ">
+					<div class="button mb-4 mt-4 d-flex gap-2">
+						<a class="btn btn-danger" href="product_stock.php">ຍົກເລີກ</a>
+						<button type="submit" class="btn btn-primary grid d-flex hstack gap-2"><i
+								class="fa fa-save"></i>ບັນທືກ</button>
 					</div>
-				</div>
+				</form>
 			</div>
-		</div>
 
 	</section>
 
+	<!-- The Modal -->
 
 
 	<?php include('footer.php'); ?>

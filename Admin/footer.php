@@ -238,3 +238,27 @@
 	})
 </script>
 <?php } ?>
+
+
+<?php if (isset($_GET['pro_stock'])) { ?>
+<script>
+	Swal.fire({
+		title: 'ລຳເລັດ',
+		text: 'ທ່ານເພີ່ມຂໍ້ມູນສຳເລັດ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+
+<?php if (isset($_GET['pro_stock_error'])) { ?>
+<script>
+	Swal.fire({
+		title: 'Error',
+		text: 'ຂໍ້ມູນມີບາງຢ່າງຜິດພາບ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
