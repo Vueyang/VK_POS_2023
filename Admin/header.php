@@ -1,6 +1,4 @@
-<!-- http://fordev22.com/ -->
-
-<?php include ("head.php"); ?>
+<?php include("head.php"); ?>
 
 <!-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm sidebar-collapse"> -->
 
@@ -9,8 +7,8 @@
 	<div class="wrapper">
 
 
-		<?php include ("navbar.php"); ?>
-		<?php include ("sidebar.php"); ?>
+		<?php include("navbar.php"); ?>
+		<?php include("sidebar.php"); ?>
 
 
 

@@ -50,7 +50,7 @@
 					<a href="Dashboard.php" class="nav-link <?php if ($menu == "Dashboard") {
 						echo "active";
 					} ?> ">
-						<i class="fas fa-tachometer-alt"></i>
+						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>Dashboard</p>
 					</a>
 				</li>
@@ -68,12 +68,35 @@
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 			   with font-awesome or any other icon font library -->
+				<li class="nav-header">ເມນູຟ່າຍບັນຊີ</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link <?php if ($menu == "") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍຮັບ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link <?php if ($menu == "") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍຈ່າຍ</p>
+					</a>
+				</li>
+			</ul>
+			<br>
+			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+			   with font-awesome or any other icon font library -->
 				<li class="nav-header">ເມນູສຳລັບການຂາຍ</li>
 				<li class="nav-item">
 					<a href="list_sale_approved.php" class="nav-link <?php if ($menu == "list_sale_approved") {
 						echo "active";
 					} ?> ">
-						<i class="nav-icon fas fa-clipboard-list"></i>
+						<i class="nav-icon fas fa-cart-plus"></i>
 						<p>ຢືນຢັນການສັ່ງຊື້ </p>
 					</a>
 				</li>
@@ -99,7 +122,7 @@
 					<a href="show_Pro_type.php" class="nav-link <?php if ($menu == "pro_type") {
 						echo "active";
 					} ?> ">
-						<i class="nav-icon fa fa-shopping-cart "></i>
+						<i class="nav-icon fa fa-calendar-plus "></i>
 						<p>ຂໍ້ມູນປະເພດສີນຄ້າ </p>
 					</a>
 				</li>
@@ -107,7 +130,7 @@
 					<a href="frm_Show_product.php" class="nav-link <?php if ($menu == "product") {
 						echo "active";
 					} ?> ">
-						<i class="nav-icon fa fa-box-open "></i>
+						<i class="nav-icon fas fa-calendar-plus "></i>
 						<p>ຂໍ້ມູນສີນຄ້າ </p>
 					</a>
 				</li>
@@ -115,7 +138,7 @@
 					<a href="product_stock.php" class="nav-link <?php if ($menu == "product_stock") {
 						echo "active";
 					} ?> ">
-						<i class="nav-icon fa fa-box-open "></i>
+						<i class="nav-icon far fa-calendar-plus "></i>
 						<p>ຂໍ້ມູນສີນຄ້າທີຄົງເຫຼືອ < 10 ອັນ </p>
 					</a>
 				</li>
