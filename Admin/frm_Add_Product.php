@@ -1,4 +1,6 @@
-<?php include ("connetdb.php")?>
+<?php include("connetdb.php");
+$menu = "product";
+?>
 <?php include("header.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,26 +17,26 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<style>
-	.button {
-		display: flex;
-		justify-content: space-between;
-	}
+		.button {
+			display: flex;
+			justify-content: space-between;
+		}
 
-	.fa {
-		padding: 5px;
-	}
+		.fa {
+			padding: 5px;
+		}
 	</style>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#blah').attr('src', e.target.result);
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#blah').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
 			}
-			reader.readAsDataURL(input.files[0]);
 		}
-	}
 	</script>
 </head>
 
@@ -52,13 +54,14 @@
 					<select class="form-select" name="typeID" aria-label="Default select example">
 						<option selected>ກະລູນາເລືອກປະເພດສີນຄ້າ</option>
 						<?php
-					$sql = "SELECT * FROM type_product ORDER BY type_name";
+						$sql = "SELECT * FROM type_product ORDER BY type_name";
 						$result = mysqli_query($conn, $sql);
-						while ($row = mysqli_fetch_array($result)){
-					?>
-						<option value="<?=$row["type_id"]?>"><?=$row["type_name"]?></option>
-						<?php
-						};
+						while ($row = mysqli_fetch_array($result)) {
+							?>
+							<option value="<?= $row["type_id"] ?>"><?= $row["type_name"] ?></option>
+							<?php
+						}
+						;
 						?>
 					</select>
 					<label for="text" style="padding:10px 0px;"> ລາຄາສີນຄ້າ*:</label>

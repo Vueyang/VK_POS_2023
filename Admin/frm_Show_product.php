@@ -83,17 +83,16 @@ $menu = "product";
 										</td>
 										<td><img src="./image/<?= $rs["image"] ?>" width="100px" height="80px"> </td>
 										<td>
-											<div class="grid d-flex hstack gap-3 justify-content-center"
-												style="--bs-columns: 4; --bs-gap: 5rem;">
+											<div class="grid d-flex hstack gap-3">
 												<div>
-													<a class="btn btn-warning"
+													<a class="btn btn-warning grid d-flex hstack gap-2"
 														href="frm_Edit_Product.php?id=<?= $rs['pro_id'] ?>" role="button"><i
 															class="fas fa-pencil-alt"></i>ແກ້ໄຂ</a>
 												</div>
-												<div>
-													<a class="del-btn btn btn-danger"
+												<div class="grid d-flex hstack gap-3">
+													<a class="del-btn btn btn-danger grid d-flex hstack gap-2 "
 														href="delete_product.php?id=<?= $rs['pro_id'] ?> &&product_del=del"><i
-															class="fas fas fa-trash"
+															class="nav-icon fas fas fa-trash"
 															onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"></i>ລຶບ</a>
 												</div>
 											</div>

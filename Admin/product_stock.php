@@ -94,15 +94,56 @@ $menu = "product_stock";
 										</td>
 										<td><img src="./image/<?= $rs["image"] ?>" width="100px" height="80px"> </td>
 										<td>
-											<a class="btn btn-primary"
-												href="frm_add_stock_pro.php?id=<?= $rs['pro_id'] ?>">ເພີ່ມສະຕ໋ອນສີນຄ້າ</a>
+											<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+												data-bs-target="#Modalstock<?= $rs['pro_id'] ?>"
+												data-bs-whatever="@mdo">ເພີ່ມສະຕ໋ອນສີນຄ້າ</button>
 										</td>
 									</tr>
-								<?php }
+									<div class="modal fade" id="Modalstock<?= $rs['pro_id'] ?>" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">ຟອນເພີ່ມສະຕ໋ອນສີນຄ້າ
+													</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form name="frm-stock" method="POST" action="add_stock_pro.php">
+														<label for="text">ລະຫັດສີນຄ້າ:</label>
+														<input type="text" name="pro_id" class="form-control"
+															value="<?= $rs['pro_id'] ?>" readonly required
+															placeholder="ລະຫັດສີນຄ້າ">
+														<br>
+														<label for="text">ຊື່ສີນຄ້າ:</label>
+														<input type="text" name="pro_name" class="form-control"
+															value="<?= $rs['pro_name'] ?>" readonly required
+															placeholder="ຊື່ສີນຄ້າ">
+														<br>
+														<label for="text">ຈຳນວນ:</label>
+														<input type="number" name="p_amount" class="form-control"
+															value="<?= $rs['amount'] ?>" required placeholder="ຈຳນວນ">
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">ຍົກເລີກ</button>
+															<button type="submit"
+																class="btn btn-primary grid d-flex hstack gap-2"><i
+																	class="fa fa-save"></i>ບັນທືກ</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<?php
+								}
 								mysqli_close($conn)
 									?>
 							</tbody>
 						</table>
+
+
 					</div>
 				</div>
 			</div>

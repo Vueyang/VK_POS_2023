@@ -70,7 +70,7 @@
 			   with font-awesome or any other icon font library -->
 				<li class="nav-header">ເມນູຟ່າຍບັນຊີ</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link <?php if ($menu == "") {
+					<a href="#" class="nav-link <?php if ($menu == "Report_Receip") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
@@ -78,7 +78,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link <?php if ($menu == "") {
+					<a href="#" class="nav-link <?php if ($menu == "Report_Expens") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
@@ -155,10 +155,17 @@
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fa fa-users"></i>
+						<p>ຂໍ້ມູນສະມາຊີກ </p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="list_employee.php" class="nav-link <?php if ($menu == "employee") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fa fa-copy"></i>
 						<p>ຂໍ້ມູນພະນັກງານ </p>
 					</a>
 				</li>
-
 
 				<li class="nav-item">
 					<a href="add_to_card.php" class="nav-link <?php if ($menu == "type") {

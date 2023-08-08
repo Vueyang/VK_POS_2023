@@ -87,12 +87,13 @@ include('connetdb.php')
 													<input type="hidden" name="ref_l_id"
 														value="<?php echo $rs['ref_l_id']; ?>">
 													<a href="edit_profile.php?id=<?= $rs['mem_id'] ?>"
-														class="btn btn-warning"><i class="fas fa-pencil-alt"></i>
+														class="btn btn-warning grid d-flex hstack gap-2"><i
+															class="fas fa-pencil-alt"></i>
 														ແກ້ໄຂ</a>
 												</div>
 												<div>
 													<a href="delete_member.php?id=<?= $rs['mem_id']; ?> &&member=del"
-														class="del-btn btn btn-danger"
+														class="del-btn btn btn-danger grid d-flex hstack gap-2"
 														onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
 															class="fas fas fa-trash"></i>
 														ລືບ</a>

@@ -1,6 +1,6 @@
 <?php
-include("connetdb.php");
-$menu = "pro_type"
+$menu = "employee";
+include('connetdb.php')
 	?>
 <?php include("header.php"); ?>
 <!DOCTYPE html>
@@ -23,10 +23,9 @@ $menu = "pro_type"
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
-				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນປະເພດສີນຄ້າ</h3>
+				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊິກ</h3>
 				<div align="right">
-					<a class="btn btn-primary" href="frm_add_product_type.php" role="button"><i
-							class="fa fa-plus"></i>ເພີ່ມປະເພດສີນຄ້າໄໝ່</a>
+					<a class=" btn btn-primary" href="frm_add_mem.php"><i class="fa fa-plus"></i>ເພີ່ມສະມາຊິກ</a>
 				</div>
 			</div>
 			<br>
@@ -35,7 +34,7 @@ $menu = "pro_type"
 					<div class="col">
 						<?php
 
-						$nquery = "SELECT * from type_product GROUP BY type_id ";
+						$nquery = "SELECT * from  tbl_employee GROUP BY en_id ";
 
 						$rs_my_order = mysqli_query($conn, $nquery);
 						//echo ($query_my_order);//test query
@@ -46,9 +45,13 @@ $menu = "pro_type"
 
 								<tr>
 									<th>ລຳດັບ</th>
-									<th>ລະຫັດປະເພດ</th>
-									<th>ຊື່ປະເພດສີນຄ້າ</th>
 									<th>ຮູບ</th>
+									<th>ຊື່</th>
+									<th>ນາມສະກຸນ</th>
+									<th>ເບີໂທ</th>
+									<th>ອີແມວ</th>
+									<th>ໜຳແໜ່ງ</th>
+									<th>ໜ້າທີ່ຮັບຜິດຊອບ</th>
 									<th>review</th>
 
 								</tr>
@@ -61,25 +64,43 @@ $menu = "pro_type"
 										<td>
 											<?= $l += 1 ?>
 										</td>
+										<td><img src="./image/<?= $rs["en_image"] ?>" width="100px" height="90px"> </td>
 										<td>
-											<?= $rs['type_id'] ?>
+											<?= $rs['en_name'] ?>
 										</td>
 										<td>
-											<?= $rs['type_name'] ?>
+											<?= $rs['en_lastname'] ?>
 										</td>
-										<td><img src="./image/<?= $rs["type_img"] ?>" width="100px" height="80px"> </td>
 										<td>
-											<div class="grid d-flex hstack gap-3 justify-content-center">
+											<?= $rs['en_phone'] ?>
+										</td>
+										<td>
+											<?= $rs['en_email']; ?>
+										</td>
+										<td>
+											<?= $rs['position']; ?>
+										</td>
+										<td>
+											<?= $rs['responsible']; ?>
+										</td>
+										<td>
+											<div class="grid d-flex hstack gap-3 justify-content-center"
+												style="--bs-columns: 4; --bs-gap: 5rem;">
 												<div>
-													<a class="btn btn-warning grid d-flex hstack gap-2"
-														href="frm_edit_product_type.php?id=<?= $rs['type_id'] ?>"
-														role="button"><i class="fas fa-pencil-alt"></i>ແກ້ໄຂ</a>
+													<input type="hidden" name="mem_id" value="<?php echo $rs['mem_id']; ?>">
+													<input type="hidden" name="ref_l_id"
+														value="<?php echo $rs['ref_l_id']; ?>">
+													<a href="edit_profile.php?id=<?= $rs['mem_id'] ?>"
+														class="btn btn-warning grid d-flex hstack gap-2"><i
+															class="fas fa-pencil-alt"></i>
+														ແກ້ໄຂ</a>
 												</div>
 												<div>
-													<a class="btn btn-danger grid d-flex hstack gap-2"
-														href="delete_pro_type.php?id=<?= $rs['type_id']; ?> &&product_type_del=del"
+													<a href="delete_member.php?id=<?= $rs['mem_id']; ?> &&member=del"
+														class="del-btn btn btn-danger grid d-flex hstack gap-2"
 														onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
-															class="fas fas fa-trash"></i>ລຶບ</a>
+															class="fas fas fa-trash"></i>
+														ລືບ</a>
 												</div>
 											</div>
 
