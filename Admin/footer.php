@@ -163,7 +163,7 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
@@ -175,17 +175,18 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
 </script>
 <?php } ?>
+
 <?php if (isset($_GET['save_ok'])) { ?>
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ບັນທືກຂໍ້ມູນການສັ່ງສຳເລັດ',
+		text: 'ທ່ານໄດ້ບັນທືກຂໍ້ມູນການສັ່ງສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
@@ -197,7 +198,7 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ທ່ານໄດ້ຍົດເລີກຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ຍົດເລີກຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
@@ -220,7 +221,7 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ທ່ານໄດ້ຢືນຢາຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ຢືນຢາຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
@@ -244,7 +245,7 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ທ່ານເພີ່ມຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
 	})
@@ -253,6 +254,63 @@
 
 
 <?php if (isset($_GET['pro_stock_error'])) { ?>
+<script>
+	Swal.fire({
+		title: 'Error',
+		text: 'ຂໍ້ມູນມີບາງຢ່າງຜິດພາບ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+<?php if (isset($_GET['en_edit'])) { ?>
+<script>
+	Swal.fire({
+		title: 'ລຳເລັດ',
+		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+
+<?php if (isset($_GET['en_error'])) { ?>
+<script>
+	Swal.fire({
+		title: 'Error',
+		text: 'ຂໍ້ມູນມີບາງຢ່າງຜິດພາບ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+<?php if (isset($_GET['en_del'])) { ?>
+<script>
+	Swal.fire({
+		title: 'ລຳເລັດ',
+		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດແລ້ວ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+<?php if (isset($_GET['en_add'])) { ?>
+<script>
+	Swal.fire({
+		title: 'ລຳເລັດ',
+		text: 'ທ່ານໄດ້ເພີ່ມຂໍ້ມູນສຳເລັດແລ້ວ',
+		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ'
+	})
+</script>
+<?php } ?>
+
+
+<?php if (isset($_GET['en_add_error'])) { ?>
 <script>
 	Swal.fire({
 		title: 'Error',

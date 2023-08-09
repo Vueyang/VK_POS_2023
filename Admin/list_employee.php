@@ -25,7 +25,7 @@ include('connetdb.php')
 			<div class="card-header ">
 				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊິກ</h3>
 				<div align="right">
-					<a class=" btn btn-primary" href="frm_add_mem.php"><i class="fa fa-plus"></i>ເພີ່ມສະມາຊິກ</a>
+					<a class=" btn btn-primary" href="frm_add_employee.php"><i class="fa fa-plus"></i>ເພີ່ມສະມາຊິກ</a>
 				</div>
 			</div>
 			<br>
@@ -87,16 +87,16 @@ include('connetdb.php')
 											<div class="grid d-flex hstack gap-3 justify-content-center"
 												style="--bs-columns: 4; --bs-gap: 5rem;">
 												<div>
-													<input type="hidden" name="mem_id" value="<?php echo $rs['mem_id']; ?>">
+													<input type="hidden" name="en_id" value="<?php echo $rs['en_id']; ?>">
 													<input type="hidden" name="ref_l_id"
 														value="<?php echo $rs['ref_l_id']; ?>">
-													<a href="edit_profile.php?id=<?= $rs['mem_id'] ?>"
+													<a href="edit_employee.php?id=<?= $rs['en_id'] ?>"
 														class="btn btn-warning grid d-flex hstack gap-2"><i
 															class="fas fa-pencil-alt"></i>
 														ແກ້ໄຂ</a>
 												</div>
 												<div>
-													<a href="delete_member.php?id=<?= $rs['mem_id']; ?> &&member=del"
+													<a href="delete_employee.php?id=<?= $rs['en_id']; ?> &&employee=del"
 														class="del-btn btn btn-danger grid d-flex hstack gap-2"
 														onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
 															class="fas fas fa-trash"></i>
