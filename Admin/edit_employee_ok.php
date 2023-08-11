@@ -13,7 +13,7 @@ $village = $_POST['village'];
 $district = $_POST['district'];
 $provice = $_POST['provice'];
 $position = $_POST['position'];
-$responsible = $_POST['responsible'];
+//$responsible = $_POST['responsible'];
 //$en_username = $_POST['en_username'];
 //$en_password = (sha1($_POST['en_password']));
 $en_img = $_POST['en_image2'];
@@ -25,15 +25,10 @@ if (is_uploaded_file($_FILES['en_image']['tmp_name'])) {
 } else {
 	$new_image_name = "$en_img";
 }
-$gender1 = "";
-if ($gender == "0") {
-	$gender1 = "ຊາຍ";
-} elseif ($gender == "1") {
-	$gender1 = "ຍິງ";
-}
+
 // function Update
-$sql = "UPDATE tbl_employee SET en_name = '$en_name', en_lastname = '$en_lastname', gender = '$gender1', date_of_birth = '$newDate',
-en_phone = '$en_phone', en_email = '$en_email', village = '$village', district = '$district', provice = '$provice', position = '$position', responsible = '$responsible', en_image = '$new_image_name' WHERE en_id ='$en_id'";
+$sql = "UPDATE tbl_employee SET en_name = '$en_name', en_lastname = '$en_lastname', gender = '$gender', date_of_birth = '$newDate',
+en_phone = '$en_phone', en_email = '$en_email', village = '$village', district = '$district', provice = '$provice', position = '$position', en_image = '$new_image_name' WHERE en_id ='$en_id'";
 /*$result = mysqli_query($conn, $sql);
 if($result){
 	echo "<script> alert('ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ')</script>";

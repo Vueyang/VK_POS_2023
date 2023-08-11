@@ -22,33 +22,33 @@ $en_img = (isset($_POST['en_img']) ? $_POST['en_img'] : '');
 $upload = $_FILES['en_img']['name'];
 if ($upload != '') {
 
-	$path = "./image/";
-	$type = strrchr($_FILES['en_img']['name'], ".");
-	$newname = $numrand . $date1 . $type;
-	$path_copy = $path . $newname;
-	// $path_link="../en_img/".$newname;
-	move_uploaded_file($_FILES['en_img']['tmp_name'], $path_copy);
+  $path = "./image/";
+  $type = strrchr($_FILES['en_img']['name'], ".");
+  $newname = $numrand . $date1 . $type;
+  $path_copy = $path . $newname;
+  // $path_link="../en_img/".$newname;
+  move_uploaded_file($_FILES['en_img']['tmp_name'], $path_copy);
 } else {
-	$newname = '';
+  $newname = '';
 }
 $gender1 = "";
 if ($gender == "0") {
-	$gender1 = "ຊາຍ";
+  $gender1 = "ຊາຍ";
 } elseif ($gender == "1") {
-	$gender1 = "ຍິງ";
+  $gender1 = "ຍິງ";
 }
 
 $posotion1 = "";
 if ($position == "0") {
-	$posotion1 = "ຜູ້ໃຊ້ລະບົບ(Admin)";
+  $posotion1 = "ຜູ້ໃຊ້ລະບົບ(Admin)";
 } elseif ($position == "1") {
-	$posotion1 = "ຜູ້ຈັກການ";
+  $posotion1 = "ຜູ້ຈັກການ";
 } elseif ($position == "2") {
-	$posotion1 = "ພະນັກງານການຕະຫຼາດ";
+  $posotion1 = "ພະນັກງານການຕະຫຼາດ";
 } elseif ($position == "3") {
-	$position = "ພະນັກງານບັນຊີ";
+  $position = "ພະນັກງານບັນຊີ";
 } elseif ($position == "4") {
-	$posotion1 = "ພະນັກງານຂາຍ";
+  $posotion1 = "ພະນັກງານຂາຍ";
 }
 $sql = "INSERT INTO tbl_employee
   (
@@ -67,7 +67,7 @@ $sql = "INSERT INTO tbl_employee
   )
   VALUES
   (
-  '$gender1',
+  '$gender',
   '$en_name',
   '$en_lastname',
   '$newDate',
@@ -76,7 +76,7 @@ $sql = "INSERT INTO tbl_employee
   '$village',
   '$district',
   '$provice',
-  '$posotion1',
+  '$posotion',
   '$responsible',
   '$newname'
   )";
@@ -87,13 +87,13 @@ $result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_erro
 //mysqli_close($conn);
 
 if ($result) {
-	echo "<script type='text/javascript'>";
-	//echo "alert('เพิ่มข้อมูลเรียบร้อย');";
-	echo "window.location = 'list_employee.php?en_add=en_add'; ";
-	echo "</script>";
+  echo "<script type='text/javascript'>";
+  //echo "alert('เพิ่มข้อมูลเรียบร้อย');";
+  echo "window.location = 'list_employee.php?en_add=en_add'; ";
+  echo "</script>";
 } else {
-	echo "<script type='text/javascript'>";
-	echo "window.location = 'list_employee.php?en_add_error=en_add_error'; ";
-	echo "</script>";
+  echo "<script type='text/javascript'>";
+  echo "window.location = 'list_employee.php?en_add_error=en_add_error'; ";
+  echo "</script>";
 }
 ?>

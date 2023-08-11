@@ -51,7 +51,6 @@ include('connetdb.php')
 									<th>ເບີໂທ</th>
 									<th>ອີແມວ</th>
 									<th>ໜຳແໜ່ງ</th>
-									<th>ໜ້າທີ່ຮັບຜິດຊອບ</th>
 									<th>review</th>
 
 								</tr>
@@ -79,9 +78,6 @@ include('connetdb.php')
 										</td>
 										<td>
 											<?= $rs['position']; ?>
-										</td>
-										<td>
-											<?= $rs['responsible']; ?>
 										</td>
 										<td>
 											<div class="grid d-flex hstack gap-3 justify-content-center"

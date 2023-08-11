@@ -58,15 +58,27 @@ $row = mysqli_fetch_array($rs_member);
 						<input type="text" name="en_lastname" class="form-control" id="en_lastname" placeholder=""
 							value="<?php echo $row['en_lastname']; ?>">
 					</div>
-					<select name="gender" id="gender" class="form-select" aria-label="Default select example">
-						<?php
-						foreach ($row as $rs) {
-							?>
-							<option value="<? $rs ?>">
-								<?= $rs['gender'] ?>
-							</option>
-						<?php } ?>
-					</select>
+					<div class="form-group row">
+						<label for="" class="col-sm-2 col-form-label">ເພດ </label>
+						<select name="gender" id="gender" class="form-control" required>
+							<?php
+							if ($row['gender'] == 0) {
+								echo "<option>---ເລືອກເພດ---</option>
+								<option selected>ຊາຍ</option>
+							<option>ຍິງ</option>";
+							} elseif ($row['gender'] == 1) {
+								echo "<option>---ເລືອກເພດ---</option>
+								<option>ຊາຍ</option>
+								<option selected>ຍິງ</option>";
+
+							} else {
+								echo "<option>---ເລືອກເພດ---</option>
+								<option>ຊາຍ</option>
+								<option>ຍິງ</option>";
+							} ?>
+						</select>
+					</div>
+
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ວັນທີເດືອນປີ </label>
 						<input type="date" name="date_of_birth" class="form-control" id="en_phone" placeholder=""
@@ -99,13 +111,22 @@ $row = mysqli_fetch_array($rs_member);
 					</div>
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ </label>
-						<input type="text" name="position" class="form-control" id="position" placeholder=""
-							value="<?php echo $row['position']; ?>">
-					</div>
-					<div class="form-group row">
-						<label for="" class="col-sm-2 col-form-label">ໜ້າທີຮັບຜິດຊອບ </label>
-						<input type="text" name="responsible" class="form-control" id="mem_password"
-							placeholder="ໜ້າທີຮັບຜິດຊອບ" value="<?php echo $row['responsible']; ?>" required>
+						<select name="position" class="form-control" required aria-label="Default select example">
+							<option value="selected">-ຕຳແໜ່ງ-</option>
+							<?php
+							$qry = "SELECT * FROM tbl_employee WHERE en_id";
+							$rslt = mysqli_query($conn, $qry);
+							foreach ($rslt as $rs) {
+								$em_id = $rs['en_id'];
+								?>
+								<option value="<?php echo $rs["position"] ?>" <?php if ($em_id = $en_id) {
+									   echo "selected=selected";
+								   } ?>>
+									<?php echo $rs['position'] ?>
+								</option>
+							<?php } ?>
+
+						</select>
 					</div>
 					<label for="" class="col-sm-2 col-form-label">ຮູບເກົ່າ</label>
 					<div class="col-sm-10">

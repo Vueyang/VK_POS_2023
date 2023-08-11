@@ -45,11 +45,9 @@ include('connetdb.php')
 
 								<tr>
 									<th>ລຳດັບ</th>
-									<th>ຮູບ</th>
 									<th>ຊື່</th>
 									<th>ນາມສະກຸນ</th>
-									<th>ເບີໂທ</th>
-									<th>ອີແມວ</th>
+									<th>ຊື່ຜູ້ໃຊ້</th>
 									<th>ໜຳແໜ່ງ</th>
 									<th>review</th>
 
@@ -63,21 +61,22 @@ include('connetdb.php')
 										<td>
 											<?= $l += 1 ?>
 										</td>
-										<td><img src="./image/<?= $rs["mem_img"] ?>" width="100px" height="90px"> </td>
+										<?php
+										$resultemployee = "SELECT * FROM tbl_employee WHERE en_id = '" . $rs['en_id'] . "' ";
+										$result_em = mysqli_query($conn, $resultemployee);
+										$row_em = mysqli_fetch_array($result_em);
+										?>
 										<td>
-											<?= $rs['mem_name'] ?>
+											<?= $row_em['en_name'] ?>
 										</td>
 										<td>
-											<?= $rs['mem_lastname'] ?>
-										</td>
-										<td>
-											<?= $rs['mem_phone'] ?>
-										</td>
-										<td>
-											<?= $rs['mem_email']; ?>
+											<?= $row_em['en_lastname'] ?>
 										</td>
 										<td>
 											<?= $rs['mem_username']; ?>
+										</td>
+										<td>
+											<?= $row_em['position']; ?>
 										</td>
 										<td>
 											<div class="grid d-flex hstack gap-3 justify-content-center"

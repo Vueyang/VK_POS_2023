@@ -42,26 +42,24 @@ $rs_member = mysqli_query($conn, $query_member);
 		</div>
 		<div class=" col-sm-12" style=" padding: 10px 20px;">
 			<form action="insert_member.php" method="POST" enctype="multipart/form-data">
-				<label for="" class="col-sm-2 col-form-label">ຊື່ຜູ້ໃຊ້ລະບົບ </label>
+				<?php
+				$request = "SELECT * FROM tbl_employee ORDER BY en_id";
+				$result = mysqli_query($conn, $request);
+				$row = mysqli_fetch_array($result);
+				?>
+				<label for="" class="col-sm-2 col-form-label">ຊື່ພະນັກງານ </label>
 				<div class="form-group row">
 					<div class="col-sm-12">
-						<select class="form-select" name="ref_l_id" id="ref_l_id" required>
-							<option value="">-- ກະລຸນາເລືອກຜູ້ໃຊ້ລະບົບ --</option>
-							<option value="1">ຜູ້ໃຊ້ລະບົບ(Admin)</option>
-							<option value="2">ຜູ້ຈັກການ</option>
-							<option value="3">ພະນັກງານການຕະຫຼາດ</option>
-							<option value="4">ພະນັກງານບັນຊີ</option>
-							<option value="5">ພະນັກງານຂາຍ</option>
-
+						<select name="em_name" id="em_name" class="form-control" required>
+							<option value="selected">---ເລືອກພະນັກງານ---</option>
+							<?php
+							foreach ($row as $rs) {
+								?>
+								<option value="<?= $rs['en_name'] ?>"><?= $rs['en_name'] ?></option>
+							<?php } ?>
 						</select>
 					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ຊື່ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="mem_name" class="form-control" id="mem_name" placeholder="" value=""
-							required>
-					</div>
+
 				</div>
 				<label for="" class="col-sm-2 col-form-label">ນາມສະກຸນ </label>
 				<div class="form-group row">
