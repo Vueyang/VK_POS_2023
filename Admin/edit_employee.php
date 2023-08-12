@@ -112,20 +112,81 @@ $row = mysqli_fetch_array($rs_member);
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ </label>
 						<select name="position" class="form-control" required aria-label="Default select example">
-							<option value="selected">-ຕຳແໜ່ງ-</option>
-							<?php
-							$qry = "SELECT * FROM tbl_employee WHERE en_id";
-							$rslt = mysqli_query($conn, $qry);
-							foreach ($rslt as $rs) {
-								$em_id = $rs['en_id'];
-								?>
-								<option value="<?php echo $rs["position"] ?>" <?php if ($em_id = $en_id) {
-									   echo "selected=selected";
-								   } ?>>
-									<?php echo $rs['position'] ?>
-								</option>
-							<?php } ?>
+							<option value="<?= $row['position']; ?>"><?php if ($row['position'] == "ຜູ້ຈັດການ(Admin)") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  	<option selected>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+									<option>ພະນັກງານຢືນຢັນ</option>";
 
+							  } elseif ($row['position'] == "HR") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  	<option>ຜູ້ຈັດການ(Admin)</option>
+									<option selected>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option>ພະນັກງານຢືນຢັນ</option>";
+							  } elseif ($row['position'] == "ພະນັກງານບັນຊີ") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  	<option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option selected>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option>ພະນັກງານຢືນຢັນ</option>";
+							  } elseif ($row['position'] == "ພະນັກງານຈັດຊື້") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  <option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option selected>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option>ພະນັກງານຢືນຢັນ</option>";
+							  } elseif ($row['position'] == "ພະນັກງານສາງ") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  <option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option selected>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option>ພະນັກງານຢືນຢັນ</option>";
+							  } elseif ($row['position'] == "ພະນັກງານຂາຍໜ້າຮ້ານ") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  <option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option selected>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option>ພະນັກງານຢືນຢັນ</option>";
+							  } elseif ($row['position'] == "ພະນັກງານຢືນຢັນ") {
+								  echo "<option>---ຕຳແໜ່ງ---</option>
+								  <option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option >ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+										<option selected>ພະນັກງານຢືນຢັນ</option>";
+							  } else {
+								  echo "<option selected>---ຕຳແໜ່ງ---</option>
+								<option>ຜູ້ຈັດການ(Admin)</option>
+								<option>HR</option>
+								<option>ພະນັກງານບັນຊີ</option>
+								<option>ພະນັກງານຈັດຊື້</option>
+								<option>ພະນັກງານສາງ</option>
+								<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+								<option>ພະນັກງານຢືນຢັນ</option>";
+							  }
+							  ?></option>
 						</select>
 					</div>
 					<label for="" class="col-sm-2 col-form-label">ຮູບເກົ່າ</label>

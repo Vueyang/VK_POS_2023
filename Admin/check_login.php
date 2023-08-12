@@ -15,18 +15,18 @@ if (isset($_POST['mem_username'])) {
   } //close if chk trim
   else {
     //query 
-    $sql = "SELECT * FROM tbl_member 
-                              WHERE mem_username='" . $mem_username . "' 
+    $sql = "SELECT * FROM tbl_member m, tbl_employee e
+                              WHERE m.en_id = e.en_id AND mem_username='" . $mem_username . "' 
                               AND mem_password='" . $mem_password . "' ";
     $result = mysqli_query($conn, $sql);
     //echo mysqli_num_rows($result);
     //exit;
     if (mysqli_num_rows($result) == 1) {
       $row = mysqli_fetch_array($result);
-      $_SESSION["mem_id"] = $row["mem_id"];
-      $_SESSION["mem_name"] = $row["mem_name"];
+      $_SESSION["en_id"] = $row["en_id"];
+      $_SESSION["en_name"] = $row["en_name"];
       $_SESSION["ref_l_id"] = $row["ref_l_id"];
-      $_SESSION["mem_img"] = $row["mem_img"];
+      $_SESSION["en_image"] = $row["en_image"];
       $_SESSION["mem_address"] = $row["mem_address"];
       //print_r($_SESSION);
       //var_dump($_SESSION);
@@ -38,7 +38,7 @@ if (isset($_POST['mem_username'])) {
 
       } elseif ($_SESSION["ref_l_id"] == "2") {
 
-        Header("Location: Admin/");
+        Header("Location:list_employee.php");
       }
     } else {
       echo "<script>";

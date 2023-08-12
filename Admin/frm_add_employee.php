@@ -112,15 +112,8 @@ $rs_enber = mysqli_query($conn, $query_enber);
 				<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ </label>
 				<div class="form-group row">
 					<div class="col-sm-12">
-						<select class="form-select" name="position" id="position" required>
-							<option value="">-- ກະລຸນາເລືອກຕຳແໜ່ງ --</option>
-							<option value="0">ຜູ້ໃຊ້ລະບົບ(Admin)</option>
-							<option value="1">ຜູ້ຈັກການ</option>
-							<option value="2">ພະນັກງານການຕະຫຼາດ</option>
-							<option value="3">ພະນັກງານບັນຊີ</option>
-							<option value="4">ພະນັກງານຂາຍ</option>
-
-						</select>
+						<input type="text" name="position" class="form-control" id="position" placeholder="ຕຳແໜ່ງ"
+							value="" required>
 					</div>
 				</div>
 				<div class="form-group row">

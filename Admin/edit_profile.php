@@ -4,8 +4,8 @@ $menu = ""
 <?php include("header.php"); ?>
 <?php
 //$mem_id = $_GET['id'];
-$mem_id = $_SESSION['mem_id'];
-$query_member = "SELECT * FROM tbl_member WHERE mem_id = $mem_id";
+$en_id = $_SESSION['en_id'];
+$query_member = "SELECT * FROM tbl_member WHERE mem_id = $en_id";
 $rs_member = mysqli_query($conn, $query_member);
 $row = mysqli_fetch_array($rs_member);
 //echo $row['mem_name'];

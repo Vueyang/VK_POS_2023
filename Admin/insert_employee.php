@@ -12,7 +12,7 @@ $village = mysqli_real_escape_string($conn, $_POST["village"]);
 $district = mysqli_real_escape_string($conn, $_POST["district"]);
 $provice = mysqli_real_escape_string($conn, $_POST["provice"]);
 $position = mysqli_real_escape_string($conn, $_POST["position"]);
-$responsible = mysqli_real_escape_string($conn, $_POST["responsible"]);
+//$responsible = mysqli_real_escape_string($conn, $_POST["responsible"]);
 //$en_password = mysqli_real_escape_string($conn, (sha1($_POST["en_password"])));
 
 
@@ -38,18 +38,22 @@ if ($gender == "0") {
   $gender1 = "ຍິງ";
 }
 
-$posotion1 = "";
-if ($position == "0") {
-  $posotion1 = "ຜູ້ໃຊ້ລະບົບ(Admin)";
-} elseif ($position == "1") {
-  $posotion1 = "ຜູ້ຈັກການ";
+/*$posotion1 = "";
+if ($position == "1") {
+  $posotion1 = "ຜູ້ຈັກການ(Admin)";
 } elseif ($position == "2") {
-  $posotion1 = "ພະນັກງານການຕະຫຼາດ";
+  $posotion1 = "HR";
 } elseif ($position == "3") {
-  $position = "ພະນັກງານບັນຊີ";
+  $posotion1 = "ພະນັກງານບັນຊີ";
 } elseif ($position == "4") {
-  $posotion1 = "ພະນັກງານຂາຍ";
-}
+  $position = "ພະນັກງານຈັດຊື້";
+} elseif ($position == "5") {
+  $posotion1 = "ພະນັກງານສາງ";
+} elseif ($position == "6") {
+  $position = "ພະນັກງານຂາຍໜ້າຮ້ານ";
+} elseif ($position == "7") {
+  $posotion1 = "ພະນັກງານຢືນຢັນ";
+}*/
 $sql = "INSERT INTO tbl_employee
   (
   gender,
@@ -62,7 +66,6 @@ $sql = "INSERT INTO tbl_employee
   district,
   provice,
   position,
-  responsible,
   en_image
   )
   VALUES
@@ -76,8 +79,7 @@ $sql = "INSERT INTO tbl_employee
   '$village',
   '$district',
   '$provice',
-  '$posotion',
-  '$responsible',
+  '$position',
   '$newname'
   )";
 
