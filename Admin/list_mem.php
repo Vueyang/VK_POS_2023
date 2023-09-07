@@ -49,7 +49,7 @@ include('connetdb.php')
 									<th>ລຳດັບ</th>
 									<th>ຊື່</th>
 									<th>ຊື່ຜູ້ໃຊ້</th>
-									<th>ໜຳແໜ່ງ</th>
+									<th>ສິດທີ</th>
 									<th align="center">review</th>
 
 								</tr>
@@ -71,7 +71,23 @@ include('connetdb.php')
 											<?= $rs['mem_username']; ?>
 										</td>
 										<td>
-											<?= $rs['position']; ?>
+											<?php
+											if ($rs['ref_l_id'] == 1) {
+												echo "ຜູ້ຈັດການ(Admin)";
+											} elseif ($rs['ref_l_id'] == 2) {
+												echo "HR";
+											} elseif ($rs['ref_l_id'] == 3) {
+												echo "ພະນັກງານບັນຊີ";
+											} elseif ($rs['ref_l_id'] == 4) {
+												echo "ພະນັກງານຈັດຊື້";
+											} elseif ($rs['ref_l_id'] == 5) {
+												echo "ພະນັກງານສາງ";
+											} elseif ($rs['ref_l_id'] == 6) {
+												echo "ພະນັກງານຂາຍໜ້າຮ້ານ";
+											} elseif ($rs['ref_l_id'] == 7) {
+												echo "ພະນັກງານຂາຢືນຢັນລູກຄ້າ";
+											}
+											?>
 										</td>
 
 										<td>
@@ -82,7 +98,7 @@ include('connetdb.php')
 													<input type="hidden" name="ref_l_id"
 														value="<?php echo $rs['ref_l_id']; ?>">
 													<button type="button" class="btn btn-warning" data-bs-toggle="modal"
-														data-bs-target="#myModal">
+														data-bs-target="#myModal<?= $rs['mem_id'] ?>">
 														<i class="fas fa-pencil-alt"></i>ແກ້ໄຂ
 													</button>
 												</div>
@@ -96,114 +112,32 @@ include('connetdb.php')
 											</div>
 
 										</td>
-										<!-- The Modal -->
-										<div class="modal fade" id="myModal">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<!-- Modal Header -->
-													<div class="modal-header">
-														<h1 class="modal-title fs-3 " id="exampleModalLabel">
-															ຟອນແກ້ໄຂສະມາຊີກ
-														</h1>
-														<button type="button" class="btn-close"
-															data-bs-dismiss="modal"></button>
-													</div>
-													<!-- Modal body -->
-													<div class="modal-body">
-														<form action="insert_member.php" method="POST"
-															enctype="multipart/form-data">
-															<label for="" class="col-sm-2 col-form-label">ຊື່ພະນັກງານ
-															</label>
-															<div class="form-group row">
-																<div class="col-sm-12">
-																	<input type="text" name="en_name" class="form-control"
-																		placeholder="" value="<?= $rs['en_name'] ?>">
-																</div>
-															</div>
-															<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ</label>
-															<div class="form-group row">
-																<div class="col-sm-12">
-																	<select name="ref_l_id" id="ref_l_id"
-																		class="form-control" required>
-																		<option value="selected">---ເລືອກຕຳແໜ່ງ---
-																		</option>
-																		<option value="1">ຜູ້ຈັດການ(Admin)</option>
-																		<option value="2">HR</option>
-																		<option value="3">ພະນັກງານບັນຊີ</option>
-																		<option value="4">ພະນັກງານຈັດຊື້</option>
-																		<option value="5">ພະນັກງານສາງ</option>
-																		<option value="6">ພະນັກງານຂາຍໜ້າຮ້ານ</option>
-																		<option value="7">ພະນັກງານຂາຢືນຢັນລູກຄ້າ
-																		</option>
-																	</select>
-																</div>
-															</div>
-															<label for=""
-																class="col-sm-4 col-form-label">ຊື່ຜູ້ໃຊ້ລະບົບ</label>
-															<div class="form-group row">
-																<div class="col-sm-12">
-																	<input type="text" name="mem_username"
-																		class="form-control" id="mem_username"
-																		placeholder="ກະລຸນາໃສ່ຊື່ຜູ້ໃຊ້ລະບົບ" value=""
-																		required>
-																</div>
-															</div>
-															<label for="" class="col-sm-2 col-form-label">ລະຫັດຜ່ານ
-															</label>
-															<div class="form-group row">
-																<div class="col-sm-12">
-																	<input type="text" name="mem_password"
-																		class="form-control" id="mem_password"
-																		placeholder="ກະລຸນາໃສ່ລະຫັດຜ່ານ" value="" required>
-																</div>
-															</div>
 
-														</form>
-													</div>
 
-													<!-- Modal footer -->
-													<div class="modal-footer">
-														<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-															aria-label="Close">ຍົກເລີກ</button>
-														<button type="submit" class="btn btn-primary"><i
-																class="fa fa-save"></i>ບັນທືກ</button>
-													</div>
-												</div>
-											</div>
-										</div>
 									</tr>
-									<div class="modal fade" id="Modalstock" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<!-- The Modal -->
+									<div class="modal fade" id="myModal<?= $rs['mem_id'] ?>">
 										<div class="modal-dialog">
 											<div class="modal-content">
+												<!-- Modal Header -->
 												<div class="modal-header">
 													<h1 class="modal-title fs-3 " id="exampleModalLabel">
-														ຟອນເພີ່ມສະມາຊີກ
+														ຟອນແກ້ໄຂສະມາຊີກ
 													</h1>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"
-														aria-label="Close"></button>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal"></button>
 												</div>
+												<!-- Modal body -->
 												<div class="modal-body">
-													<form action="insert_member.php" method="POST"
+
+													<label for="" class="col-sm-2 col-form-label">ຊື່ພະນັກງານ
+													</label>
+													<form action="edit_mamber.php" method="POST"
 														enctype="multipart/form-data">
-														<label for="" class="col-sm-2 col-form-label">ຊື່ພະນັກງານ </label>
 														<div class="form-group row">
 															<div class="col-sm-12">
-																<?php
-																$request = "SELECT * FROM tbl_employee";
-																$result = mysqli_query($conn, $request);
-
-																?>
-																<select name="en_id" id="en_id" class="form-control"
-																	required>
-																	<option value="selected">---ເລືອກພະນັກງານ---</option>
-																	<?php
-																	while ($row = mysqli_fetch_array($result)) { ?>
-																		<option value="<?= $row['en_id'] ?>">
-																			<?= $row['en_name'] ?>
-																		</option>
-																	<?php } ?>;
-																</select>
+																<input type="text" name="en_name" class="form-control"
+																	placeholder="" value="<?= $rs['en_name'] ?>">
 															</div>
 														</div>
 														<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ</label>
@@ -211,26 +145,93 @@ include('connetdb.php')
 															<div class="col-sm-12">
 																<select name="ref_l_id" id="ref_l_id" class="form-control"
 																	required>
-																	<option value="selected">---ເລືອກຕຳແໜ່ງ---</option>
-																	<option value="1">ຜູ້ຈັດການ(Admin)</option>
-																	<option value="2">HR</option>
-																	<option value="3">ພະນັກງານບັນຊີ</option>
-																	<option value="4">ພະນັກງານຈັດຊື້</option>
-																	<option value="5">ພະນັກງານສາງ</option>
-																	<option value="6">ພະນັກງານຂາຍໜ້າຮ້ານ</option>
-																	<option value="7">ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>
+																	<?php if ($rs['ref_l_id'] == 1) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option selected>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 2) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option selected>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 3) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option selected>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 4) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option selected>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 5) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option selected>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 6) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option selected>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} elseif ($rs['ref_l_id'] == 7) {
+																		echo "<option>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option selected>ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} else {
+																		echo "<option selected>---ເລືອກຕຳແໜ່ງ---</option>
+																			<option>ຜູ້ຈັດການ(Admin)</option>
+																			<option>HR</option>
+																			<option>ພະນັກງານບັນຊີ</option>
+																			<option>ພະນັກງານຈັດຊື້</option>
+																			<option>ພະນັກງານສາງ</option>
+																			<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+																			<option >ພະນັກງານຂາຢືນຢັນລູກຄ້າ</option>";
+																	} ?>
+
 																</select>
 															</div>
 														</div>
 														<label for="" class="col-sm-4 col-form-label">ຊື່ຜູ້ໃຊ້ລະບົບ</label>
 														<div class="form-group row">
 															<div class="col-sm-12">
-																<input type="text" name="mem_username" class="form-control"
-																	id="mem_username" placeholder="ກະລຸນາໃສ່ຊື່ຜູ້ໃຊ້ລະບົບ"
-																	value="" required>
+																<input type="text" name="username" class="form-control"
+																	id="username" placeholder="ກະລຸນາໃສ່ຊື່ຜູ້ໃຊ້ລະບົບ"
+																	value="<?= $rs['mem_username'] ?>" required />
 															</div>
 														</div>
-														<label for="" class="col-sm-2 col-form-label">ລະຫັດຜ່ານ </label>
+														<label for="" class="col-sm-2 col-form-label">ລະຫັດຜ່ານ
+														</label>
 														<div class="form-group row">
 															<div class="col-sm-12">
 																<input type="text" name="mem_password" class="form-control"
@@ -239,7 +240,8 @@ include('connetdb.php')
 															</div>
 														</div>
 
-														<div class="button mb-4 d-flex justify-content-between ">
+														<!-- Modal footer -->
+														<div class="button mb-4 d-flex justify-content-between">
 															<button type="button" class="btn btn-danger"
 																data-bs-dismiss="modal" aria-label="Close">ຍົກເລີກ</button>
 															<button type="submit" class="btn btn-primary"><i
@@ -247,27 +249,25 @@ include('connetdb.php')
 														</div>
 													</form>
 												</div>
+
+
 											</div>
 										</div>
 									</div>
 
-
 									<?php
-									mysqli_close($conn);
-								} ?>
+								//mysqli_close($conn);
+							} ?>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="card-footer">
-
-			</div>
 
 		</div>
-
+		<?php include('frm_add_member.php') ?>
 	</section>
-	<!-- /.content -->
+
 	<?php include('footer.php'); ?>
 	<script>
 		$(function () {

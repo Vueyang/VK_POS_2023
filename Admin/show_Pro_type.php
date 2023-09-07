@@ -15,6 +15,23 @@ $menu = "pro_type"
 	<link rel="stylesheet" href="./assets/adminlte.min.css">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<style>
+	.button {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.fa {
+		padding: 5px;
+	}
+
+	.text {
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		padding: 10px;
+	}
+</style>
 
 <body>
 
@@ -25,9 +42,10 @@ $menu = "pro_type"
 			<div class="card-header ">
 				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນປະເພດສີນຄ້າ</h3>
 				<div align="right">
-					<a class="btn btn-primary" href="frm_add_product_type.php" role="button"><i
-							class="fa fa-plus"></i>ເພີ່ມປະເພດສີນຄ້າໄໝ່</a>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modalstock"
+						data-bs-whatever="@mdo"><i class="fa fa-plus"></i>ເພີ່ມປະເພດສີນຄ້າໄໝ່</button>
 				</div>
+
 			</div>
 			<br>
 			<div class="card-body">
@@ -71,9 +89,10 @@ $menu = "pro_type"
 										<td>
 											<div class="grid d-flex hstack gap-3 justify-content-center">
 												<div>
-													<a class="btn btn-warning grid d-flex hstack gap-2"
-														href="frm_edit_product_type.php?id=<?= $rs['type_id'] ?>"
-														role="button"><i class="fas fa-pencil-alt"></i>ແກ້ໄຂ</a>
+													<button type="button" class="btn btn-warning" data-bs-toggle="modal"
+														data-bs-target="#Modal<?= $rs['type_id'] ?>">
+														<i class="fas fa-pencil-alt"></i>ແກ້ໄຂ
+													</button>
 												</div>
 												<div>
 													<a class="btn btn-danger grid d-flex hstack gap-2"
@@ -85,14 +104,59 @@ $menu = "pro_type"
 
 										</td>
 									</tr>
+									<div class="modal fade" id="Modal<?= $rs["type_id"] ?>" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<h1 class="modal-title fs-3 text " id="exampleModalLabel">
+													ໜ້າແກ້ໄຂຂໍ້ມູນປະເພດສີນຄ້າ
+												</h1>
+												<div class="modal-header">
+													<div class="modal-body">
+														<form name="form1" method="post" action="update_pro_type.php"
+															enctype="multipart/form-data">
+															<label for="text" style="padding:10px 0px;">
+																ລະຫັດປະເພດສີນຄ້າ*:</label>
+															<input type="text" name="type_id" class="form-control"
+																placeholder="ຊື່ປະເພດສີນຄ້າ" value="<?= $rs['type_id'] ?>"
+																readonly required>
+															<br>
+															<label for="text" style="padding:10px 0px;">
+																ຊື່ປະເພດສີນຄ້າ*:</label>
+															<input type="text" name="type" class="form-control"
+																placeholder="ຊື່ປະເພດສີນຄ້າ" value="<?= $rs['type_name'] ?>"
+																required>
+															<br>
+															<label for="text" style="padding:10px 0px;"> ຮູບສີນຄ້າ*:</label>
+															<div class="col-sm-10">
+																<img id="blah" src="./image/<?= $rs['type_img'] ?>"
+																	alt="your image" width="200" />
+																<div class="custom-file mb-4 mt-4">
+																	<input type="file" name="type_img"
+																		onchange="readURL(this);" required>
+																	<input type="hidden" name="textimg" class="form-control"
+																		value="<?= $rs['image'] ?>">
+																	<br>
+																</div>
+															</div>
+															<div class="button mb-4 mt-4">
+																<a class="btn btn-danger" href="show_Pro_type.php"
+																	role="button">ຍົກເລີກ</a>
+																<button type="submit" class="btn btn-primary"><i
+																		class="fa fa-save"></i>ບັນທືກ</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								<?php } ?>
 							</tbody>
 						</table>
 					</div>
+					<?php include("frm_add_product_type.php") ?>
 				</div>
-			</div>
-			<div class="card-footer">
-
 			</div>
 
 		</div>

@@ -25,9 +25,14 @@ if (is_uploaded_file($_FILES['en_image']['tmp_name'])) {
 } else {
 	$new_image_name = "$en_img";
 }
-
+$gender1 = "";
+if ($gender == "ຊາຍ") {
+	$gender1 = 0;
+} elseif ($gender == 1) {
+	$gender1 = 1;
+}
 // function Update
-$sql = "UPDATE tbl_employee SET en_name = '$en_name', en_lastname = '$en_lastname', gender = '$gender', date_of_birth = '$newDate',
+$sql = "UPDATE tbl_employee SET en_name = '$en_name', en_lastname = '$en_lastname', gender = '$gender1', date_of_birth = '$newDate',
 en_phone = '$en_phone', en_email = '$en_email', village = '$village', district = '$district', provice = '$provice', position = '$position', en_image = '$new_image_name' WHERE en_id ='$en_id'";
 /*$result = mysqli_query($conn, $sql);
 if($result){

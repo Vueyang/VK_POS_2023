@@ -129,6 +129,13 @@ $mem_id = $_SESSION['mem_id'];
 					<?php }
 
 					?>
+					<input type="hidden" name="mem_id" value="<?php echo $mem_id; ?>">
+					<a href="list_sale_approved.php"><button type="button"
+							class="btn btn-outline-warning">ກັບຄືນ</button></a>
+					<a href="confirm_customer.php?order_id=<?= $row['order_id'] ?>"><button type="button"
+							class="btn btn-outline-success">ຢືນຢັນ</button></a>
+					<a href="confirm_cancel_order.php?order_id=<?= $row['order_id'] ?>"><button type="button"
+							class="btn btn-outline-danger">ຍົກເລີກ</button></a>
 				</div>
 
 			</div>

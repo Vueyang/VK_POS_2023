@@ -81,8 +81,10 @@
 		title: 'ລຳເລັດ',
 		text: 'ທ່ານໄດ້ບັນທືກຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
-		confirmButtonText: 'ຕົກລົງ'
-	})
+		confirmButtonText: 'ຕົກລົງ',
+	}).then(() => {
+		location.href = "list_mem.php";
+	});
 </script>
 <?php } ?>
 <?php if (isset($_GET['mem_editp'])) { ?>
@@ -91,10 +93,26 @@
 		title: 'ລຳເລັດ',
 		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
+		confirmButtonText: 'ຕົກລົງ',
+	}).then(() => {
+		location.href = "list_mem.php";
+	});
+</script>
+<?php } ?>
+
+<?php if (isset($_GET['mem_error'])) { ?>
+<script>
+	Swal.fire({
+		title: 'error',
+		text: 'Username ນີ້ມີຢູ່ແລ້ວ',
+		icon: 'error',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "list_mem.php";
 	})
 </script>
 <?php } ?>
+
 <?php if (isset($_GET['mem_del'])) { ?>
 <script>
 	Swal.fire({
@@ -102,6 +120,8 @@
 		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "list_mem.php";
 	})
 </script>
 <?php } ?>
@@ -114,6 +134,8 @@
 		text: 'ບັນທືກຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "frm_Show_product.php";
 	})
 </script>
 <?php } ?>
@@ -124,6 +146,8 @@
 		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "frm_Show_product.php";
 	})
 </script>
 <?php } ?>
@@ -134,6 +158,8 @@
 		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "frm_Show_product.php";
 	})
 </script>
 <?php } ?>
@@ -144,6 +170,8 @@
 		text: 'ຂໍ້ມູນ Username ຊໍ້າ',
 		icon: 'error',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "frm_Show_product.php";
 	})
 </script>
 <?php } ?>
@@ -153,9 +181,11 @@
 <script>
 	Swal.fire({
 		title: 'ລຳເລັດ',
-		text: 'ບັນທືກຂໍ້ມູນສຳເລັດ',
+		text: 'ທ່ານໄດ້ບັນທືກຂໍ້ມູນສຳເລັດ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "show_Pro_type.php";
 	})
 </script>
 <?php } ?>
@@ -166,6 +196,8 @@
 		text: 'ທ່ານໄດ້ແກ້ໄຂຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "show_Pro_type.php";
 	})
 </script>
 <?php } ?>
@@ -178,6 +210,8 @@
 		text: 'ທ່ານໄດ້ລືບຂໍ້ມູນສຳເລັດແລ້ວ',
 		icon: 'success',
 		confirmButtonText: 'ຕົກລົງ'
+	}).then(() => {
+		location.href = "show_Pro_type.php";
 	})
 </script>
 <?php } ?>

@@ -31,7 +31,7 @@ if (isset($_POST['mem_username'])) {
       //print_r($_SESSION);
       //var_dump($_SESSION);
       //exit();
-      if ($_SESSION["ref_l_id"] == "1") { //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
+      if ($_SESSION["ref_l_id"] == "1") { //ຖ້າເປັນ admin ໃຫ້ເຂົ້າໄປໜ້າ admin_page.php
         //echo "Are Your Admin";
         //exit();
         Header("Location:Dashboard.php");
@@ -39,10 +39,25 @@ if (isset($_POST['mem_username'])) {
       } elseif ($_SESSION["ref_l_id"] == "2") {
 
         Header("Location:list_employee.php");
+      } elseif ($_SESSION["ref_l_id"] == "3") {
+
+        Header("Location:list_employee.php");
+      } elseif ($_SESSION["ref_l_id"] == "4") {
+
+        Header("Location:list_employee.php");
+      } elseif ($_SESSION["ref_l_id"] == "5") {
+
+        Header("Location:list_employee.php");
+      } elseif ($_SESSION["ref_l_id"] == "6") {
+
+        Header("Location:list_employee.php");
+      } elseif ($_SESSION["ref_l_id"] == "7") {
+
+        Header("Location:list_sale-approved.php");
       }
     } else {
       echo "<script>";
-      echo "alert(\" user หรือ  mem_password ไม่ถูกต้อง\");";
+      echo "alert(\" user ຫຼື  mem_password ບໍ່ຖືກຕ້ອງ\");";
       echo "window.history.back()";
       echo "</script>";
     }
