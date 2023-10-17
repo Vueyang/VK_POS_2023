@@ -145,15 +145,7 @@ $mem_id = $_SESSION['mem_id'];
 	<script>
 		$(function () {
 			$(".datatable").DataTable();
-			// $('#example2').DataTable({
-			//   "paging": true,
-			//   "lengthChange": false,
-			//   "searching": false,
-			//   "ordering": true,
-			//   "info": true,
-			//   "autoWidth": false,
-			// http://fordev22.com/
-			// });
+
 		});
 	</script>
 </body>
