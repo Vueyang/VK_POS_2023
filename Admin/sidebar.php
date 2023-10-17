@@ -166,24 +166,6 @@
 						<p>ຂໍ້ມູນພະນັກງານ </p>
 					</a>
 				</li>
-
-				<li class="nav-item">
-					<a href="add_to_card.php" class="nav-link <?php if ($menu == "type") {
-						echo "active";
-					} ?> ">
-						<i class="nav-icon fa fa-copy"></i>
-						<p>Type </p>
-					</a>
-				</li>
-
-				<li class="nav-item">
-					<a href="" class="nav-link <?php if ($menu == "brand") {
-						echo "active";
-					} ?> ">
-						<i class="nav-icon fa fa-box"></i>
-						<p>Brand </p>
-					</a>
-				</li>
 			</ul>
 
 
