@@ -7,7 +7,7 @@ $menu = "report_p5"
 $query_my_order = "SELECT p.pro_name, SUM(o.total) AS totol
 FROM tbl_order_detail as o
 INNER JOIN product_new as p ON p.pro_id=o.pro_id
-INNER JOIN tbl_order as ord ON ord.order_id=o.order_id
+INNER JOIN tbl_order_receive as ord ON ord.order_id=o.order_id
 WHERE ord.order_status =4
 GROUP BY o.pro_id ORDER BY  totol DESC LIMIT 5
 "

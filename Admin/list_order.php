@@ -1,22 +1,68 @@
 <?php
 
-$query_my_order = "SELECT o.* ,m.mem_name
-FROM tbl_order as o
-INNER JOIN tbl_member as m ON o.mem_id=m.mem_id
-
-WHERE o.order_status=4
-ORDER BY o.order_id DESC
-"
+$query_my_order = "SELECT o.* ,m.mem_username FROM tbl_order_receive as o INNER JOIN tbl_member as m ON o.mem_id=m.mem_id WHERE o.order_status=4 ORDER BY o.order_id DESC"
 	or die
 	("Error : " . mysqlierror($query_my_order));
 $rs_my_order = mysqli_query($conn, $query_my_order);
-//echo ($query_my_order);//test query
+//echo ($rs_my_order);//test query
+?>
+<?php
+$query_1 = mysqli_query($conn, "SELECT COUNt(order_id) FROM 'tbl_order_receive'");
+$row = mysqli_fetch_row($query_1);
+echo $row;
+$row = $row[0];
+$page_rows = 6;
+$last = ceil($row / $page_rows);
+if($last < 1){
+	$last = 1;
+}
+$pagenum = 1;
+if(isset($_GET['pn'])){
+	$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+}
+if($pagenum < 1){
+	$pagenum = 1;
+}elseif($pagenum > $last){
+	$pagenum = $last;
+}
+$limit = 'LIMIT' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+$numpage = mysqli_query($conn, "SELECT * FROM tbl_order_receive ORDER BY order_id DESC $limit");
+print_r($numpage);
+$pageinationCtrls = '';
+if($last != 1){
+	if($pagenum > 1){
+		$previos = $pagenum - 1;
+		$pageinationCtrls .= '<a href = "' .$_SERVER['PHP_SELF'] . '?pn=' . $previos .'" class="btn btn-info">Previous</a> &nbsp; ';
+		for($i = $pagenum - 4; $i < $pagenum; $i++){
+			if($i > 0){
+				$pageinationCtrls .='<a href="' . $_SERVER['PHP_SELF'] . '?pn=' .$i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+
+			}
+		}
+	}
+	$pageinationCtrls .='<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
+
+	for($i = $pagenum + 1; $i <= $last; $i++){
+		$pageinationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+		if($i >= $pagenum + 4){
+			break;
+		}
+	}
+
+	if($pagenum != $last){
+		$next = $pagenum + 1;
+		$pageinationCtrls .= '&nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a>';
+	}
+}
+//print_r($pageinationCtrls);
+//echo $query_1;
+//exit();
 ?>
 <table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
 	<thead>
 		<tr class="danger">
 			<th width="7%">
-				<center>No.</center>
+				<center>ລະຫັດ</center>
 			</th>
 			<th width="20%">ພະນັກງານຂາຍ</th>
 			<th width="20%">ສະຖານະ</th>
@@ -32,7 +78,7 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 					<?php echo $rs_order['order_id']; ?>
 				</td>
 				<td>
-					<?php echo $rs_order['mem_name']; ?>
+					<?php echo $rs_order['mem_username']; ?>
 				</td>
 				<td>
 					<?php $st = $rs_order['order_status'];
@@ -54,4 +100,6 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 			</tr>
 		<?php } ?>
 	</tbody>
+	
+</div>
 </table>

@@ -2,34 +2,38 @@
 error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
 
-
+$mem_id = $_SESSION['mem_id'];
+//echo $mem_id;
+//exit;
 $p_id = mysqli_real_escape_string($conn, $_GET['pro_id']);
 $actdd = mysqli_real_escape_string($conn, 'add');
 $act = mysqli_real_escape_string($conn, $_GET['act']);
 
-if ($actdd == 'add' && !empty($p_id)) //เช็คว่า $act=='add' และ p_id ไม่ใช่ค้าว่างให้ทำเงื่อนไข
+if ($actdd == 'add' && !empty($p_id)) //ກວດວ່າ $act=='add' ແລະ p_id ຖ້າບໍ່ແມ່ນຄ່າຫວ່າງໃຫ້ທຳເງື່ອນໄຂນີ້
 {
-	if (isset($_SESSION['cart'][$p_id])) //ถ้าเจอ p_id ในตระกร้า 
+	if (isset($_SESSION['cart'][$p_id])) //ຖ້າມີ p_id ໃນກະຕ່າ
 	{
-		$_SESSION['cart'][$p_id]++; //ให้เพิ่มทีละ 1 
-	} else //ถ้าไม่เจอให้สินค้าที่ส่งมานั้น  
+		$_SESSION['cart'][$p_id] = 1; //ໃຫ້ສີນຄ້າເທົ່າກັບ = 1 	
+		//$_SESSION['cart'][$p_id]++; //ໃຫ້ເພີ່ມທີລະ1
+	}else //ຖ້າບໍ່ເຈີໃຫ້ສີນຄ້າທີ່ສົ່ງມານັ້ນ
 	{
-		$_SESSION['cart'][$p_id] = 1; //ให้สินค้านั้นเท่ากับๅ
+		//$_SESSION['cart'][$p_id] = 1; //ໃຫ້ສີນຄ້າເທົ່າກັບ = 1
+		$_SESSION['cart'][$p_id]++; //ໃຫ້ເພີ່ມທີລະ1
 	}
 }
 
 // session_destroy();
 //header("location: cart.php");
 
-//echo'<pre>';
-//print_r($_SESSION);
-//echo'</pre>';
-//exit();
+/*echo'<pre>';
+print_r($_SESSION);
+echo'</pre>';
+exit();*/
 
 
 
 
-if ($act == 'remove' && !empty($p_id)) //ยกเลิกการสั่งซื้อ
+if ($act == 'remove' && !empty($p_id)) //ຍົກເລີກການສັ່ງຊື້
 {
 	unset($_SESSION['cart'][$p_id]);
 }
@@ -38,6 +42,7 @@ if ($act == 'update') {
 	$amount_array = $_POST['amount'];
 	foreach ($amount_array as $p_id => $amount) {
 		$_SESSION['cart'][$p_id] = $amount;
+	
 	}
 }
 ?>
@@ -65,18 +70,18 @@ if ($act == 'update') {
 				$sql = "SELECT * FROM product_new where pro_id=$p_id";
 				$query = mysqli_query($conn, $sql);
 				$row = mysqli_fetch_array($query);
-				$sum = $row['price'] * $qty; //เอาราคาสินค้ามา * จำนวนในตระกร้า
-				$total += $sum; //ราคารวม ทั้ง ตระกร้า
+				$sum = $row['price'] * $qty; //ເອົາລາຄາສີນຄ້າມາ * ຈຳນວນ
+				$total += $sum; //ລາຄາທັງໝົດ
 				echo "<tr>";
 				echo "<td>" . $ii += 1 . "</td>";
 
 				echo "<td>"
 
 					. $row["pro_name"]
-					. "<br>"
+					/*. "<br>"
 					. "ສະຕ໋ອກ "
 					. $row['amount']
-					. " ລາຍການ"
+					. " ລາຍການ"*/
 
 					. "</td>";
 				echo "<td align='right'>" . number_format($row["price"], 0) . "</td>";
@@ -84,8 +89,8 @@ if ($act == 'update') {
 
 
 
-				$pqty = $row['amount']; //ประกาศตัวแปรจำนวนสินค้าใน stock
-				echo "<input type='number' name='amount[$p_id]' value='$qty' size='2'class='form-control' min='0'max='$pqty'/>";
+				$pqty = $row['amount']; //ປະກາດຕົວແປຈຳນວນສີນຄ້າໃນ stock
+				echo "<input type='number' name='amount[$p_id]' value='$qty' size='2'class='form-control' min='0' max='$pqty'/>";
 
 
 				echo "<td align='right'>" . number_format($sum, 0) . "</td>";
@@ -101,7 +106,7 @@ if ($act == 'update') {
 			echo "<td></td>";
 			echo "<td></td>";
 
-			echo "<td bgcolor='#CEE7FF' align='center'><b>ລາຄາລວມ	</b></td>";
+			echo "<td bgcolor='#CEE7FF' align='center'><b>ລາຄາລວມ</b></td>";
 			echo "<td align='right' bgcolor='#CEE7FF'>" . "<b>" . number_format($total, 0) . "</b>" . "</td>";
 			echo "<td align='left' bgcolor='#CEE7FF'></td>";
 			echo "</tr>";
@@ -116,7 +121,7 @@ if ($act == 'update') {
 		<!-- <a href="#" target="" class="btn btn-success" onclick="window.print()">Print</a> -->
 
 		<input type="submit" name="button" id="button" value="ປັບປຸງ" class="btn btn-warning" />
-		<input type="button" name="Submit2" value="ທຳລາຍການຕໍ່ໄປ" onclick="window.location='confirm_a.php';"
+		<input type="button" name="Submit2" value="ຂາຍ" onclick="window.location='confirm_a.php';"
 			class="btn btn-primary" />
 		<!--<input type="hidden" name="t_id" value="<?php echo $t_id; ?>">
 		<input type="hidden" name="b_id" value="<?php echo $b_id; ?>">-->

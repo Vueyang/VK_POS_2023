@@ -15,7 +15,84 @@ include('connetdb.php')
 	<link rel="stylesheet" href="./assets/adminlte.min.css">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
+<?php
+							$query1 = mysqli_query($conn, "SELECT COUNT(en_id) FROM `tbl_employee`");
 
+							$row = mysqli_fetch_row($query1);
+							//echo "<pre>";
+//print_r($row);
+//print_r($_SESSION['cart']);
+//print_r($_POST);
+//echo "</pre>";
+//exit();
+							$rows = $row[0];
+							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+							$last = ceil($rows / $page_rows);
+							//print_r($last);
+							if ($last < 1) {
+								$last = 1;
+							}
+							$pagenum = 1;
+							if (isset($_GET['pn'])) {
+								$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+							}
+							if ($pagenum < 1) {
+								$pagenum = 1;
+							} else if ($pagenum > $last) {
+								$pagenum = $last;
+							}
+							$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+							if(isset($_GET['search'])){
+								$search = $_GET['search'];
+								$nquery = mysqli_query($conn, "SELECT * from  tbl_employee WHERE en_name LIKE '%$search%' OR en_lastname LIKE '%$search%' OR en_phone LIKE '%$search%'  ORDER BY en_id DESC $limit ");
+								//echo $nquery;
+							}else{
+								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+								$nquery = mysqli_query($conn, "SELECT * from  tbl_employee ORDER BY en_id DESC $limit");
+								$paginationCtrls = '';
+								if ($last != 1) {
+									if ($pagenum > 1) {
+										$previous = $pagenum - 1;
+										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
+								
+								
+										for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+											if ($i > 0) {
+												$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+											}
+										}
+									}
+								
+								
+									//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
+								
+								
+									$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
+								
+
+								
+								
+									for ($i = $pagenum + 1; $i <= $last; $i++) {
+										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+										if ($i >= $pagenum + 4) {
+											break;
+										}
+									}
+								
+								
+									if ($pagenum != $last) {
+										$next = $pagenum + 1;
+								
+								
+										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
+									}
+									
+								}
+								
+							}
+							
+							
+						?>
 <body>
 
 	<!-- Main content -->
@@ -23,24 +100,53 @@ include('connetdb.php')
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
-				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊິກ</h3>
+				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນພະນັກງານ</h3>
 				<div align="right">
-					<a class=" btn btn-primary" href="frm_add_employee.php"><i class="fa fa-plus"></i>ເພີ່ມສະມາຊິກ</a>
+					<a class=" btn btn-primary" href="frm_add_employee.php"><i class="fa fa-plus"></i>ເພີ່ມພະນັກງານ</a>
 				</div>
 			</div>
 			<br>
-			<div class="card-body">
-				<div class="row">
+			<div class="card-body-card">
+				<div class="row-row">
 					<div class="col">
 						<?php
 
-						$nquery = "SELECT * from  tbl_employee GROUP BY en_id ";
+						//$nquery = "SELECT * from  tbl_employee GROUP BY en_id ";
 
-						$rs_my_order = mysqli_query($conn, $nquery);
+						//$rs_my_order = mysqli_query($conn, $nquery);
 						//echo ($query_my_order);//test query
 						?>
-
-						<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
+						<div class="container text-center">
+							<div class="row ">
+    							<div class="col">
+									<form class="form-group my-3" method="GET">
+										<div class="row">
+											<div class="col-10">
+											<input type="text" placeholder="ຄົ້ນຫາ" class="form-control" name="search"  required>
+											</div>
+											<div class="col-2">
+											<input type="submit" value="ຄົ້ນຫາ" class="btn btn-info" >
+											</div>
+										</div>
+									</form>
+   								</div>
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "list_employee.php" method="GET">
+										<div class="row">
+											<div class="col-12">
+												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+											</div>
+										</div>
+									</form>
+								</div>						
+  							</div>
+						</div>
+						
+							<br>
+							
+  
+						
+						<table id="datatablesSimples" class="table table-striped-columns">
 							<thead>
 
 								<tr>
@@ -58,53 +164,62 @@ include('connetdb.php')
 							</thead>
 
 							<tbody>
-								<?php foreach ($rs_my_order as $rs) { ?>
-									<tr>
-										<td>
-											<?= $l += 1 ?>
-										</td>
-										<td><img src="./image/<?= $rs["en_image"] ?>" width="100px" height="90px"> </td>
-										<td>
-											<?= $rs['en_name'] ?>
-										</td>
-										<td>
-											<?= $rs['en_lastname'] ?>
-										</td>
-										<td>
-											<?= $rs['en_phone'] ?>
-										</td>
-										<td>
-											<?= $rs['en_email']; ?>
-										</td>
-										<td>
-											<?= $rs['position']; ?>
-										</td>
-										<td>
-											<div class="grid d-flex hstack gap-3 justify-content-center"
-												style="--bs-columns: 4; --bs-gap: 5rem;">
-												<div>
-													<input type="hidden" name="en_id" value="<?php echo $rs['en_id']; ?>">
-													<input type="hidden" name="ref_l_id"
-														value="<?php echo $rs['ref_l_id']; ?>">
-													<a href="edit_employee.php?id=<?= $rs['en_id'] ?>"
-														class="btn btn-warning grid d-flex hstack gap-2"><i
-															class="fas fa-pencil-alt"></i>
-														ແກ້ໄຂ</a>
+								<?php if($row > 0) { ?>
+									<?php foreach ($nquery as $rs) { ?>
+										<tr>
+											<td>
+												<?= $l += 1 ?>
+											</td>
+											<td><img src="./image/<?= $rs["en_image"] ?>" width="100px" height="90px"> </td>
+											<td>
+												<?= $rs['en_name'] ?>
+											</td>
+											<td>
+												<?= $rs['en_lastname'] ?>
+											</td>
+											<td>
+												<?= $rs['en_phone'] ?>
+											</td>
+											<td>
+												<?= $rs['en_email']; ?>
+											</td>
+											<td>
+												<?= $rs['position']; ?>
+											</td>
+											<td>
+												<div class="grid d-flex hstack gap-3 justify-content-center"
+													style="--bs-columns: 4; --bs-gap: 5rem;">
+													<div>
+														<input type="hidden" name="en_id" value="<?php echo $rs['en_id']; ?>">
+														<input type="hidden" name="ref_l_id"
+															value="<?php echo $rs['ref_l_id']; ?>">
+														<a href="edit_employee.php?id=<?= $rs['en_id'] ?>"
+															class="btn btn-warning grid d-flex hstack gap-2"><i
+																class="fas fa-pencil-alt"></i>
+															ແກ້ໄຂ</a>
+													</div>
+													<div>
+														<a href="delete_employee.php?id=<?= $rs['en_id']; ?> &&employee=del"
+															class="del-btn btn btn-danger grid d-flex hstack gap-2"
+															onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
+																class="fas fas fa-trash"></i>
+															ລືບ</a>
+													</div>
 												</div>
-												<div>
-													<a href="delete_employee.php?id=<?= $rs['en_id']; ?> &&employee=del"
-														class="del-btn btn btn-danger grid d-flex hstack gap-2"
-														onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
-															class="fas fas fa-trash"></i>
-														ລືບ</a>
-												</div>
-											</div>
 
-										</td>
-									</tr>
+											</td>
+										</tr>
+									<?php } ?>
 								<?php } ?>
 							</tbody>
 						</table>
+					</div>
+				</div>
+				<div class="card-footer" align="end">
+					<div id="pagination_controls">
+
+						<?php echo $paginationCtrls; ?>
+
 					</div>
 				</div>
 			</div>
@@ -113,7 +228,7 @@ include('connetdb.php')
 			</div>
 
 		</div>
-
+		
 	</section>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>

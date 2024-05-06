@@ -3,6 +3,8 @@
 		font-family: 'Noto Sans Lao', sans-serif;
 	}
 </style>
+
+
 <aside class="main-sidebar sidebar-dark-gray elevation-4">
 	<!-- Brand Logo -->
 	<!-- <a href="" class="brand-link bg-gray">
@@ -29,8 +31,8 @@
 				<!-- <img src="../assets/img/FD22.png" class="img-circle elevation-2" alt="User Image"> -->
 			</div>
 			<div class="info">
-				<a href="edit_profile.php?id<?= $_SESSION['en_id'] ?>" target="" class="d-block">
-					<?php echo $_SESSION['en_name']; ?> | Edit
+				<a href="edit_profile.php?id<?= $_SESSION['mem_id'] ?>" target="" class="d-block">
+					<?php echo $_SESSION['mem_username']; ?> | Edit
 					Profile</a>
 			</div>
 		</div>
@@ -168,7 +170,7 @@
 				</li>
 			</ul>
 
-
+					<hr>
 			<!--<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
 

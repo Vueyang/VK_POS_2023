@@ -3,13 +3,15 @@ include('connetdb.php');
 $order_id = mysqli_real_escape_string($conn, $_GET['order_id']);
 //echo $order_id;
 $sqlpay = "SELECT d.* , p.* ,
-				m.mem_name,o.order_date,o.order_status,o.pay_amount2
+				m.mem_username,o.order_date,o.order_status,o.pay_amount2
 				FROM tbl_order_detail AS d
 				INNER JOIN product_new AS p ON d.pro_id=p.pro_id
-				INNER JOIN tbl_order AS o ON d.order_id=o.order_id
+				INNER JOIN tbl_order_receive AS o ON d.order_id=o.order_id
 				INNER JOIN tbl_member as m ON o.mem_id=m.mem_id
 				WHERE d.order_id=$order_id";
 $querypay = mysqli_query($conn, $sqlpay);
+//echo $order_id;
+//exit();
 $rowmember = mysqli_fetch_array($querypay);
 $st = $rowmember['order_status'];
 ?>
@@ -22,7 +24,7 @@ $st = $rowmember['order_status'];
 			<?php echo date('d/m/y', strtotime($rowmember['order_date'])); ?>
 		</h6>
 		<h6>ຜູ້ທຳລາຍການ :
-			<?php echo $rowmember['mem_name']; ?> <br />ສະຖານະ :
+			<?php echo $rowmember['mem_username']; ?> <br />ສະຖານະ :
 			<?php include('mystatus.php'); ?>
 		</h6>
 	</h4>

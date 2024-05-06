@@ -118,6 +118,11 @@ FROM tbl_order as o WHERE o.order_status=0 ORDER BY order_date DESC";
 													type="button"
 													onclick="window.location='review_detail_cancelOK.php?order_id=<?= $rs['order_id'] ?>';"><i
 														class="nav-icon fas fa-clipboard-list"></i>ເບີ່ງລາຍການ</button>
+														<button
+													class="btn btn-danger grid d-flex hstack gap-3 justify-content-center"
+													type="button"
+													onclick="window.location='review_detail_cancelOK.php?order_id=<?= $rs['order_id'] ?>';"><i
+														class="fas fas fa-trash"></i>ລົບ</button>
 											</td>
 										</tr>
 									<?php } ?>

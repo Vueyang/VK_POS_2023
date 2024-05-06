@@ -32,10 +32,11 @@
 				if ($act == 'view') {
 
 					include('order_detail.php');
+					//include('list_order.php');
 
 
 				} else {
-
+					
 					include('list_order.php');
 				} ?>
 			</div>

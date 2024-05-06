@@ -1,7 +1,7 @@
 <?php
 include('connetdb.php');
 $en_id = $_POST['en_id'];
-//$ref_l_id = $_POST['ref_l_id'];
+$ref_l_id = $_POST['ref_l_id'];
 $en_name = $_POST['en_name'];
 $en_lastname = $_POST['en_lastname'];
 $gender = $_POST['gender'];
@@ -28,7 +28,7 @@ if (is_uploaded_file($_FILES['en_image']['tmp_name'])) {
 $gender1 = "";
 if ($gender == "ຊາຍ") {
 	$gender1 = 0;
-} elseif ($gender == 1) {
+} elseif ($gender == "ຍິງ") {
 	$gender1 = 1;
 }
 // function Update

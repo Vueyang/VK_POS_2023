@@ -82,18 +82,18 @@ if ($last != 1) {
 }
 ?>
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<!--<section class="content-header">
 	<div class="container-fluid">
 		<h1>ຂາຍສີນຄ້າ</h1>
-	</div><!-- /.container-fluid -->
-</section>
+	</div><!-- /.container-fluid
+</section>-->
 
 <!-- Main content -->
 <section class="content">
 
 	<div class="card card-gray">
 		<div class="card-header ">
-			<h3 class="card-title">ສີນຄ້າ IN STOCK</h3>
+			<h1 class="card-title">ຂາຍສີນຄ້າ</h1>
 		</div>
 		<br>
 		<div class="card-body">
@@ -113,7 +113,7 @@ if ($last != 1) {
 							</div>
 						</form>
 						<br>
-						<?php if ($row > 0) { ?>
+						<?php if ($row  > 0) { ?>
 							<div class="row">
 
 

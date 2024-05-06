@@ -6,10 +6,10 @@ $menu = "sale_pro";
 
 <?php
 
-//echo'<pre>';
-//print_r($_SESSION);
-//echo'</pre>';
-//exit();
+/*echo'<pre>';
+print_r($_SESSION);
+echo'</pre>';
+exit();*/
 
 
 
@@ -17,6 +17,9 @@ error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
 $mem_id = $_SESSION['mem_id'];
 $mem_address = $_SESSION['mem_address'];
+//echo $en_id;
+//echo "<hr/>";
+//exit();
 ?>
 
 <!-- Content Header (Page header) -->
@@ -53,10 +56,11 @@ $mem_address = $_SESSION['mem_address'];
 									<tr>
 										<td width="5%" align="center">ລຳດັບ</td>
 										<td width="10%" align="center">ຮູບ</td>
-										<td width="40%" align="center">ສີນຄ້າ</td>
+										<td width="20%" align="center">ສີນຄ້າ</td>
+										<td width="20%" align="center">ລາຍລະອຽດ</td>
 										<td width="10%" align="center">ລາຄາ</td>
 										<td width="10%" align="center">ຈຳນວນ</td>
-										<td width="15%" align="center">ລວມ(ກີບ)</td>
+										<td width="15%" align="center">ລວມ (ກີບ)</td>
 
 									</tr>
 									<?php
@@ -67,32 +71,30 @@ $mem_address = $_SESSION['mem_address'];
 											$sql = "SELECT * FROM product_new where pro_id=$p_id";
 											$query = mysqli_query($conn, $sql);
 											$row = mysqli_fetch_array($query);
-											$sum = $row['price'] * $qty; //เอาราคาสินค้ามา * จำนวนในตระกร้า
-											$total += $sum; //ราคารวม ทั้ง ตระกร้า
+											$sum = $row['price'] * $qty; //ເອົາລາຄາສີນຄ້າມາ * ຈຳນວນສີນຄ້າ
+											$total += $sum; //ລາຄາລວມທັງໝົດ
 											echo "<tr>";
 											echo "<td>" . $i += 1 . "</td>";
 											echo "<td>" . "<img src='image/" . $row['image'] . "' width='100%'>" . "</td>";
 											echo "<td>"
-
 												. $row["pro_name"]
-												. "<br>"
+/*. "<br>"
 												. "ສະຕ໋ອກ "
 												. $row['amount']
-												. " ລາຍການ"
+												. " ລາຍການ"*/
 
 												. "</td>";
+											echo "<td>" . $row["detail"] . "</td>";
 											echo "<td align='right'>" . number_format($row["price"], 0) . "</td>";
 											echo "<td align='right'>";
-											$pqty = $row['amount']; //ประกาศตัวแปรจำนวนสินค้าใน stock
+											$pqty = $row['amount']; //ປະກາດຕົວແປຈຳນວນສີນຄ້າໃນ stock
 											echo "<input type='number' name='amount[$p_id]' value='$qty' size='2'class='form-control' min='0'max='$pqty' readonly/></td>";
 											echo "<td align='right'>" . number_format($sum, 2) . "</td>";
 											//remove product
 										}
+										
 										echo "<tr>";
-										echo "<td></td>";
-										echo "<td></td>";
-										echo "<td></td>";
-										echo "<td  align='center'><b>ລາຄາລວມ</b></td>";
+										echo "<td  align='right'colspan='5'><b>ລາຄາລວມທັງໝົດ:</b></td>";
 										echo "<td align='right'colspan='2'>" . "<b>" . number_format($total, 2) . "</b>" . "</td>";
 										echo "</tr>";
 									}

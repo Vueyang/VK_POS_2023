@@ -34,15 +34,26 @@
 
 	<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
 	<!-- ckeditor -->
 	<script src="assets/ckeditor.js"></script>
 
 	<style>
 		body {
-			font-family: 'Kanit', sans-serif;
+			
+			font-family: "Noto Sans Lao", sans-serif;
+  			font-optical-sizing: auto;
+  			font-weight: <weight>;
+  			font-style: normal;
+  			font-variation-settings:"wdth" 100;
 
 			font-size: 14px;
 		}
+body {
+  
+}
 	</style>
 
 

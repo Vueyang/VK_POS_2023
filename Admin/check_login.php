@@ -23,8 +23,8 @@ if (isset($_POST['mem_username'])) {
     //exit;
     if (mysqli_num_rows($result) == 1) {
       $row = mysqli_fetch_array($result);
-      $_SESSION["en_id"] = $row["en_id"];
-      $_SESSION["en_name"] = $row["en_name"];
+      $_SESSION["mem_id"] = $row["mem_id"];
+      $_SESSION["mem_username"] = $row["mem_username"];
       $_SESSION["ref_l_id"] = $row["ref_l_id"];
       $_SESSION["en_image"] = $row["en_image"];
       $_SESSION["mem_address"] = $row["mem_address"];
