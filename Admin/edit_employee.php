@@ -9,8 +9,9 @@ $en_id = $_GET['id'];
 $query_member = "SELECT * FROM tbl_employee WHERE en_id = $en_id";
 $rs_member = mysqli_query($conn, $query_member);
 $row = mysqli_fetch_array($rs_member);
-//echo $row['mem_name'];
+//echo $row['position'];
 //echo ($query_member);//test query
+//exit();
 ?>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -50,7 +51,7 @@ $row = mysqli_fetch_array($rs_member);
 					<input type="hidden" name="ref_l_id" value="<?php echo $row['ref_l_id']; ?>">
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ຊື່ </label>
-						<input type="text" name="en_name" class="form-control" id="en_name" placeholder=""
+						<input type="text" name="en_name" date_date_set class="form-control" id="en_name" placeholder=""
 							value="<?php echo $row['en_name']; ?>">
 					</div>
 					<div class="form-group row">
@@ -65,7 +66,7 @@ $row = mysqli_fetch_array($rs_member);
 							if ($row['gender'] == 0) {
 								echo "<option>---ເລືອກເພດ---</option>
 								<option selected>ຊາຍ</option>
-							<option>ຍິງ</option>";
+								<option>ຍິງ</option>";
 							} elseif ($row['gender'] == 1) {
 								echo "<option>---ເລືອກເພດ---</option>
 								<option>ຊາຍ</option>
@@ -112,7 +113,9 @@ $row = mysqli_fetch_array($rs_member);
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ </label>
 						<select name="position" class="form-control" required aria-label="Default select example">
-							<option value="<?= $row['position']; ?>"><?php if ($row['position'] == "ຜູ້ຈັດການ(Admin)") {
+							<option value="<?= $row['position']; ?>">
+							<?php 
+								if ($row['position'] == "ຜູ້ຈັດການ(Admin)") {
 								  echo "<option>---ຕຳແໜ່ງ---</option>
 								  	<option selected>ຜູ້ຈັດການ(Admin)</option>
 									<option>HR</option>

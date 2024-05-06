@@ -16,7 +16,6 @@ $num = mysqli_num_rows($result1);
 
 if ($num > 0) {
   echo "<script>";
-
   echo "window.location = 'list_mem.php?mem_error=mem_error'; ";
   echo "</script>";
 } else {
@@ -36,7 +35,6 @@ if ($num > 0) {
   )";
 
   $result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn) . "<br>$sql");
-
 }
 //exit();
 //mysqli_close($conn);

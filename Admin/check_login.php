@@ -41,7 +41,7 @@ if (isset($_POST['mem_username'])) {
         Header("Location:list_employee.php");
       } elseif ($_SESSION["ref_l_id"] == "3") {
 
-        Header("Location:list_employee.php");
+        Header("Location: Report_Receip.php");
       } elseif ($_SESSION["ref_l_id"] == "4") {
 
         Header("Location:list_employee.php");
@@ -53,7 +53,7 @@ if (isset($_POST['mem_username'])) {
         Header("Location:list_employee.php");
       } elseif ($_SESSION["ref_l_id"] == "7") {
 
-        Header("Location:list_sale-approved.php");
+        Header("Location:list_sale_approved.php");
       }
     } else {
       echo "<script>";
@@ -64,6 +64,6 @@ if (isset($_POST['mem_username'])) {
   } //close else chk trim
   //exit();
 } else {
-  Header("Location: login.php"); //user & mem_password incorrect back to login again
+  Header("Location: index.php"); //user & mem_password incorrect back to login again
 }
 ?>

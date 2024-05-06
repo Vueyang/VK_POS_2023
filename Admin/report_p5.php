@@ -18,9 +18,12 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 //exit();
 ?>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!--<script src="https://code.highcharts.com/highcharts.js"></script>-->
+<script type="text/javascript" src="./highcharts/highcharts.js"></script>
+<script type="text/javascript" src="./highcharts/data.js"></script>
+<script type="text/javascript" src="./highcharts/exporting.js"></script>
+<!--<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>-->
 <link rel="stylesheet" href="assets/charts.css">
 <!-- Content Header (Page header) -->
 <section class="content-header">
