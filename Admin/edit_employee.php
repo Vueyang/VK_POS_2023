@@ -51,17 +51,17 @@ $row = mysqli_fetch_array($rs_member);
 					<input type="hidden" name="ref_l_id" value="<?php echo $row['ref_l_id']; ?>">
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ຊື່ </label>
-						<input type="text" name="en_name" date_date_set class="form-control" id="en_name" placeholder=""
+						<input type="text" name="en_name" disabled = "disabled" class="form-control" id="en_name" placeholder=""
 							value="<?php echo $row['en_name']; ?>">
 					</div>
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ນາມສະກຸນ </label>
-						<input type="text" name="en_lastname" class="form-control" id="en_lastname" placeholder=""
+						<input type="text" name="en_lastname" disabled = "disabled" class="form-control" id="en_lastname" placeholder=""
 							value="<?php echo $row['en_lastname']; ?>">
 					</div>
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ເພດ </label>
-						<select name="gender" id="gender" class="form-control" required>
+						<select name="gender" id="gender" disabled = "disabled" class="form-control" required>
 							<?php
 							if ($row['gender'] == 0) {
 								echo "<option>---ເລືອກເພດ---</option>
@@ -82,7 +82,7 @@ $row = mysqli_fetch_array($rs_member);
 
 					<div class="form-group row">
 						<label for="" class="col-sm-2 col-form-label">ວັນທີເດືອນປີ </label>
-						<input type="date" name="date_of_birth" class="form-control" id="en_phone" placeholder=""
+						<input type="date" name="date_of_birth" disabled = "disabled" class="form-control" id="en_phone" placeholder=""
 							value="<?php echo $row['date_of_birth']; ?>">
 					</div>
 					<div class="form-group row">

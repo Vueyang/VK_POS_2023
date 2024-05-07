@@ -133,8 +133,17 @@ include('connetdb.php')
 								<div class="col" align="end">
 									<form class="form-group my-3" action = "list_employee.php" method="GET">
 										<div class="row">
-											<div class="col-12">
+											<div class="col-1">
 												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+											</div>
+										</div>
+									</form>
+								</div>	
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "Report_enployee.php" method="GET">
+										<div class="row">
+											<div class="col-12">
+												<input type="submit" value="ລາຍງານ" class="btn btn-success " >
 											</div>
 										</div>
 									</form>
@@ -146,7 +155,7 @@ include('connetdb.php')
 							
   
 						
-						<table id="datatablesSimples" class="table table-striped-columns">
+						<table id="datatablesSimples" class="table table-striped-columns table-hover">
 							<thead>
 
 								<tr>
