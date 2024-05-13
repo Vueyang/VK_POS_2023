@@ -143,7 +143,9 @@ include('connetdb.php')
 									<form class="form-group my-3" action = "Report_enployee.php" method="GET">
 										<div class="row">
 											<div class="col-12">
-												<input type="submit" value="ລາຍງານ" class="btn btn-success " >
+					<a href="Report_enployee.php?en_id=<?php echo $rs_order['en_id']; ?>&act=view" target="_blank"
+						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
+												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
 											</div>
 										</div>
 									</form>
@@ -161,8 +163,8 @@ include('connetdb.php')
 								<tr>
 									<th>ລຳດັບ</th>
 									<th>ຮູບ</th>
+									<th>ເພດ</th>
 									<th>ຊື່</th>
-									<th>ນາມສະກຸນ</th>
 									<th>ເບີໂທ</th>
 									<th>ອີແມວ</th>
 									<th>ໜຳແໜ່ງ</th>
@@ -174,17 +176,26 @@ include('connetdb.php')
 
 							<tbody>
 								<?php if($row > 0) { ?>
-									<?php foreach ($nquery as $rs) { ?>
+									<?php foreach ($nquery as $rs) {
+										$gender="";
+										if($rs['gender']== "0"){
+											$gender = "ຊາຍ";
+										}elseif($rs['gender']== "1"){
+											$gender="ຍີງ";
+										}else{
+											$gender="";
+										} 
+										?>
 										<tr>
 											<td>
 												<?= $l += 1 ?>
 											</td>
 											<td><img src="./image/<?= $rs["en_image"] ?>" width="100px" height="90px"> </td>
 											<td>
-												<?= $rs['en_name'] ?>
+											<?= $gender?>	
 											</td>
 											<td>
-												<?= $rs['en_lastname'] ?>
+												<?= $rs['en_name'] ?><?= $rs['en_lastname'] ?>
 											</td>
 											<td>
 												<?= $rs['en_phone'] ?>

@@ -41,8 +41,7 @@ include('connetdb.php')
 						//$row = mysqli_fetch_row($nquery);
 						//echo ($query_my_order);//test query
 						$nquery = mysqli_query($conn, "SELECT COUNT(mem_id) FROM `tbl_member`");
-
-							$row = mysqli_fetch_row($nquery);
+						$row = mysqli_fetch_row($nquery);
 							$rows = $row[0];
 							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
 							$last = ceil($rows / $page_rows);
@@ -63,12 +62,10 @@ include('connetdb.php')
 							if(isset($_GET['search'])){
 								$search = $_GET['search'];
 								//print_r($search);
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tbl_member m, tbl_employee en WHERE m.en_id = en.en_id AND en.en_name LIKE '%$search%' OR m.mem_username LIKE '%$search%' GROUP BY mem_id DESC $limit ");
-								//echo $nquery;
+								$nquery_1 = mysqli_query($conn, "SELECT * from  tbl_member m, tbl_employee en WHERE m.en_id = en.en_id AND en.en_name LIKE '%$search%' OR m.mem_username LIKE '%$search%' GROUP BY m.mem_id DESC $limit ");
 							}else{
 								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
 								$nquery_1 = mysqli_query($conn, "SELECT * from  tbl_member m, tbl_employee en WHERE m.en_id = en.en_id  GROUP BY mem_id DESC $limit");
-								//echo $nquery_1;
 								$paginationCtrls = '';
 								if ($last != 1) {
 									if ($pagenum > 1) {
@@ -109,13 +106,13 @@ include('connetdb.php')
 									
 								}
 								//print_r($nquery_1);
-								//echo $nquery_1;
+								//echo $nquery;
 								//exit();
 							}
 							
 
 						?>
-						<div class="row ">
+							<div class="row ">
     							<div class="col">
 									<form class="form-group my-3" method="GET">
 										<div class="row">
@@ -129,25 +126,28 @@ include('connetdb.php')
 									</form>
    								</div>
 								<div class="col" align="end">
-									<form class="form-group my-3" action = "list_employee.php" method="GET">
+									<form class="form-group my-3" action = "list_mem.php" method="GET">
+										<div class="row">
+											<div class="col-1">
+												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+											</div>
+										</div>
+									</form>
+								</div>	
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "Report_member.php" method="GET">
 										<div class="row">
 											<div class="col-12">
-												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
+												<a href="Report_member.php?mem_id=<?php echo $rs_order['mem_id']; ?>&act=view" target="_blank"
+						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
 											</div>
 										</div>
 									</form>
 								</div>						
   							</div>
-						<!--<form action = "list_mem.php " method="GET">
-							<div class="input-group">
-								<input type="text" name="search" class="form-control" placeholder="ຄົ້ນຫາ" require>
-								<span class="input-group-append">
-									<button class="btn btn-outline-success" type="submit" value="ค้นหาข้อมูลพนักงาน">ຄົ້ນຫາ</button>
-									<input type="submit" value="ค้นหาข้อมูลพนักงาน" class="btn btn-info">
-								</span>
-							</div> 
-						</form>-->
-						<br>
+						
+							<br>
 						<table id="datatablesSimples" class="table table-striped-columns  table-hover">
 							<thead>
 
@@ -192,6 +192,8 @@ include('connetdb.php')
 												echo "ພະນັກງານຂາຍໜ້າຮ້ານ";
 											} elseif ($rs['ref_l_id'] == 7) {
 												echo "ພະນັກງານຂາຢືນຢັນລູກຄ້າ";
+											}else{
+												echo "ບໍ່ມີຂໍ້ມູນ";
 											}
 											?>
 										</td>
@@ -238,7 +240,7 @@ include('connetdb.php')
 
 													<label for="" class="col-sm-2 col-form-label">ຊື່ພະນັກງານ
 													</label>
-													<form action="edit_mamber.php" method="POST"
+													<form action="edit_mamber.php?id=<?= $rs['mem_id']; ?>" method="POST"
 														enctype="multipart/form-data">
 														<div class="form-group row">
 															<div class="col-sm-12">
@@ -350,6 +352,7 @@ include('connetdb.php')
 														<div class="button mb-4 d-flex justify-content-between">
 															<button type="button" class="btn btn-danger"
 																data-bs-dismiss="modal" aria-label="Close">ຍົກເລີກ</button>
+																<input type="hidden" name="mem_id" value="<?php echo $rs['mem_id']; ?>">
 															<button type="submit" class="btn btn-primary"><i
 																	class="fa fa-save"></i>ບັນທືກ</button>
 														</div>

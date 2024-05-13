@@ -1,155 +1,152 @@
-<?php
-$menu = "employee";
-include('connetdb.php')
-	?>
-<?php include("header.php"); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<?php
+include('connetdb.php');
+require_once __DIR__ . '/vendor/autoload.php';
 
+$mpdf = new \Mpdf\Mpdf(['default_font_size' => 9,
+'default_font' => 'dejavusans']);
+
+ob_start();
+?>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-	<link href="./css_js/css/styles.css" rel="stylesheet" />
-	<link rel="stylesheet" href="./assets/adminlte.min.css">
-	<link rel="stylesheet" href="./assets/adminlte.min.css">
-	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Preview</title>
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+	<script src="js/jquery.js" type="text/javascript"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
+	<link href="/font/NotoSansLao-VariableFont_wdth,wght.ttf" rel="stylesheet">
 </head>
+<style type="text/css">
+	*{
+			font-family: "Noto Sans Lao", sans-serif;
+  			font-optical-sizing: auto;
+  			font-weight: <weight>;
+  			font-style: normal;
+  			font-variation-settings:"wdth" 100;
 
-<style>
-	* {
-		font-family: 'Noto Sans Lao', sans-serif;
+			font-size: 14px;
+		}
+	body {
+		background-color: #CCC;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	div {
+		margin-top: 10px;
+		background-color: #FFF;
+		padding: 50px;
+		width: 1000px;
+		height: 90vh;
+		display: block;
+		margin: auto;
+	}
+
+	button {
+		font-family: "noto Sans Lao";
+	}
+
+	.tb_detail {
+		border-top: 1px solid #333;
+		border-right: 1px solid #333;
+	}
+
+	.tb_detail th {
+		border-bottom: 1px solid #333;
+		border-left: 1px solid #333;
+	}
+
+	.tb_detail td {
+		border-bottom: 1px solid #333;
+		border-left: 1px solid #333;
+        text-align:center;
+	}
+
+	@media print {
+		body {
+			background-color: #FFF;
+		}
+
+		button {
+			visibility: hidden;
+		}
+
+		@page {
+			margin: 0;
+			padding: 0;
+		}
+
+		.cash {
+			display: none;
+		}
 	}
 </style>
 <?php
-							$query1 = mysqli_query($conn, "SELECT COUNT(en_id) FROM `tbl_employee`");
+							$nquery = mysqli_query($conn, "SELECT COUNT(en_id) FROM `tbl_employee`");
 
-							$row = mysqli_fetch_row($query1);
-							//echo "<pre>";
-//print_r($row);
-//print_r($_SESSION['cart']);
-//print_r($_POST);
-//echo "</pre>";
-//exit();
-							$rows = $row[0];
-							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-							$last = ceil($rows / $page_rows);
-							//print_r($last);
-							if ($last < 1) {
-								$last = 1;
-							}
-							$pagenum = 1;
-							if (isset($_GET['pn'])) {
-								$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-							}
-							if ($pagenum < 1) {
-								$pagenum = 1;
-							} else if ($pagenum > $last) {
-								$pagenum = $last;
-							}
-							$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-							if(isset($_GET['search'])){
-								$search = $_GET['search'];
-								$nquery = mysqli_query($conn, "SELECT * from  tbl_employee WHERE en_name LIKE '%$search%' OR en_lastname LIKE '%$search%' OR en_phone LIKE '%$search%'  ORDER BY en_id DESC $limit ");
-								//echo $nquery;
-							}else{
-								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-								$nquery = mysqli_query($conn, "SELECT * from  tbl_employee ORDER BY en_id DESC $limit");
-								$paginationCtrls = '';
-								if ($last != 1) {
-									if ($pagenum > 1) {
-										$previous = $pagenum - 1;
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
-								
-								
-										for ($i = $pagenum - 4; $i < $pagenum; $i++) {
-											if ($i > 0) {
-												$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
-											}
-										}
-									}
-								
-								
-									//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
-								
-								
-									$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
-								
-
-								
-								
-									for ($i = $pagenum + 1; $i <= $last; $i++) {
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
-										if ($i >= $pagenum + 4) {
-											break;
-										}
-									}
-								
-								
-									if ($pagenum != $last) {
-										$next = $pagenum + 1;
-								
-								
-										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
-									}
-									
-								}
-								
-							}
+							$row = mysqli_fetch_row($nquery);
 							
+                            $nquery_1 = mysqli_query($conn, "SELECT * from  tbl_employee WHERE en_id  GROUP BY en_id DESC");
+							//$load_sql = "SELECT * FROM product_new";
+				//$load_query = $conn->query($load_sql);
+                            //$row_1 = mysqli_fetch_array($nquery_1);
+                            //echo $nquery_1;
 						?>
-<body>
+                        
+<body style="font-family:'noto Sans Lao'; border-raduis:10px;">
 
-	<!-- Main content -->
-	<br>
-	<section class="content ">
-		<div class="card card-gray">
-			<div class="card-header ">
-            <div align="center">
-					<h4>ລາຍງານຂໍ້ມູນພະນັກງານທັງໝົດ</h4>
-				</div>
-			</div>
-			<br>
-			<div class="card-body-card">
-				<div class="row-row">
-					<div class="col">
-						<?php
-
-						//$nquery = "SELECT * from  tbl_employee GROUP BY en_id ";
-
-						//$rs_my_order = mysqli_query($conn, $nquery);
-						//echo ($query_my_order);//test query
-						?>
-						<div class="container text-center">
-                            <h2>ຮ້ານ VK Yang</h2>
-                            <h5>ຂາຍ: ເຄືອງທົ່ວໄປ ຂາຍສົ່ງ ແລະ ຂາຍຍ່ອນ</h5>
-                            <h5>ຕັ້ງຢູ່ສາມແຍກລ້ອງຊານຕະຫຼາດເກົ່າ ບ້ານ ຄອນວັດ ເມືອງລ້ອງຊານ ແຂວງໄຊສົມບູນ</h5>
-                            <h5>ເບີໂທ ແລະ ເບີແອັບ: 020 78665114, 020 78779149</h5>
-                            <hr>
-						</div>
-						<table id="datatablesSimples" class="table table-striped-columns table-hover">
-							<thead>
-
-                            <tr style="background-color:Gray;">
-								<td align="center">ລຳດັບ</td>
-                                <td align="center">ລະຫັດ</td>
-								<td align="center">ຮູບ</td>
-								<td align="center">ຊື່ ແລະ ນາມສະກຸນ</td>
-                                <td align="center">ເພດ</td>
-                                <td align="center">ວັນທີເດືອນປີ</td>
-                                <td align="center">ເບີໂທລະສັບ</td>
-                                <td align="center">Email</td>
-                                <td align="center">ບ້ານ</td>
-                                <td align="center">ເມືອງ</td>
-                                <td align="center">ແຂວງ</td>
-                                <td align="center">ຕຳແໜ່ງ</td>
+<br>
+	<div style="border-raduis:10px; height: 100%;">
+		
+		<table cellpadding="0" cellspacing="0" align="center" width="1000">
+			<tr>
+				<td align="center" style="font-size: 20px;">ສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size: 20px;">ສັນຕິພາບ ເອກະລາດ ປະຊາທິປະໄຕ ເອກະພາບ ວັດທະນະຖາວອນ</td>
+			</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" align="center" width="1000">
+			<tr>
+				<td style="font-size: 20px;">ຮ້ານ VK_POS</td>
+				<td align="right"></td>
+			</tr>
+			<tr>
+				<td style="font-size: 18px;">ຕັ້ງຢູ່ສາມແຍກຕະຫຼາດເກົ່າເມືອງລ້ອງຊານ ບ້ານ ຄອນວັດ, ເມືອງ ລ້ອງຊານ, ແຂວງ ໄຊສົມບູນ</td>
+				<td align="right"></td>
+			</tr>
+			<tr>
+				<td style="font-size: 16px;">ໂທ: 020 78665114, 020 78779149</td>
+				<td align="right"></td>
+			</tr>
+		</table>
+		<center><label
+				style="font-family:'noto Sans Lao'; font-weight:bold; font-size:20px">ສະຫຼຸບຈໍານວນພະນັກງານຂອງຮ້ານ VK_POS</label>
+		</center>
+		<br>
+		<table cellpadding="0" cellspacing="0" width="100%" class="tb_detail">
+			<thead>
+            <tr>
+								<th>ລຳດັບ</th>
+                                <th>ລະຫັດ</th>
+								<th>ຮູບ</th>
+								<th>ຊື່ ແລະ ນາມສະກຸນ</th>
+                                <th>ເພດ</th>
+                                <th>ວັນທີເດືອນປີ</th>
+                                <th>ເບີໂທລະສັບ</th>
+                                <th>Email</th>
+                                <th>ບ້ານ</th>
+                                <th>ເມືອງ</th>
+                                <th>ແຂວງ</th>
+                                <th>ຕຳແໜ່ງ</th>
 							</tr>
-
-							</thead>
-
-							<tbody>
-								<?php if($row > 0) { ?>
-									<?php foreach ($nquery as $rs) { ?>
+			</thead>
+				<tbody>
+				<?php if($row > 0) { ?>
+									<?php foreach ($nquery_1 as $rs) { ?>
 										<tr>
 											<td>
 												<?= $l += 1 ?>
@@ -195,81 +192,41 @@ include('connetdb.php')
 											<td>
 												<?= $rs['position']; ?>
 											</td>
-											<td>
-												
-
-											</td>
 										</tr>
 									<?php } ?>
 								<?php } ?>
 							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="card-footer" align="end">
-					<div id="pagination_controls">
-                    <?php echo $paginationCtrls; ?>
-
-					</div>
-				</div>
-			</div>
-            <div class="container text-center">
-							<div class="row ">
-    							
-								<div class="col" align="end">
-									<form class="form-group my-3" action = "list_employee.php" method="GET">
-										<div class="row">
-											<div class="col-1">
-												<input type="submit" value="ຍົກເລີກ" class="btn btn-primary " >
-											</div>
-										</div>
-									</form>
-								</div>	
-								<div class="col" align="end">
-									<form class="form-group my-3" action = "print_employee.php" method="GET">
-										<div class="row">
-											<div class="col-12">
-												<input type="submit" value="print" class="btn btn-success " >
-											</div>
-										</div>
-									</form>
-								</div>						
-  							</div>
-						</div>
-			<div class="card-footer">
-                
-			</div>
-
-		</div>
-		
-	</section>
-	<!-- /.content -->
-	<?php include('footer.php'); ?>
-	<script>
-		$(function () {
-			$(".datatable").DataTable();
-			// $('#example2').DataTable({
-			//   "paging": true,
-			//   "lengthChange": false,
-			//   "searching": false,
-			//   "ordering": true,
-			//   "info": true,
-			//   "autoWidth": false,
-			// http://fordev22.com/
-			// });
-		});
-	</script>
-
+				
+		</table>
+	</div>
+	
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script src="./css_js/js/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="./css_js/assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-	crossorigin="anonymous"></script>
-<script src="./css_js/js/datatables-simple-demo.js"></script>
 
 </html>
+<?php
+$html = ob_get_contents();
+
+$mpdf->WriteHTML($html);
+$mpdf->Output('report_pdf/Report_employee.pdf');
+ob_end_flush();
+
+?>
+<style>
+	.button_print{
+		text-align: center;
+		height:0px;
+		margin-top:-50px;
+		
+	}
 	
+	.button_print_1{
+		margin-top:-100px;
+		cursor: pointer;
+	}
+	.button_print_1:hover {
+}
+</style>
+<div class="button_print my-12">
+	<a href="report_pdf/Report_employee.pdf"><button class="btn btn-primary my-12 button_print_1">ລາຍງານເປັນ PDF</button> </a>
+</div>
+<br>

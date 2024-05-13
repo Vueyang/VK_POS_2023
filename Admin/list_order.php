@@ -9,7 +9,7 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 <?php
 $query_1 = mysqli_query($conn, "SELECT COUNt(order_id) FROM 'tbl_order_receive'");
 $row = mysqli_fetch_row($query_1);
-echo $row;
+//echo $row;
 $row = $row[0];
 $page_rows = 6;
 $last = ceil($row / $page_rows);

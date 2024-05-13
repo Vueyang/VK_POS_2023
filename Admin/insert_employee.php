@@ -12,7 +12,7 @@ $village = mysqli_real_escape_string($conn, $_POST["village"]);
 $district = mysqli_real_escape_string($conn, $_POST["district"]);
 $provice = mysqli_real_escape_string($conn, $_POST["provice"]);
 $position = mysqli_real_escape_string($conn, $_POST["position"]);
-//$responsible = mysqli_real_escape_string($conn, $_POST["responsible"]);
+$responsible = mysqli_real_escape_string($conn, $_POST["responsible"]);
 //$en_password = mysqli_real_escape_string($conn, (sha1($_POST["en_password"])));
 
 
@@ -66,6 +66,7 @@ $sql = "INSERT INTO tbl_employee
   district,
   provice,
   position,
+  responsible,
   en_image
   )
   VALUES
@@ -80,6 +81,7 @@ $sql = "INSERT INTO tbl_employee
   '$district',
   '$provice',
   '$position',
+  $responsible,
   '$newname'
   )";
 

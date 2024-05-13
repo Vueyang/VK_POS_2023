@@ -78,7 +78,7 @@
 
 <body style="font-family:'noto Sans Lao'; border-raduis:10px;">
 <br>
-	<div style="border-raduis:10px;">
+	<div style="border-raduis:10px; height: 100%;">
 		<?php
 		require("connetdb.php");
 		?>
@@ -113,6 +113,7 @@
 				<tr>
 					<th width="50">ລໍາດັບ</th>
 					<th width="50">ລະຫັດ</th>
+					<th width="50">ຮູບ</th>
 					<th width="50">ເພດ</th>
 					<th>ຊື່ ແລະ ນາມສະກຸນ</th>
 					<th>ວັນເດືອນປີເກີດ</th>
@@ -144,6 +145,10 @@
 						<td align="center">
 							<?= $load_row[0] ?>
 						</td>
+						<td align="center">
+						<img src="./image/<?= $load_row[12] ?>" width="100px" height="90px">
+					 </td>
+						
 						<td align="center">
 							<?= $gender ?>
 						</td>

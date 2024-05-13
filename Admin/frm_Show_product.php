@@ -33,17 +33,124 @@ $menu = "product";
 			</div>
 			<br>
 			<div class="card-body">
+			<div class="row ">
+    							<div class="col">
+									<form class="form-group my-3" method="GET">
+										<div class="row">
+											<div class="col-10">
+											<input type="text" placeholder="ຄົ້ນຫາ" class="form-control" name="search"  required>
+											</div>
+											<div class="col-2">
+											<input type="submit" value="ຄົ້ນຫາ" class="btn btn-info" >
+											</div>
+										</div>
+									</form>
+   								</div>
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "frm_Show_product.php" method="GET">
+										<div class="row">
+											<div class="col-1">
+												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+											</div>
+										</div>
+									</form>
+								</div>	
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "print_product.php" method="GET">
+										<div class="row">
+											<div class="col-12">
+												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
+					<a href="print_product.php?pro_id=<?php echo $rs_order['pro_id']; ?>&act=view" target="_blank"
+						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
+											</div>
+										</div>
+									</form>
+								</div>						
+  							</div>
+						
+							<br>
 				<div class="row">
 					<div class="col">
 						<?php
+						$nquery = mysqli_query($conn, "SELECT COUNT(pro_id) FROM `product_new`");
 
+						$row = mysqli_fetch_row($nquery);
+						$rows = $row[0];
+						$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+						$last = ceil($rows / $page_rows);
+						//print_r($last);
+						if ($last < 1) {
+							$last = 1;
+						}
+						$pagenum = 1;
+						if (isset($_GET['pn'])) {
+							$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+						}
+						if ($pagenum < 1) {
+							$pagenum = 1;
+						} else if ($pagenum > $last) {
+							$pagenum = $last;
+						}
+						$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+						if(isset($_GET['search'])){
+							$search = $_GET['search'];
+							//print_r($search);
+							$nquery_1 = mysqli_query($conn, "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id AND p.pro_name LIKE '%$search%' OR p.price LIKE '%$search%' GROUP BY pro_id DESC $limit ");
+							//echo $nquery;
+						}else{
+							//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+							$nquery_1 = mysqli_query($conn, "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id  GROUP BY pro_id DESC $limit");
+							//echo $nquery_1;
+							$paginationCtrls = '';
+							if ($last != 1) {
+								if ($pagenum > 1) {
+									$previous = $pagenum - 1;
+									$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
+							
+							
+									for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+										if ($i > 0) {
+											$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+										}
+									}
+								}
+							
+							
+								//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
+							
+							
+								$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
+								//echo $paginationCtrls;
+
+							
+							
+								for ($i = $pagenum + 1; $i <= $last; $i++) {
+									$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+									if ($i >= $pagenum + 4) {
+										break;
+									}
+								}
+							
+							
+								if ($pagenum != $last) {
+									$next = $pagenum + 1;
+							
+							
+									$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
+								}
+								
+							}
+							//print_r($nquery_1);
+							//echo $nquery_1;
+							//exit();
+						}
 						$nquery = "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id  GROUP BY p.pro_id ";
 
 						$rs_my_order = mysqli_query($conn, $nquery);
 						//echo ($query_my_order);//test query
 						?>
 
-						<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
+						<table id="datatablesSimples" class="table table-bordered  table-hover table-striped">
 							<thead>
 
 								<tr>
@@ -61,7 +168,7 @@ $menu = "product";
 							</thead>
 
 							<tbody>
-								<?php foreach ($rs_my_order as $rs) { ?>
+								<?php foreach ($nquery_1 as $rs) { ?>
 									<tr>
 										<td>
 											<?= $l += 1 ?>
@@ -76,7 +183,7 @@ $menu = "product";
 											<?= $rs['type_name'] ?>
 										</td>
 										<td>
-											<?= $rs['price'] ?>
+										<?= number_format($rs['price'], 0); ?> ກີບ
 										</td>
 										<td>
 											<?= $rs['amount']; ?>
@@ -105,10 +212,13 @@ $menu = "product";
 					</div>
 				</div>
 			</div>
-			<div class="card-footer">
+			<div class="card-footer" align="end">
+							<div id="pagination_controls">
 
-			</div>
+								<?php echo $paginationCtrls; ?>
 
+							</div>
+						</div>
 		</div>
 
 	</section>
