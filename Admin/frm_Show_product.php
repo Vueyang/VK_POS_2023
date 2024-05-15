@@ -78,7 +78,7 @@ $menu = "product";
 						$rows = $row[0];
 						$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
 						$last = ceil($rows / $page_rows);
-						//print_r($last);
+						//print_r($last); 
 						if ($last < 1) {
 							$last = 1;
 						}
@@ -95,7 +95,7 @@ $menu = "product";
 						if(isset($_GET['search'])){
 							$search = $_GET['search'];
 							//print_r($search);
-							$nquery_1 = mysqli_query($conn, "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id AND p.pro_name LIKE '%$search%' OR p.price LIKE '%$search%' GROUP BY pro_id DESC $limit ");
+							$nquery_1 = mysqli_query($conn, "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id AND p.pro_id LIKE '%$search%' OR p.pro_name LIKE '%$search%' OR p.price LIKE '%$search%' GROUP BY p.pro_id DESC $limit ");
 							//echo $nquery;
 						}else{
 							//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
@@ -144,9 +144,9 @@ $menu = "product";
 							//echo $nquery_1;
 							//exit();
 						}
-						$nquery = "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id  GROUP BY p.pro_id ";
+						//$nquery = "SELECT * from  product_new p, type_product t WHERE p.type_id = t.type_id  GROUP BY p.pro_id ";
 
-						$rs_my_order = mysqli_query($conn, $nquery);
+						//$rs_my_order = mysqli_query($conn, $nquery);
 						//echo ($query_my_order);//test query
 						?>
 

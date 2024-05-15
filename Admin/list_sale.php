@@ -26,9 +26,11 @@
 
 			</div>
 			<br>
+			
 			<div class="card-body">
 				<?php
-				$act = (isset($_GET['act']) ? $_GET['act'] : '');
+				include('list_order.php');
+				/*$act = (isset($_GET['act']) ? $_GET['act'] : '');
 				if ($act == 'view') {
 
 					include('order_detail.php');
@@ -37,8 +39,8 @@
 
 				} else {
 					
-					include('list_order.php');
-				} ?>
+					
+				} */?>
 			</div>
 			<div class="card-footer">
 

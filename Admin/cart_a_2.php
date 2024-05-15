@@ -102,11 +102,7 @@ if ($act == 'update') {
 
 			}
 			echo "<tr>";
-			echo "<td></td>";
-			echo "<td></td>";
-			echo "<td></td>";
-
-			echo "<td bgcolor='#CEE7FF' align='center'><b>ລາຄາລວມ</b></td>";
+			echo "<td bgcolor='#CEE7FF' align='center' colspan='4'><b>ລາຄາລວມ:</b></td>";
 			echo "<td align='right' bgcolor='#CEE7FF'>" . "<b>" . number_format($total, 0) . "</b>" . "</td>";
 			echo "<td align='left' bgcolor='#CEE7FF'></td>";
 			echo "</tr>";

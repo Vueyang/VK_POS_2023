@@ -49,17 +49,115 @@ $menu = "pro_type"
 			</div>
 			<br>
 			<div class="card-body">
+			<div class="row ">
+    							<div class="col">
+									<form class="form-group my-3" method="GET">
+										<div class="row">
+											<div class="col-10">
+											<input type="text" placeholder="ຄົ້ນຫາ" class="form-control" name="search"  required>
+											</div>
+											<div class="col-2">
+											<input type="submit" value="ຄົ້ນຫາ" class="btn btn-info" >
+											</div>
+										</div>
+									</form>
+   								</div>
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "show_Pro_type.php" method="GET">
+										<div class="row">
+											<div class="col-1">
+												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
+											</div>
+										</div>
+									</form>
+								</div>	
+								<div class="col" align="end">
+									<form class="form-group my-3" action = "print_type_product.php" method="GET">
+										<div class="row">
+											<div class="col-12">
+												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
+					<a href="print_type_product.php?type_id=<?php echo $rs_order['type_id']; ?>&act=view" target="_blank"
+						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
+											</div>
+										</div>
+									</form>
+								</div>						
+  							</div>
+						
+							<br>
 				<div class="row">
 					<div class="col">
 						<?php
+						$nquery = mysqli_query($conn, "SELECT COUNT(type_id) FROM `type_product`");
 
-						$nquery = "SELECT * from type_product GROUP BY type_id ";
+						$row = mysqli_fetch_row($nquery);
+						$rows = $row[0];
+						$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+						$last = ceil($rows / $page_rows);
+						//print_r($last); 
+						if ($last < 1) {
+							$last = 1;
+						}
+						$pagenum = 1;
+						if (isset($_GET['pn'])) {
+							$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+						}
+						if ($pagenum < 1) {
+							$pagenum = 1;
+						} else if ($pagenum > $last) {
+							$pagenum = $last;
+						}
+						$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+						$searchs = $_GET['search'];
+						if(isset($_GET['search'])){
+							$nquery_1 = mysqli_query($conn, "SELECT * from  type_product WHERE type_id AND type_id LIKE '%$searchs%' OR type_name LIKE '%$searchs%' GROUP BY type_id DESC $limit");
+						}else{
+							$nquery_1 = mysqli_query($conn, "SELECT * from  type_product WHERE type_id  GROUP BY type_id DESC $limit");
+						$paginationCtrls = '';
+							if ($last != 1) {
+								if ($pagenum > 1) {
+									$previous = $pagenum - 1;
+									$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
+							
+							
+									for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+										if ($i > 0) {
+											$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+										}
+									}
+								}
+							
+							
+								//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
+							
+							
+								$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
+								//echo $paginationCtrls;
 
-						$rs_my_order = mysqli_query($conn, $nquery);
+							
+							
+								for ($i = $pagenum + 1; $i <= $last; $i++) {
+									$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+									if ($i >= $pagenum + 4) {
+										break;
+									}
+								}
+							
+							
+								if ($pagenum != $last) {
+									$next = $pagenum + 1;
+							
+							
+									$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
+								}
+								
+							}
+						}
+						
 						//echo ($query_my_order);//test query
 						?>
 
-						<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
+						<table id="datatablesSimples" class="table table-bordered  table-hover table-striped">
 							<thead>
 
 								<tr>
@@ -74,7 +172,7 @@ $menu = "pro_type"
 							</thead>
 
 							<tbody>
-								<?php foreach ($rs_my_order as $rs) { ?>
+								<?php foreach ($nquery_1 as $rs) { ?>
 									<tr>
 										<td>
 											<?= $l += 1 ?>
@@ -133,7 +231,7 @@ $menu = "pro_type"
 																	alt="your image" width="200" />
 																<div class="custom-file mb-4 mt-4">
 																	<input type="file" name="type_img"
-																		onchange="readURL(this);" required>
+																		onchange="readURL(this);">
 																	<input type="hidden" name="textimg" class="form-control"
 																		value="<?= $rs['image'] ?>">
 																	<br>
@@ -154,6 +252,13 @@ $menu = "pro_type"
 								<?php } ?>
 							</tbody>
 						</table>
+						<div class="card-footer" align="end">
+							<div id="pagination_controls">
+
+								<?php echo $paginationCtrls; ?>
+
+							</div>
+						</div>
 					</div>
 					<?php include("frm_add_product_type.php") ?>
 				</div>

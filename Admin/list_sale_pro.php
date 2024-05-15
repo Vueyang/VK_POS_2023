@@ -40,7 +40,13 @@ if ($pagenum < 1) {
 	$pagenum = $last;
 }
 $limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-$nquery = mysqli_query($conn, "SELECT * from  product_new ORDER BY pro_id DESC $limit");
+$search = $_GET['p_id'];
+if(isset($_GET['p_id'])){
+	$nquery = mysqli_query($conn, "SELECT * from  product_new WHERE pro_id AND pro_name LIKE '%$search%' OR price LIKE '%$search%' ORDER BY pro_id DESC $limit");
+}else{
+	$nquery = mysqli_query($conn, "SELECT * from  product_new ORDER BY pro_id DESC $limit");
+}
+
 
 $paginationCtrls = '';
 if ($last != 1) {
@@ -105,7 +111,7 @@ if ($last != 1) {
 					<div class="col-md-7">
 						<form action="list_sale_pro.php" method="GET">
 							<div class="input-group">
-								<input type="text" name="p_id" class="form-control" placeholder="Scan Barcode"
+								<input type="text" name="p_id" class="form-control" placeholder="ຄົ້ນຫາສີນຄ້າ"
 									autofocus>
 								<span class="input-group-append">
 									<button class="btn btn-outline-success" type="submit">ຄົ້ນຫາ</button>
@@ -139,8 +145,8 @@ if ($last != 1) {
 													<center>
 
 														<!-- QR Code -->
-														<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<?php echo $rs_prd['pro_id']; ?>&choe=UTF-8"
-															title="Link to my Website" />
+														<!--<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=<?php echo $rs_prd['pro_id']; ?>&choe=UTF-8"
+															title="Link to my Scan Barcode" />-->
 														<!-- QR Code -->
 
 														<br>
