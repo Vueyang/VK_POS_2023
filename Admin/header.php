@@ -2,7 +2,7 @@
 
 <!-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm sidebar-collapse"> -->
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm sidebar-collapse">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 
@@ -14,3 +14,4 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
+</body>

@@ -63,7 +63,7 @@ FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
 							$rs_my_order = mysqli_query($conn, $query_my_order);
 							//echo ($query_my_order);//test query
 							?>
-
+					
 							<table id="datatablesSimple" class="table table-bordered  table-hover table-striped">
 								<thead>
 

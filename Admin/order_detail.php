@@ -95,13 +95,14 @@ ob_start();
 											INNER JOIN tbl_member as m ON o.mem_id=m.mem_id
 											WHERE d.order_id=$order_id";
 							$querypay = mysqli_query($conn, $sqlpay);
-							//echo $order_id;
-							//exit();
+							
 							$rowmember = mysqli_fetch_array($querypay);
 							$st = $rowmember['order_status'];
+							//echo $rowmember;
+							//exit();
 						?>
 						<br>
-	<body style="font-family:'noto Sans Lao'; border-raduis:10px;">
+	<body class="t" style="font-family:'noto Sans Lao'; border-raduis:10px;">
 		<div style="border-raduis:10px; height: 100%;">
 		<table cellpadding="0" cellspacing="0" align="center" width="1000">
 			<tr>
@@ -133,7 +134,7 @@ ob_start();
 					<td align="center" style="font-size: 16px;">ລະຫັດການສັ່ງຊື້: <?php echo "<lable style='color:#FF5580'>" . $order_id ."</lable>"; ?></td>
 				</tr>
 				<tr>
-					<td align="center" style="font-size: 16px;">ວັນທີເດືອນປີສັ່ງຊື້: <?php echo "<lable style='color:#FF5580'>" . date('d/m/y', strtotime($rowmember['order_date'])) . "</lable>"; ?></td>
+					<td align="center" style="font-size: 16px;">ວັນທີເດືອນປີສັ່ງຊື້: <?php echo "<lable style='color:#FF5580'>" . date('d/m/y H:i:s:m', strtotime($rowmember['order_date'])) . "</lable>"; ?></td>
 				</tr>
 				<tr>
 					<td align="center" style="font-size: 16px;">ຜູ້ທຳລາຍການ: <?php echo "<lable style='color:#FF5580'>". $rowmember['mem_username'] . "</lable>"; ?></td>

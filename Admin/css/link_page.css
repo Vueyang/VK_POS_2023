@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+#num{
+	margin-top:5px;
+	line-height:40px;
+	height:40px;
+	width:100%;
+	margin:auto;
+	padding:auto;
+	text-align:center;
+	font-family:"BoonHome";
+	font-size:16px;
+	color:#000;
+	background:rgb(241, 18, 18);
+	float:left;
+	}
+#c {
+	border-radius:5px;
+	background:#33C;
+	color:#fff;
+	width:40px;
+	padding:1px 5px 1px 5px;
+	font-size:16px;
+	font-weight:bold;
+	font-family:"Times New Roman", Times, serif;
+	}
+#numshow a{
+	text-decoration:none;
+	padding:5px;
+	color:rgb(255,0,0);}
+	

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2023 at 06:01 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.1.33
+-- Generation Time: Sep 16, 2024 at 07:47 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -74,7 +73,7 @@ CREATE TABLE `product_image` (
 CREATE TABLE `product_new` (
   `pro_id` int(6) UNSIGNED ZEROFILL NOT NULL COMMENT 'ລະຫັດສີນຄ້າ',
   `pro_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ຊື່',
-  `type_id` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'ລະຫັດປະເພດສີນຄ້າ',
+  `type_id` int(6) UNSIGNED ZEROFILL NOT NULL COMMENT 'ລະຫັດປະເພດສີນຄ້າ',
   `price` float(10,2) NOT NULL COMMENT 'ລາຄາ',
   `amount` int(11) NOT NULL COMMENT 'ຈຳນວນ',
   `detail` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'ລາຍລະອຽດ',
@@ -87,21 +86,21 @@ CREATE TABLE `product_new` (
 --
 
 INSERT INTO `product_new` (`pro_id`, `pro_name`, `type_id`, `price`, `amount`, `detail`, `image`, `inser_date`) VALUES
-(000001, 'Canon', 0000004, 8500000.00, 50, 'dkjfiogkdfsgdf\r\ngsfdgfdsg\r\nsdgdsfget', 'pro_6484917b131a1.jpg', '2023-07-23 14:15:41'),
-(000003, 'Iphone 12', 0000005, 15000000.00, 50, 'hhhhhhhhhhhhhhhh\r\nlkkkkkkkkk\r\nuuuuuuuuuuuu', 'pro_648491bac0509.jpg', '2023-07-18 15:07:47'),
-(000005, 'mouse', 0000001, 150000.00, 51, 'khhhhhhhhhhhkdfgh\r\ngtgorektphdhglfdhd\r\nerhtgdfhet\r\ngdhtehdf\r\nsgdgtrehrtdy\r\ndgfgtreyhjwregs\r\negteryhetr', 'pro_6484920937ef2.jpg', '2023-08-05 15:58:12'),
-(000007, 'keybroad', 0000002, 180000.00, 5, 'frrghgdfdgsdfg\r\nsfgsdgtr\r\nfsdfdsg\r\nasdfrtgse\r\nfsdfwrtr\r\ngsdfg', 'pro_6484931234dde.jpg', '2023-07-23 13:22:50'),
-(000008, 'lanovo', 0000007, 5400000.00, 48, '', 'pro_6484934787797.jpg', '2023-07-24 14:43:25'),
-(000009, 'Iphone 13', 0000005, 15000000.00, 2, '', 'pro_64856ba6635ad.jpg', '2023-08-01 14:59:52'),
-(000010, 'Canon', 0000004, 5000000.00, 43, '', 'pro_64856db86802d.jpg', '2023-08-01 14:57:44'),
-(000011, 'dell', 0000007, 5400000.00, 48, 'dell core i7', 'pro_6491ab30dc7fe.jpg', '2023-07-20 15:17:25'),
-(000012, 'LED', 0000003, 2000000.00, 49, 'tieojfsdgiuregmls\r\n', 'pro_6499b3983cffa.jpg', '2023-07-20 14:35:28'),
-(000013, 'Aser', 0000007, 5000000.00, 57, 'test meiaafkfdgilksjgdssgsdgsdf', 'pro_649fe87e308ec.jpg', '2023-08-07 14:36:44'),
-(000014, 'Asu', 0000007, 6000000.00, 46, 'iytryiyoirjhkdjhtiod', 'pro_649fe8afdd14e.jpg', '2023-07-17 13:11:52'),
-(000016, 'laptops', 0000007, 8000000.00, 29, 'jlhkopkpfgplhryt', 'pro_649fe94e88a1b.jpg', '2023-07-24 14:39:43'),
-(000017, 'lenovo', 0000007, 5000000.00, 35, 'toioodugopguigsfgls', 'pro_649fecfcd538b.jpg', '2023-08-05 16:27:30'),
-(000018, 'dell 1', 0000007, 5800000.00, 48, 'gfhfgjfgdgdfgjfjuty', 'pro_649fed487d4ab.jpg', '2023-08-05 16:29:13'),
-(000019, 'dell 2', 0000007, 5000000.00, 50, 'trefsfdfhdgfgdfgdgdg', 'pro_649fed7d080ee.jpg', '2023-08-06 03:09:06');
+(000001, 'Canon', 000004, 8500000.00, 50, 'dkjfiogkdfsgdf\r\ngsfdgfdsg\r\nsdgdsfget', 'pro_6484917b131a1.jpg', '2023-07-23 14:15:41'),
+(000003, 'Iphone 12', 000005, 15000000.00, 49, 'hhhhhhhhhhhhhhhh\r\nlkkkkkkkkk\r\nuuuuuuuuuuuu', 'pro_648491bac0509.jpg', '2023-07-18 15:07:47'),
+(000005, 'mouse', 000001, 150000.00, 51, 'khhhhhhhhhhhkdfgh\r\ngtgorektphdhglfdhd\r\nerhtgdfhet\r\ngdhtehdf\r\nsgdgtrehrtdy\r\ndgfgtreyhjwregs\r\negteryhetr', 'pro_6484920937ef2.jpg', '2023-08-05 15:58:12'),
+(000007, 'keybroad', 000002, 180000.00, 5, 'frrghgdfdgsdfg\r\nsfgsdgtr\r\nfsdfdsg\r\nasdfrtgse\r\nfsdfwrtr\r\ngsdfg', 'pro_6484931234dde.jpg', '2023-07-23 13:22:50'),
+(000008, 'lanovo', 000007, 5400000.00, 48, '', 'pro_6484934787797.jpg', '2023-07-24 14:43:25'),
+(000009, 'Iphone 13', 000005, 15000000.00, 1, '', 'pro_64856ba6635ad.jpg', '2023-08-01 14:59:52'),
+(000010, 'Canon', 000004, 5000000.00, 26, '', 'pro_64856db86802d.jpg', '2023-08-01 14:57:44'),
+(000011, 'dell', 000007, 5400000.00, 48, 'dell core i7', 'pro_6491ab30dc7fe.jpg', '2023-07-20 15:17:25'),
+(000012, 'LED', 000003, 2000000.00, 34, 'tieojfsdgiuregmls\r\n', 'pro_6499b3983cffa.jpg', '2023-07-20 14:35:28'),
+(000013, 'Aser', 000007, 5000000.00, 46, 'test meiaafkfdgilksjgdssgsdgsdf', 'pro_649fe87e308ec.jpg', '2023-08-07 14:36:44'),
+(000014, 'Asu', 000007, 6000000.00, 27, 'iytryiyoirjhkdjhtiod', 'pro_649fe8afdd14e.jpg', '2023-07-17 13:11:52'),
+(000016, 'laptops', 000007, 8000000.00, 13, 'jlhkopkpfgplhryt', 'pro_649fe94e88a1b.jpg', '2023-07-24 14:39:43'),
+(000017, 'lenovo', 000007, 5000000.00, 20, 'toioodugopguigsfgls', 'pro_649fecfcd538b.jpg', '2023-08-05 16:27:30'),
+(000018, 'dell 1', 000007, 5800000.00, 47, 'gfhfgjfgdgdfgjfjuty', 'pro_649fed487d4ab.jpg', '2023-08-05 16:29:13'),
+(000019, 'dell 2', 000007, 5000000.00, 32, 'trefsfdfhdgfgdfgdgdg', 'pro_649fed7d080ee.jpg', '2023-08-06 03:09:06');
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,7 @@ CREATE TABLE `tbl_employee` (
   `gender` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `en_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `en_lastname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `date of birth` date NOT NULL,
+  `date_of_birth` date NOT NULL,
   `en_phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `en_email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `village` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -148,9 +147,14 @@ CREATE TABLE `tbl_employee` (
 -- Dumping data for table `tbl_employee`
 --
 
-INSERT INTO `tbl_employee` (`en_id`, `gender`, `en_name`, `en_lastname`, `date of birth`, `en_phone`, `en_email`, `village`, `district`, `provice`, `position`, `responsible`, `en_image`, `insert_date`) VALUES
-(000004, 'ຊາຍ', 'ທ້າວ ວືຢ່າງ', 'ໄຊມົວ', '1996-06-21', '02078665114', 'nkaujkiabvang20212022@gmail.com', 'ຍອດງື່ມ', 'ແປກ', 'ຊຽງຂວາງ', 'ຜູ້ຈັດການ', 'ຜູ້ຈັດການ', '', '2023-08-08 22:58:37'),
-(000005, 'ຍິງ', 'ນ່າງ ເກ້ຍວ່າງ', 'ເຍ່ຍລົ່ງວ່າງ', '1996-06-21', '02059673954', 'nkaujkiabvang20212022@gmail.com', 'ຍອດງື່ມ', 'ແປກ', 'ຊຽງຂວາງ', 'HR', 'HR', '', '2023-08-08 22:58:37');
+INSERT INTO `tbl_employee` (`en_id`, `gender`, `en_name`, `en_lastname`, `date_of_birth`, `en_phone`, `en_email`, `village`, `district`, `provice`, `position`, `responsible`, `en_image`, `insert_date`) VALUES
+(000004, '0', 'ທ້າວ ວືຢ່າງ', 'ໄຊມົວ', '1996-06-21', '02078665114', 'nkaujkiabvang20212022@gmail.com', 'ຍອດງື່ມ', 'ແປກ', 'ຊຽງຂວາງ', 'ຜູ້ຈັດການ(Admin)', 'ຜູ້ຈັດການ', 'pro_66306a7f80496.jfif', '2023-08-08 22:58:37'),
+(000005, '1', 'ນ່າງ ເກ້ຍວ່າງ', 'ເຍ່ຍລົ່ງວ່າງ', '1996-06-21', '02059673954', 'nkaujkiabvang20212022@gmail.com', 'ຍອດງື່ມ', 'ແປກ', 'ຊຽງຂວາງ', 'HR', 'HR', 'pro_66306a998fe96.jfif', '2023-08-08 22:58:37'),
+(000006, '0', 'ທ້າວ ມາ', 'ຢ່າງ', '1998-02-03', '2078665211', 'ttttt@gmail.com', 'test1', 'test2', 'test3', 'ພະນັກງານບັນຊີ', 'ພະນັກງານບັນຊີ', '183166307320240502_135631.jfif', '2024-05-02 13:56:31'),
+(000007, '0', 'ກ້ອງ', 'ຫາ', '1999-10-01', '2078665213', 'ttttt2021@gmail.com', 'test11', 'test22', 'test33', 'ພະນັກງານຂາຍໜ້າຮ້ານ', 'ພະນັກງານຂາຍໜ້າຮ້ານ', '142148596520240507_072652.jfif', '2024-05-07 07:26:52'),
+(000008, '1', 'ມະນີວັນ', 'ວີໄລ', '1999-02-12', '2078665218', 'ttttt@gmail.com', 'test111', 'test222', 'test333', 'ພະນັກງານຢືນຢັນ', 'ພະນັກງານຢືນຢັນ', '115639083020240507_110806.jfif', '2024-05-07 11:08:06'),
+(000009, '0', 'ຄຳດີ', 'ຄຳພົງ', '1998-02-06', '2078665217', 'ttttt2023@gmail.com', 'test1111', 'test2222', 'test3333', 'ພະນັກງານສາງ', 'ພະນັກງານສາງ', '172259723320240507_110931.jfif', '2024-05-07 11:09:31'),
+(000010, '0', 'laiblau', 'yang', '1996-09-06', '2078665216', 'ttttt2021@gmail.com', 'test11111', 'test22222', 'test33333', 'ພະນັກງານຈັດຊື້', 'ພະນັກງານຈັດຊື້', '90341420120240507_111127.jfif', '2024-05-07 11:11:27');
 
 -- --------------------------------------------------------
 
@@ -159,22 +163,23 @@ INSERT INTO `tbl_employee` (`en_id`, `gender`, `en_name`, `en_lastname`, `date o
 --
 
 CREATE TABLE `tbl_member` (
-  `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL COMMENT 'ລະຫັດພະນັກງານ',
+  `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL,
   `en_id` int(6) UNSIGNED ZEROFILL NOT NULL,
-  `ref_l_id` int(1) NOT NULL COMMENT 'ສະຖານະ',
-  `mem_username` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ຊື່ເຂົ້າໃຊ້ລະບົບ',
-  `mem_password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'ລະຫັດ',
-  `date_insert` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'ເວລາ'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ref_l_id` int(1) NOT NULL,
+  `mem_username` varchar(100) NOT NULL,
+  `mem_password` varchar(100) NOT NULL,
+  `login_status` int(1) NOT NULL,
+  `date_insert` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
-INSERT INTO `tbl_member` (`mem_id`, `en_id`, `ref_l_id`, `mem_username`, `mem_password`, `date_insert`) VALUES
-(000029, 000000, 2, 'Admin2024', '284762cb4151b016102311af00f6ab735ec50f33', '2023-06-05 14:33:08'),
-(000030, 000000, 1, 'Admin2025', '32a44abb7a66e19ef716f60478e030165c233aea', '2023-06-05 14:40:14'),
-(000039, 000000, 1, 'Admin2011', '336f3fa51e95e81d00ec230af62abc325a750cc8', '2023-06-07 13:35:46');
+INSERT INTO `tbl_member` (`mem_id`, `en_id`, `ref_l_id`, `mem_username`, `mem_password`, `login_status`, `date_insert`) VALUES
+(000001, 000004, 1, 'Admin', '4e7afebcfbae000b22c7c85e5560f89a2a0280b4', 1, '2024-09-14 14:04:42'),
+(000002, 000005, 2, 'HR', 'f187928fdb223e7f3b7b0396e72e2d59a5f12b29', 0, '2024-09-14 14:48:24'),
+(000003, 000006, 3, 'Banxi', '97ec7660dc618d22e8037bf871e6720ddccdafea', 0, '2024-09-14 15:07:37');
 
 -- --------------------------------------------------------
 
@@ -197,35 +202,6 @@ CREATE TABLE `tbl_order` (
   `confirm_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tbl_order`
---
-
-INSERT INTO `tbl_order` (`order_id`, `mem_id`, `receive_name`, `order_status`, `b_name`, `member_name`, `member_phone`, `member_address`, `pay_amount`, `pay_amount2`, `order_date`, `confirm_date`) VALUES
-(00000102, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 5000000.00, 5000000.00, '2023-07-24 21:38:47', '0000-00-00 00:00:00'),
-(00000103, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 8000000.00, 8000000.00, '2023-07-24 21:39:43', '0000-00-00 00:00:00'),
-(00000104, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 10800000.00, 10800000.00, '2023-07-24 21:43:25', '0000-00-00 00:00:00'),
-(00000101, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 15000000.00, 15000000.00, '2023-07-24 21:11:25', '0000-00-00 00:00:00'),
-(00000100, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 5000000.00, 5000000.00, '2023-07-24 20:55:38', '0000-00-00 00:00:00'),
-(00000082, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 0, 'M-MOney', 'lee vang', '2028182917', '55/88/66', 21600000.00, 0.00, '2023-07-18 22:27:39', '2023-07-26 22:09:48'),
-(00000092, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'longyang', '2078666666', '99/88/222', 5400000.00, 0.00, '2023-07-20 22:12:45', '2023-07-26 21:26:41'),
-(00000098, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 0, 'BCEL ONE', 'boumi', '2078665114', '999/88/555', 5250000.00, 0.00, '2023-07-23 20:23:56', '2023-07-31 20:21:48'),
-(00000097, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 2, 'BCEL ONE', 'jengli', '2059673954', '0088//9955', 5000000.00, 0.00, '2023-07-23 20:22:16', '2023-07-30 22:09:42'),
-(00000096, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 2, 'BCEL ONE', 'ong yang', '2078666666', '333/55/66', 1200000.00, 0.00, '2023-07-23 20:21:12', '2023-07-31 20:06:24'),
-(00000095, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 0, 'BCEL ONE', 'lar xyooj', '2059673954', '000/888/666', 40000000.00, 0.00, '2023-07-23 20:19:45', '2023-07-26 21:50:48'),
-(00000094, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 2, 'BCEL ONE', 'pheng yang', '2028182917', '000/88/222', 5400000.00, 0.00, '2023-07-20 22:17:25', '2023-07-31 20:34:33'),
-(00000093, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 2, 'BCEL ONE', 'khan lor', '2028182917', '33/88/55', 8000000.00, 0.00, '2023-07-20 22:15:45', '2023-08-01 20:45:18'),
-(00000099, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 10000000.00, 10000000.00, '2023-07-24 20:46:35', '0000-00-00 00:00:00'),
-(00000090, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'kiagvang', '2059673954', '2222/111/888', 2000000.00, 0.00, '2023-07-20 21:35:28', '2023-07-26 21:12:52'),
-(00000086, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 5000000.00, 5000000.00, '2023-07-20 20:24:27', '0000-00-00 00:00:00'),
-(00000085, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', '', '', '', 15000000.00, 15000000.00, '2023-07-20 14:51:01', '0000-00-00 00:00:00'),
-(00000105, 000000, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'ວື ຢ່າງ', '2078665114', 'ຍອດງື່ມ/ແປກ/ຊຽງຂວາງ', 15000000.00, 0.00, '2023-08-01 21:51:32', '0000-00-00 00:00:00'),
-(00000106, 000000, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'ນາງ ລິວ່າງ', '2078665555', '66/88/99', 5000000.00, 0.00, '2023-08-01 21:56:09', '0000-00-00 00:00:00'),
-(00000107, 000000, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'ທ້າວ ຈັນຢ່າງ', '2078665555', '55/88/11', 15000000.00, 0.00, '2023-08-01 21:59:52', '0000-00-00 00:00:00'),
-(00000108, 000000, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'ທ້າວ ເຕ້ຍ', '2078666666', '66/22/11', 5000000.00, 0.00, '2023-08-01 22:06:41', '0000-00-00 00:00:00'),
-(00000109, 000030, 'ລູກສັ່ງຊື້ອອນລາຍ', 0, 'BCEL ONE', 'test', '2028182917', 'trt', 5000000.00, 0.00, '2023-08-05 23:27:30', '2023-08-05 23:28:02'),
-(00000110, 000000, 'ລູກສັ່ງຊື້ອອນລາຍ', 1, 'BCEL ONE', 'ມາຢ່າງ', '2028182917', '2222/999/5555', 5000000.00, 0.00, '2023-08-07 21:36:44', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -234,7 +210,7 @@ INSERT INTO `tbl_order` (`order_id`, `mem_id`, `receive_name`, `order_status`, `
 
 CREATE TABLE `tbl_order_detail` (
   `d_id` int(6) UNSIGNED ZEROFILL NOT NULL,
-  `order_id` int(8) UNSIGNED ZEROFILL NOT NULL,
+  `order_id` int(6) UNSIGNED ZEROFILL NOT NULL,
   `pro_id` int(6) UNSIGNED ZEROFILL NOT NULL,
   `p_c_qty` float NOT NULL,
   `total_price` float NOT NULL COMMENT 'ລາຄາສີນຄ້າ',
@@ -246,44 +222,84 @@ CREATE TABLE `tbl_order_detail` (
 --
 
 INSERT INTO `tbl_order_detail` (`d_id`, `order_id`, `pro_id`, `p_c_qty`, `total_price`, `total`) VALUES
-(000089, 00000083, 000021, 2, 6000000, 12000000),
-(000090, 00000083, 000020, 2, 5600000, 11200000),
-(000091, 00000082, 000017, 2, 5000000, 10000000),
-(000092, 00000082, 000018, 2, 5800000, 11600000),
-(000093, 00000084, 000021, 1, 6000000, 6000000),
-(000094, 00000085, 000009, 1, 15000000, 15000000),
-(000095, 00000086, 000017, 1, 5000000, 5000000),
-(000096, 00000090, 000012, 1, 2000000, 2000000),
-(000097, 00000000, 000010, 1, 5000000, 5000000),
-(000098, 00000092, 000011, 1, 5400000, 5400000),
-(000099, 00000093, 000016, 1, 8000000, 8000000),
-(000100, 00000000, 000015, 10, 250000, 2500000),
-(000101, 00000094, 000011, 1, 5400000, 5400000),
-(000102, 00000095, 000010, 2, 5000000, 10000000),
-(000103, 00000095, 000009, 2, 15000000, 30000000),
-(000104, 00000000, 000018, 1, 5800000, 5800000),
-(000105, 00000096, 000005, 8, 150000, 1200000),
-(000106, 00000000, 000013, 2, 5000000, 10000000),
-(000107, 00000097, 000010, 1, 5000000, 5000000),
-(000108, 00000000, 000007, 5, 180000, 900000),
-(000109, 00000098, 000019, 1, 5000000, 5000000),
-(000110, 00000098, 000015, 1, 250000, 250000),
-(000111, 00000099, 000017, 2, 5000000, 10000000),
-(000112, 00000100, 000010, 1, 5000000, 5000000),
-(000113, 00000101, 000009, 1, 15000000, 15000000),
-(000114, 00000102, 000017, 1, 5000000, 5000000),
-(000115, 00000103, 000016, 1, 8000000, 8000000),
-(000116, 00000104, 000008, 2, 5400000, 10800000),
-(000119, 00000105, 000009, 1, 15000000, 15000000),
-(000120, 00000000, 000010, 1, 5000000, 5000000),
-(000121, 00000106, 000013, 1, 5000000, 5000000),
-(000122, 00000000, 000010, 1, 5000000, 5000000),
-(000123, 00000107, 000009, 1, 15000000, 15000000),
-(000124, 00000000, 000017, 1, 5000000, 5000000),
-(000125, 00000108, 000013, 1, 5000000, 5000000),
-(000126, 00000109, 000017, 1, 5000000, 5000000),
-(000127, 00000000, 000018, 1, 5800000, 5800000),
-(000128, 00000110, 000013, 1, 5000000, 5000000);
+(000001, 000001, 000017, 10, 5000000, 50000000),
+(000002, 000001, 000014, 15, 6000000, 90000000),
+(000003, 000001, 000016, 11, 8000000, 88000000),
+(000004, 000001, 000019, 10, 5000000, 50000000),
+(000005, 000002, 000010, 10, 5000000, 50000000),
+(000006, 000002, 000012, 15, 2000000, 30000000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order_receive`
+--
+
+CREATE TABLE `tbl_order_receive` (
+  `order_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `receive_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ชื่อผู้รับ',
+  `order_status` int(1) NOT NULL,
+  `b_name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'ชื่อธนาคาร',
+  `pay_amount` float(10,2) DEFAULT NULL,
+  `pay_amount2` float(10,2) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `Month` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tbl_order_receive`
+--
+
+INSERT INTO `tbl_order_receive` (`order_id`, `mem_id`, `receive_name`, `order_status`, `b_name`, `pay_amount`, `pay_amount2`, `order_date`, `Month`) VALUES
+(000001, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 100000000.00, 100000000.00, '2024-06-27 23:22:19', 'June'),
+(000002, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 80000000.00, 80000000.00, '2024-06-28 08:58:09', 'June');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_exchage`
+--
+
+CREATE TABLE `tb_exchage` (
+  `exchage_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `baht_name` varchar(100) NOT NULL,
+  `dola_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_exchage`
+--
+
+INSERT INTO `tb_exchage` (`exchage_id`, `baht_name`, `dola_name`) VALUES
+(000003, '740', '25000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_expens1`
+--
+
+CREATE TABLE `tb_expens1` (
+  `expen_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `content` varchar(100) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `prices` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `monthdate` datetime NOT NULL DEFAULT current_timestamp(),
+  `expen_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_expens1`
+--
+
+INSERT INTO `tb_expens1` (`expen_id`, `content`, `amount`, `prices`, `total`, `mem_id`, `monthdate`, `expen_date`) VALUES
+(000000, 'mouse', 12, 250000, 3000000, 000001, '0000-00-00 00:00:00', '2024-09-15 13:11:54'),
+(000001, 'computer', 10, 5500000, 55000000, 000001, '0000-00-00 00:00:00', '2024-09-15 13:10:11'),
+(000002, ' ເຈ້ຍ', 10, 150000, 1500000, 000001, '2024-08-01 08:01:09', '2024-08-01 15:01:09'),
+(000003, 'ບີກ', 10, 100000, 1000000, 000001, '2024-07-02 08:01:09', '2024-07-02 15:01:09');
 
 -- --------------------------------------------------------
 
@@ -311,7 +327,8 @@ INSERT INTO `type_product` (`type_id`, `type_name`, `type_img`, `insert_date`) V
 (0000007, 'ຄອນພີວເຕີ', 'pro_648727bdb77f6.jpg', '2023-08-07 15:29:41'),
 (0000010, ' ກ້ອງວົງຈອນປິດ', 'pro_64bcc5c630669.jpg', '2023-08-07 15:29:41'),
 (0000011, ' monitor', 'pro_64bcc6b21c9e7.jpg', '2023-08-07 15:29:41'),
-(0000013, ' ສາຍສາກ', 'pro_64bd41c919bbf.jpg', '2023-08-07 15:29:41');
+(0000013, ' ສາຍສາກ1', 'pro_66441d21e6236.jfif', '2023-08-07 15:29:41'),
+(0000014, ' Scan Bracode', 'pro_66441d4ad5130.jfif', '2024-05-15 02:26:18');
 
 --
 -- Indexes for dumped tables
@@ -366,6 +383,24 @@ ALTER TABLE `tbl_order_detail`
   ADD PRIMARY KEY (`d_id`);
 
 --
+-- Indexes for table `tbl_order_receive`
+--
+ALTER TABLE `tbl_order_receive`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `tb_exchage`
+--
+ALTER TABLE `tb_exchage`
+  ADD PRIMARY KEY (`exchage_id`);
+
+--
+-- Indexes for table `tb_expens1`
+--
+ALTER TABLE `tb_expens1`
+  ADD PRIMARY KEY (`expen_id`);
+
+--
 -- Indexes for table `type_product`
 --
 ALTER TABLE `type_product`
@@ -403,13 +438,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
-  MODIFY `en_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_member`
---
-ALTER TABLE `tbl_member`
-  MODIFY `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'ລະຫັດພະນັກງານ', AUTO_INCREMENT=40;
+  MODIFY `en_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
@@ -421,13 +450,25 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_order_detail`
 --
 ALTER TABLE `tbl_order_detail`
-  MODIFY `d_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `d_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_order_receive`
+--
+ALTER TABLE `tbl_order_receive`
+  MODIFY `order_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_exchage`
+--
+ALTER TABLE `tb_exchage`
+  MODIFY `exchage_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `type_product`
 --
 ALTER TABLE `type_product`
-  MODIFY `type_id` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `type_id` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

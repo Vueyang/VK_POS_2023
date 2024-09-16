@@ -114,17 +114,7 @@ $row = mysqli_fetch_row($nquery);
 										</div>
 									</form>
 								</div>	
-								<div class="col" align="end">
-									<form class="form-group my-3" action = "Report_order.php" method="GET">
-										<div class="row">
-											<div class="col-12">
-												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
-												<a href="Report_order.php?order_id=<?php echo $rs_order['order_id']; ?>&act=view" target="_blank"
-						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
-											</div>
-										</div>
-									</form>
-								</div>						
+													
   							</div>
 						
 							<br>
@@ -173,7 +163,7 @@ $row = mysqli_fetch_row($nquery);
 				</td>
 				<td>
 					<a href="order_detail.php?order_id=<?php echo $rs_order['order_id']; ?>&act=view" target="_blank"
-						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
+						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ອອກບີນ</a>
 				</td>
 			</tr>
 		<?php } ?>

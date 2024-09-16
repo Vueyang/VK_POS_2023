@@ -33,7 +33,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Kanit:400" rel="stylesheet">
 
 	<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
-
+	<link rel="stylesheet" href="font/NotoSansLao-VariableFont_wdth,wght.ttf">
+	<link rel="stylesheet" href="font-awesome/fonts/fontawesome-webfont.eot">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
@@ -73,7 +74,7 @@ body {
 //print_r($_SESSION);
 $m_level = $_SESSION['ref_l_id'];
 if ($m_level != 1 and $m_level != 2 and $m_level !=3 and $m_level !=4 and $m_level !=5 and $m_level !=6 and $m_level !=7) {
-	Header("Location:index.php");
+	Header("Location:Dashboard.php");
 }
 
 include('connetdb.php')

@@ -80,15 +80,24 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link <?php if ($menu == "Report_Expens") {
+					<a href="list_Expens.php" class="nav-link <?php if ($menu == "list_Expens") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
 						<p>ລາຍຈ່າຍ</p>
 					</a>
 				</li>
+				<li class="nav-item">
+					<a href="form_exchange.php" class="nav-link <?php if ($menu == "form_exchange") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ອັບຕາເລກປ່ຽນ</p>
+					</a>
+				</li>
+				
 			</ul>
-			<br>
+			<hr>
 			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
@@ -120,6 +129,13 @@
 						<p>ຂາຍສີນຄ້າ </p>
 					</a>
 				</li>
+			</ul>
+			<hr>
+			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+			   with font-awesome or any other icon font library -->
+				<li class="nav-header">ເມນູຂໍ້ມູນສີນຄ້າ</li>
 				<li class="nav-item">
 					<a href="show_Pro_type.php" class="nav-link <?php if ($menu == "pro_type") {
 						echo "active";
@@ -170,18 +186,87 @@
 				</li>
 			</ul>
 
-					<hr>
-			<!--<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+			<hr>
+			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
-
+				<!-- Add icons to the links using the .nav-icon class
+			   with font-awesome or any other icon font library -->
+				<li class="nav-header">ເມນູລາຍງານ</li>
 				<li class="nav-item">
-					<a href="logout.php" class="nav-link text-danger">
-						<i class="nav-icon fas fa-power-off"></i>
-						<p>ອອກຈະລະບົບ</p>
+					<a href="Report_sale_approved.php" class="nav-link <?php if ($menu == "Report_sale_approved") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານຢືນຢັນການສັ່ງຊື້</p>
 					</a>
 				</li>
-
-			</ul>-->
+				<li class="nav-item">
+					<a href="Report_list_sale.php" class="nav-link <?php if ($menu == "Report_list_sale") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານລາຍການຂາຍ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_Pro_type.php" class="nav-link <?php if ($menu == "Report_Pro_type") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານຂໍ້ມູນປະເພດສີນຄ້າ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_Show_product.php" class="nav-link <?php if ($menu == "Report_Show_product") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານຂໍ້ມູນສີນຄ້າ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_product_stock.php" class="nav-link <?php if ($menu == "Report_product_stock") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານສີນຄ້າຄົງເຫຼືອ < 10ອັນ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_employee.php" class="nav-link <?php if ($menu == "Report_employee") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານຂໍ້ມູນພະນັກງານ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link <?php if ($menu == "Report_Receip") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານລາຍຮັບ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_Expens_admin.php" class="nav-link <?php if ($menu == "R_Expens") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານລາຍຈ່າຍ</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="Report_exchange_admin.php" class="nav-link <?php if ($menu == "R_exchange") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-clipboard-list"></i>
+						<p>ລາຍງານອັບຕາເລກປ່ຽນ</p>
+					</a>
+				</li>
+				
+			</ul>
+			<br>
 		</nav>
 		<!-- /.sidebar-menu -->
 		<!-- http://fordev22.com/ -->

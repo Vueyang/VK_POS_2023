@@ -26,7 +26,7 @@ function Convert($amount_number)
 
 function ReadNumber($number)
 {
-    $position_call = array("ແສນ", "ສີບພັນ", "ພັນ", "ຮ້ອຍ", "", "");
+    $position_call = array("ແສນ", "ສີບພັນ", "ພັນ", "ຮ້ອຍ", "ສີບ", "");
     $number_call = array("", "ໜື່ງ", "ສອງ", "ສາມ", "ສີ່", "ຫ້າ", "ຫົກ", "ເຈັບ", "ແປດ", "ເກົ້າ");
     $number = $number + 0;
     $ret = "";
@@ -41,7 +41,7 @@ function ReadNumber($number)
     $pos = 0;
     while ($number > 0) {
         $d = intval($number / $divider);
-        $ret .= (($divider == 10) && ($d == 2)) ? "ສາວ" :
+        $ret .= (($divider == 10) && ($d == 2)) ? "ຊາວ" :
             ((($divider == 10) && ($d == 1)) ? "" :
                 ((($divider == 1) && ($d == 1) && ($ret != "")) ? "ແອັດ" : $number_call[$d]));
         $ret .= ($d ? $position_call[$pos] : "");

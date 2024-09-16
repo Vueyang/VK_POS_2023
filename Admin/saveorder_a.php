@@ -33,6 +33,8 @@ $b_name = 'ຊຳລະໜ້າຮ້ານ';
 $pay_amount = $_REQUEST["pay_amount"]; //ยอดเงินรวม
 $pay_amount2 = $_REQUEST["pay_amount2"]; //ยอดเงินที่ต้องจ่าย
 $order_date = Date("Y-m-d G:i:s");
+$Month = Date("F");
+
 //ບັນທືກການສັ່ງຊື້ order
 //echo $en_id;
 //exit();
@@ -45,7 +47,8 @@ VALUES (null,
 '$b_name', 
 '$pay_amount',
 '$pay_amount2',
-'$order_date'
+'$order_date',
+'$Month'
 )";
 $query1 = mysqli_query($conn, $sql1);
 if($query1){
