@@ -89,7 +89,7 @@ ob_start();
 							$expen_id = mysqli_real_escape_string($conn, $_GET['expen_id']);
 							$mem_id = mysqli_real_escape_string($conn, $_GET['mem_id']);
 							//echo $expen_id;
-							$sqlpay = "SELECT * FROM tb_expens WHERE expen_id = $expen_id";
+							$sqlpay = "SELECT * FROM tb_expens1 WHERE expen_id = $expen_id";
 							$querypay = mysqli_query($conn, $sqlpay);
 							
 							$rowmember = mysqli_fetch_array($querypay);

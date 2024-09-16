@@ -65,7 +65,7 @@ ob_start();
 						//$rs_my_order = mysqli_query($conn, $nquery);
 						//$row = mysqli_fetch_row($nquery);
 						//echo ($query_my_order);//test query
-						$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens`");
+						$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens1`");
 						$row = mysqli_fetch_row($nquery);
 							$rows = $row[0];
 							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
@@ -91,11 +91,11 @@ ob_start();
 							if (($dt1 != "") & ($dt2 != "")) {
 								echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
 								
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens WHERE expen_date BETWEEN '$dt1' and '$date_to_date' ORDER BY expen_id DESC $limit");
+								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens1 WHERE expen_date BETWEEN '$dt1' and '$date_to_date' ORDER BY expen_id DESC $limit");
 								
 							}else{
 								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens ORDER BY expen_id DESC $limit");
+								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens1 ORDER BY expen_id DESC $limit");
 								$paginationCtrls = '';
 								if ($last != 1) {
 									if ($pagenum > 1) {
