@@ -66,7 +66,7 @@ include('connetdb.php');
 						$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens1`");
 						$row = mysqli_fetch_row($nquery);
 							$rows = $row[0];
-							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+							$page_rows = 2; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
 							$last = ceil($rows / $page_rows);
 							//print_r($last);
 							if ($last < 1) {

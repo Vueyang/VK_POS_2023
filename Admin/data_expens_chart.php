@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 include('connetdb.php');
 
-$sqlQuery = "SELECT SUM(total) as total, monthdate FROM tb_expens GROUP BY monthdate ORDER BY monthdate";
+$sqlQuery = "SELECT SUM(total) as total, monthdate FROM tb_expens1 GROUP BY monthdate ORDER BY monthdate";
 $result = mysqli_query($conn, $sqlQuery);
 //print_r($result);
 //exit();

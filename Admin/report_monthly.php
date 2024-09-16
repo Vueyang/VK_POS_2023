@@ -324,7 +324,7 @@ $row = mysqli_fetch_row($nquery);
 								$total = 0;
 								$Alltotal = 0;
 								foreach ($result as $rs_order) {
-									$total = $rs_order['total']; //ລາຄາລວມ ທາງ ກ້າຕ່າ 
+									$total = $rs_order['totol']; //ລາຄາລວມ ທາງ ກ້າຕ່າ 
 										$Alltotal += $rs_order['totol']; 
 										//print_r($rs_order);
 									echo "<tr>";
