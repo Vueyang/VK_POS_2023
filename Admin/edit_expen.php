@@ -11,7 +11,7 @@ $total = $prices * $amount;
 $Month = Date("F");
 //echo $mem_id;
 //exit();
-$sql = "UPDATE tb_expens SET content = '$content', amount = '$amount', prices = '$prices', total='$total', mem_id='$mem_id', monthdate='$Month' WHERE expen_id = '$expen_id'";
+$sql = "UPDATE tb_expens1 SET content = '$content', amount = '$amount', prices = '$prices', total='$total', mem_id='$mem_id', monthdate='$Month' WHERE expen_id = '$expen_id'";
 $result = mysqli_query($conn, $sql) or die("Error in query; $sql" . mysqli_error($conn) . "<br>$sql");
 //print_r($sql);
 //exit();

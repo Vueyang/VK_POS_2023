@@ -35,178 +35,121 @@ include('connetdb.php');
 	<section class="content ">
 		<div class="card card-gray l">
 			<div class="card-header ">
-				<h3 class="card-title" style="font-size: 2rem;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍ</h3>
+				<h3 class="card-title" style="font-size: 2rem;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍປະຈຳວັນ</h3>
 			</div>
 			<br>
-			<form name="frm" method="POST" action="Report_Expens_admin.php">
 			
-					<div class="row mt-2" id ="row_m">
-						<div class="col-sm-2" style="text-align:center; font-size:20px;">
-							<label for="text">ເລືອກວັນທີເດືອນປີ</label>
-						</div>
-						<div class="col-sm-2">
-							<input type="date" name="dt1" class="form-control">
-						</div>
-						<div class="col-sm-2">
-							<input type="date" name="dt2" class="form-control">
-						</div>
-						<div class="col-sm-1">
-							<button type="submit" class="btn btn-primary"><i class="fas fa-search "></i></button>
-						</div>
-						<div class="col-sm-1">
-							<button type="refesh" class="btn btn-primary">ເບີ່ງທັງໝົດ</i></button>
-						</div>
-					</div>
-			</form>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12">
 					<?php
 
-						$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens1`");
-						$row = mysqli_fetch_row($nquery);
-							$rows = $row[0];
-							$page_rows = 2; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-							$last = ceil($rows / $page_rows);
-							//print_r($last);
-							if ($last < 1) {
-								$last = 1;
-							}
-							$pagenum = 1;
-							if (isset($_GET['pn'])) {
-								$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-							}
-							if ($pagenum < 1) {
-								$pagenum = 1;
-							} else if ($pagenum > $last) {
-								$pagenum = $last;
-							}
-							$dt1 = @$_POST['dt1'];
-							$dt2 = @$_POST['dt2'];
+							$dt1 = isset($_GET['dt1']) ? mysqli_real_escape_string($conn, $_GET['dt1']) : '';
 							
-							$date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query ເອົາຂໍ້ມູນຈາກວັນທີ່ທີ່ເຮົາເລືອກຈາກເລີ່ມຕົ້ນຖືວັນທີ່ເຮົາຕ້ອງການມາສະແດງ
-							$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-							if (($dt1 != "") & ($dt2 != "")) {
-								echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
-								
-								//$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens WHERE expen_date BETWEEN '$dt1' and '$date_to_date' ORDER BY expen_id DESC $limit");
-								$query = "
-									SELECT total, SUM(total) AS totol, DATE_FORMAT(expen_date, '%d-%M-%Y') AS expen_date
-									FROM tb_expens1 WHERE expen_date BETWEEN '$dt1' and '$date_to_date'
-									GROUP BY DATE_FORMAT(expen_date, '%d%')
-									ORDER BY DATE_FORMAT(expen_date, '%Y-%M-%d') AND ORDER BY expen_id DESC $limit
-									";
-									$result = mysqli_query($conn, $query);
-									$resultchart = mysqli_query($conn, $query);
-									//for chart
-									$datesave = array();
-									$totol = array();
-									while($rs = mysqli_fetch_array($resultchart)){
-									$datesave[] = "\"".$rs['expen_date']."\"";
-									$totol[] = "\"".$rs['totol']."\"";
-									}
-									$datesave = implode(",", $datesave);
-									$totol = implode(",", $totol);
+							if (!empty($dt1)) {
+								// ໃຊ້ DATE() ໃນ SQL ເພື່ອປຽບທຽບວັນທີ
+								$query = "SELECT *, SUM(total) AS total_sum 
+								FROM tb_expens1 
+								WHERE DATE(expen_date) = '$dt1'
+								GROUP BY expen_id 
+								ORDER BY expen_date DESC";
+								$result = mysqli_query($conn, $query);
+
+							// ຄຳສັ່ງສຳລັບກຣາຟ
+									$query_chart = "SELECT DATE_FORMAT(expen_date, '%d-%M-%Y') AS expen_date, SUM(total) AS total_sum 
+									FROM tb_expens1 
+									WHERE DATE(expen_date) = '$dt1'
+									GROUP BY DATE(expen_date)";
+									$result_chart = mysqli_query($conn, $query_chart);
 							}else{
-								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-								//$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens ORDER BY expen_id DESC $limit");
-								$query = "
-									SELECT expen_id, content, amount, prices, total, SUM(total) AS totol, DATE_FORMAT(expen_date, '%d-%M-%Y') AS expen_date
-									FROM tb_expens1
-									GROUP BY DATE_FORMAT(expen_date, '%d%')
-									ORDER BY DATE_FORMAT(expen_date, '%Y-%M-%d')  DESC $limit
-									";
-									$result = mysqli_query($conn, $query);
-									$resultchart = mysqli_query($conn, $query);
-									//for chart
-									//print_r($result);
-									//exit();
-									$datesave = array();
-									$totol = array();
-									while($rs = mysqli_fetch_array($resultchart)){
-									$datesave[] = "\"".$rs['expen_date']."\"";
-									$totol[] = "\"".$rs['totol']."\"";
+									
+									$nquery = mysqli_query($conn, "SELECT COUNT(DISTINCT(expen_id)) FROM `tb_expens1`");
+									$row = mysqli_fetch_row($nquery);
+									$rows = $row[0];
+									$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
+									// ຄຳສັ່ງສຳລັບການສະແດງທັງໝົດ
+									$last = ceil($rows / $page_rows);
+									if ($last < 1) {
+										$last = 1;
 									}
-									$datesave = implode(",", $datesave);
-									$totol = implode(",", $totol);
-								$paginationCtrls = '';
-								if ($last != 1) {
-									if ($pagenum > 1) {
-										$previous = $pagenum - 1;
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
-								
-								
-										for ($i = $pagenum - 4; $i < $pagenum; $i++) {
-											if ($i > 0) {
+									$pagenum = 1;
+									if (isset($_GET['pn'])) {
+										$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+									}
+									if ($pagenum < 1) {
+										$pagenum = 1;
+									} else if ($pagenum > $last) {
+										$pagenum = $last;
+									}
+									$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+									
+									// ຄຳສັ່ງສຳລັບກຣາຟ
+									$query_chart = "SELECT DATE_FORMAT(expen_date, '%d-%M-%Y') AS expen_date, SUM(total) AS total_sum 
+												FROM tb_expens1 
+												GROUP BY expen_date DESC $limit
+												"; //ORDER BY expen_id 
+									$result_chart = mysqli_query($conn, $query_chart);
+									//
+									$query = "SELECT SQL_CALC_FOUND_ROWS *, SUM(total) AS total_sum 
+											FROM tb_expens1 
+											GROUP BY expen_id 
+											ORDER BY expen_date DESC $limit";
+									$result = mysqli_query($conn, $query);
+										$paginationCtrls = '';
+										if ($last != 1) {
+											if ($pagenum > 1) {
+												$previous = $pagenum - 1;
+												$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
+												//print_r($previous);
+										
+												for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+													if ($i > 0) {
+														$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+													}
+												}
+											}
+											$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
+											for ($i = $pagenum + 1; $i <= $last; $i++) {
 												$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
+												if ($i >= $pagenum + 4) {
+													break;
+												}
+											}
+											if ($pagenum != $last) {
+												$next = $pagenum + 1;
+										
+										
+												$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
 											}
 										}
-									}
-								
-								
-									//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
-								
-								
-									$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
-									//echo $paginationCtrls;
-
-								
-								
-									for ($i = $pagenum + 1; $i <= $last; $i++) {
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
-										if ($i >= $pagenum + 4) {
-											break;
-										}
-									}
-								
-								
-									if ($pagenum != $last) {
-										$next = $pagenum + 1;
-								
-								
-										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
-									}
-									
 								}
-								//print_r($nquery_1);
-								//echo $nquery;
-								//exit();
-							}
-							
-
-						
-
-            /*$query = "
-            SELECT content, total, SUM(total) AS totol, DATE_FORMAT(expen_date, '%d-%M-%Y') AS expen_date
-            FROM tb_expens
-            GROUP BY DATE_FORMAT(expen_date, '%d%')
-            ORDER BY DATE_FORMAT(expen_date, '%Y-%M-%d') DESC
-            ";
-            $result = mysqli_query($conn, $query);
-            $resultchart = mysqli_query($conn, $query);
-            //for chart
-            $datesave = array();
-            $totol = array();
-            while($rs = mysqli_fetch_array($resultchart)){
-            $datesave[] = "\"".$rs['expen_date']."\"";
-            $totol[] = "\"".$rs['totol']."\"";
-            }
-            $datesave = implode(",", $datesave);
-            $totol = implode(",", $totol);
-           /* echo $datesave;
-            echo $totol;
-            exit();*/
+								// ການຈັດການຂໍ້ມູນກຣາຟ
+								$datesave = [];
+								$totol = [];
+								while($rs = mysqli_fetch_assoc($result_chart)){
+									$datesave[] = '"' . $rs['expen_date'] . '"';
+									$totol[] = $rs['total_sum'];
+								}
+								$datesave = implode(",", $datesave);
+								$totol = implode(",", $totol);
             ?>
            <div align="center" class="card-header">
 				<div class="row">
 					<div class="col-md-12" style="display:flex;" >
-						<a href="Report_Expens_admin.php?p=daily" class="btn btn-info" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ລາຍວັນ</a> 
-						<a href="report_monthly.php?p=monthy" class="btn btn-success" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ລາຍເດືອນ</a> 
-						<a href="report_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ລາຍປີ</a>
-						<div align="center" style=" left: 20px; text-align: center; width:50%;">
-						<h4 style=" margin: 10px;">ລາຍການຂໍ້ມູນລາຍຈ່າຍ</h4>
+						<a href="Report_Expens_admin.php?p=daily" class="btn btn-info" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ວັນ</a> 
+						<a href="report_monthly.php?p=monthy" class="btn btn-success" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ເດືອນ</a> 
+						<a href="report_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ປີ</a>
+						<div align="center" style=" left: 20px; text-align: center; width:60%;">
+						<h4 style=" margin: 10px;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍປະຈຳວັນ</h4>
 						</div>
+						<form method="GET" class="row mt-2">
+			
+						<div class="col-sm-12">
+						<input type="date" name="dt1" class="form-control" value="<?= isset($_GET['dt1']) ? $_GET['dt1'] : '' ?>" onchange="this.form.submit()">
+						</div>
+			</form>
 					</div>
+					
 				</div>
 			</div>
             
@@ -224,22 +167,22 @@ include('connetdb.php');
                 
                 ],
                 datasets: [{
-                label: 'ລາຍຈ່າຍເປັນວັນ',
+                label: 'ລາຍຈ່າຍປະຈຳວັນ',
                 data: [<?php echo $totol;?>
                 ],
                 backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5	)',
                 'rgba(255, 206, 86, 0.5)',
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(153, 102, 255, 0.5)',
+                'rgba(122, 14, 14, 0.5)',
+                'rgba(152, 125, 207, 0.5)',
                 'rgba(244, 159, 64, 0.5)',
-				'rgba(190, 255, 64, 0.5)',
+				'rgba(79, 88, 202, 0.5)',
 				'rgba(288, 35, 64, 0.5)',
 				'rgba(33, 255, 64, 0.5)',
-				'rgba(74, 90, 64, 0.5)',
+				'rgba(122, 141, 110, 0.5)',
 				'rgba(16, 160, 64, 0.5)',
-				'rgba(66, 33, 64, 0.5)',
+				'rgba(133, 101, 130, 0.5)',
                 ],
                 borderColor: [
                 'rgba(255,99,132,1)',
@@ -247,13 +190,13 @@ include('connetdb.php');
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-				'rgba(190, 255, 64, 1)',
+                'rgb(36, 19, 2)',
+				'rgb(208, 253, 119)',
 				'rgba(288, 35, 64, 1)',
-				'rgba(33, 255, 64, 1)',
+				'rgb(255, 33, 199)',
 				'rgba(74, 9, 64, 1)',
-				'rgba(74, 90, 64, 1)',
-				'rgba(66, 33, 64, 1)',
+				'rgb(33, 36, 31)',
+				'rgb(145, 90, 141)',
                 ],
                 borderWidth: 1
                 }]
@@ -270,94 +213,6 @@ include('connetdb.php');
                 });
                 </script>
             </p>
-
-
-
-
-						<?php
-
-						//$nquery = "SELECT * FROM  tbl_member m, tbl_employee en WHERE m.en_id = en.en_id  GROUP BY mem_id ";
-						//$nquery = mysqli_query("SELECT COUNT(mem_id) FROM `tbl_member`");
-						//$rs_my_order = mysqli_query($conn, $nquery);
-						//$row = mysqli_fetch_row($nquery);
-						//echo ($query_my_order);//test query
-						$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens1`");
-						$row = mysqli_fetch_row($nquery);
-							$rows = $row[0];
-							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-							$last = ceil($rows / $page_rows);
-							//print_r($last);
-							if ($last < 1) {
-								$last = 1;
-							}
-							$pagenum = 1;
-							if (isset($_GET['pn'])) {
-								$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-							}
-							if ($pagenum < 1) {
-								$pagenum = 1;
-							} else if ($pagenum > $last) {
-								$pagenum = $last;
-							}
-							$dt1 = @$_POST['dt1'];
-							$dt2 = @$_POST['dt2'];
-							
-							$date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query ເອົາຂໍ້ມູນຈາກວັນທີ່ທີ່ເຮົາເລືອກຈາກເລີ່ມຕົ້ນຖືວັນທີ່ເຮົາຕ້ອງການມາສະແດງ
-							$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-							if (($dt1 != "") & ($dt2 != "")) {
-								echo "ຄົ້ນຫາຈາກວັນທີ $dt1 ຫາ $dt2 ";
-								
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens1 WHERE expen_date BETWEEN '$dt1' and '$date_to_date' ORDER BY expen_id DESC $limit");
-								
-							}else{
-								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens1 ORDER BY expen_id DESC $limit");
-								$paginationCtrls = '';
-								if ($last != 1) {
-									if ($pagenum > 1) {
-										$previous = $pagenum - 1;
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
-								
-								
-										for ($i = $pagenum - 4; $i < $pagenum; $i++) {
-											if ($i > 0) {
-												$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
-											}
-										}
-									}
-								
-								
-									//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
-								
-								
-									$paginationCtrls .= '<a href=""class="btn btn-danger">' . $pagenum . '</a> &nbsp; ';
-									//echo $paginationCtrls;
-
-								
-								
-									for ($i = $pagenum + 1; $i <= $last; $i++) {
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $i . '" class="btn btn-primary">' . $i . '</a> &nbsp; ';
-										if ($i >= $pagenum + 4) {
-											break;
-										}
-									}
-								
-								
-									if ($pagenum != $last) {
-										$next = $pagenum + 1;
-								
-								
-										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
-									}
-									
-								}
-								//print_r($nquery_1);
-								//echo $nquery;
-								//exit();
-							}
-							
-						?>
-							
                 <hr>
 			<div class="card-body">
 				
@@ -366,7 +221,7 @@ include('connetdb.php');
 							<tr>
 										<th>ລຳດັບ</th>
 										<th>ລະຫັດ</th>
-										<th>ຊື່ລາຍການທີ່ຈ່າຍ</th>
+										<th>ລາຍການ</th>
 										<th>ຈຳນວນ</th>
 										<th>ລາຄາ/ໜ່ວຍ</th>
 										<th>ລາຄາລວມ</th>
@@ -375,20 +230,18 @@ include('connetdb.php');
 							</thead>
 							<tbody>
 								<?php
-								$total = 0;
+								$i = 1;
 								$Alltotal = 0;
-								foreach ($nquery_1 as $rs_order) {
-									$total += $rs_order['prices'] * $rs_order['amount']; //ລາຄາລວມ ທາງ ກ້າຕ່າ 
-										
-										
+								while ($row = mysqli_fetch_assoc($result)) {
+									$total += $row['total_sum'];
 									echo "<tr>";
-									echo "<td>" . $l += 1 . "</td>";
-									echo "<td>" . $rs_order['expen_id'] . "</td>";
-									echo "<td>" . $rs_order['content'] . "</td>";
-									echo "<td>" . $rs_order['amount'] . "</td>";
-									echo "<td>" . number_format($rs_order['prices'], 0) . "</td>";
-									echo "<td>" . number_format($rs_order['total'], 0) . "</td>";
-									echo "<td>" . $rs_order['expen_date'] . "</td>";
+									echo "<td>" . $i++ . "</td>";
+									echo "<td>" . htmlspecialchars($row['expen_id']) . "</td>";
+									echo "<td>" . htmlspecialchars($row['content']) . "</td>";
+									echo "<td>" . number_format($row['amount'], 0) . "</td>";
+									echo "<td>" . number_format($row['prices'], 0) . "</td>";
+									echo "<td>" . number_format($row['total_sum'], 0) . "</td>";
+									echo "<td>" . htmlspecialchars($row['expen_date']) . "</td>";
 									echo "</tr>";
 								}
 								$Alltotal += $total; 
@@ -416,6 +269,7 @@ include('connetdb.php');
 
 							</tbody>
 						</table>
+						
 						<div class="card-footer" align="end">
 								<div id="pagination_controls">
 
@@ -426,7 +280,7 @@ include('connetdb.php');
 
 					</div>
 					<div align="center" class="button_print my-12">
-					<a href="expens_detail_admin.php?expen_date=<?= $dt1 ?>&date_end=<?=$dt2?>&act=view" target="_blank"
+					<a href="Record_Expens_daily.php?expen_date=<?= $dt1 ?>&act=view" target="_blank"
 															class="button_print btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ພີມອອກ</a>
 															</div>
 															<br>

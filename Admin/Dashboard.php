@@ -122,7 +122,7 @@ $row4 = mysqli_fetch_array($result4);
 						<div class="card mb-4">
 							<div class="card-header">
 								<i class="fas fa-chart-bar me-1"></i>
-								Bar Chart Example
+								ຂໍ້ມູນລາຍຈ່າຍ
 							</div>
 							<div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
 						</div>
@@ -178,7 +178,7 @@ $row4 = mysqli_fetch_array($result4);
                     var marks = [];
 
                     for (var i in data) {
-                        name.push(data[i].monthdate);
+                        name.push(data[i].expen_date);
                         marks.push(data[i].total);
                     }
 

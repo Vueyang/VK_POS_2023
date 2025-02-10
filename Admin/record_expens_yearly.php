@@ -86,59 +86,38 @@ ob_start();
 	}
 </style>
 	<?php
-							$expen_id = mysqli_real_escape_string($conn, $_GET['expen_id']);
+							$yearly = mysqli_real_escape_string($conn, $_GET['expen_date']);
+							
 							$mem_id = mysqli_real_escape_string($conn, $_GET['mem_id']);
-							//echo $expen_id;
 							if($expen_id !=""){
-								$sqlpay = "SELECT * FROM tb_expens";
+								$sqlpay = "SELECT * FROM tb_expens1";
 							}else{
-								$sqlpay = "SELECT * FROM tb_expens";
+								$sqlpay = "SELECT * FROM tb_expens1";
 							}
 							
 							$querypay = mysqli_query($conn, $sqlpay);
 							
 							$rowmember = mysqli_fetch_array($querypay);
-							//print_r($querypay);
-							 //exit();
-							//$st = $rowmember['order_status'];
-
-
-
-							$nquery = mysqli_query($conn, "SELECT COUNT(expen_id) FROM `tb_expens`");
-						$row = mysqli_fetch_row($nquery);
-							$rows = $row[0];
-							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-							$last = ceil($rows / $page_rows);
-							//print_r($last);
-							if ($last < 1) {
-								$last = 1;
-							}
-							$pagenum = 1;
-							if (isset($_GET['pn'])) {
-								$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-							}
-							if ($pagenum < 1) {
-								$pagenum = 1;
-							} else if ($pagenum > $last) {
-								$pagenum = $last;
-							}
-							$dt1 = mysqli_real_escape_string($conn, $_GET['expen_date']);
-							$dt2 = mysqli_real_escape_string($conn, $_GET['date_end']);
-							//echo $dt1;
-							//echo $dt2;
-							//exit();
-							$text1 = "ລາຍງານວັນທີ";
-							$text2 = "ຫາ";
-							$t="ລາຍງານທັງໝົດ";
-							$date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query ເອົາຂໍ້ມູນຈາກວັນທີ່ທີ່ເຮົາເລືອກຈາກເລີ່ມຕົ້ນຖືວັນທີ່ເຮົາຕ້ອງການມາສະແດງ
-							if (($dt1 != "") & ($dt2 != "")) {
-								$txt="ລາຍງານວັນທີເດືອນປີ $dt1 ຫາ $dt2 ";
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens WHERE expen_date BETWEEN '$dt1' and '$date_to_date' ");
-								
+							$t="ລາຍງານລາຍຈ່າຍປະຈຳປີທັງໝົດ";
+							if (!empty($yearly)) {
+								$txt="ລາຍງານປະຈຳປີ: $yearly ";
+								$nqueryResult = "SELECT SUM(total) AS total_sum,
+								DATE_FORMAT(expen_date, '%Y') AS expen_year 
+								FROM tb_expens1 
+								WHERE YEAR(expen_date) = '$yearly'
+								GROUP BY DATE_FORMAT(expen_date, '%Y')
+								ORDER BY expen_year DESC";
+								$nquery_1 = mysqli_query($conn, $nqueryResult);
 							}else{
-								//$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-								$nquery_1 = mysqli_query($conn, "SELECT * from  tb_expens ");
+								$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
 								$txt = $t;
+								$nqueryResult = "SELECT SUM(total) AS total_sum,
+								DATE_FORMAT(expen_date, '%Y') AS expen_year 
+								FROM tb_expens1 
+								WHERE DATE_FORMAT(expen_date, '%Y')
+								GROUP BY DATE_FORMAT(expen_date, '%Y')
+								 DESC";
+								$nquery_1 = mysqli_query($conn, $nqueryResult);
 							}
 							
 
@@ -169,11 +148,9 @@ ob_start();
 			</tr>
 		</table>
 			<table cellpadding="0" cellspacing="0" align="center" width="100%">
+				
 				<tr>
-					<td align="center" style="font-size: 18px;">ລາຍງານລາຍຈ່າຍຊື້ເຄື່ອງໃຊ້ໃນຮ້ານ</td>
-				</tr>
-				<tr>
-					<td align="center" style="font-size: 20px; color:red;"> <?php echo $txt?></td>
+					<td align="center" style="font-size: 20px; color:#06D001;"> <?php echo $txt?></td>
 				</tr>
 				<tr>
 					<td align="center" style="font-size: 16px;">ຜູ້ທຳລາຍການ: <?php echo "<lable style='color:#FF5580'>". $_SESSION['mem_username'] . "</lable>"; ?></td>
@@ -183,53 +160,46 @@ ob_start();
 			<table cellpadding="0" cellspacing="0" width="100%" class="tb_detail">
 				<thead>
 					<tr>
-						<th width="5%" align="center">ລຳດັບ</th>
-						<th width="35%" align="center">ຊື່ລາຍການທີ່ຈ່າຍ</th>
-						<th width="10%" align="center">ຈຳນວນ</th>
-						<th width="10%" align="center">ລາຄາ/ໜ່ວຍ</th>
-						<th width="15%" align="center">ລວມ(ກີບ)</th>
+                    <th>ລຳດັບ</th>
+                    <th>ປີ</th>
+                    <th>ລາຄາລວມ</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
 					$total = 0;
-					foreach ($nquery_1  as $rspay) { 
-						$total += $rspay['prices'] * $rspay['amount']; //ລາຄາລວມ ທາງ ກ້າຕ່າ ?>
-						
-						<tr>
-						<td><?= @$i += 1 ?></td>
-						<td><?= $rspay["content"]?></td>
-						<td><?= $rspay["amount"]?></td>
-						<td align='right'><?= number_format($rspay["prices"], 0) ?></td>
-						<td align='right'><?= number_format($total, 0) ?></td>
-					</tr>
-					<?php } ?>
-					<?php
-					include('../convertnumtoLao.php');
-					?>
-					<tr>
-						<td align='end' colspan="3">
-							<b>ລາຄາລວມທັງໝົດ
-								(
-								<?php echo Convert($total); ?> ):
-							</b>
-							<br>
-							<b>ຍອດເງີນທີ່ຈ່າຍ
-								(
-								<?php echo Convert($total); ?> ):
-							</b>
-							<br>
-						</td>
-						<td align='center' colspan='2'>
-							<b>
-								<?php echo number_format($total, 0); ?> ກີບ
-							</b>
-							<br>
-							<b>
-								<?php echo number_format($total, 0); ?> ກີບ
-							</b>
-						</td>
-					</tr>
+                    $Alltotal = 0;
+                    foreach ($nquery_1 as $rs_order) {
+                        $total += $rs_order['prices'] * $rs_order['amount']; //ລາຄາລວມ ທາງ ກ້າຕ່າ 
+                            $Alltotal += $rs_order['total_sum']; 
+                        echo "<tr>";
+                        echo "<td>" . $l += 1 . "</td>";
+                        echo "<td>" . $rs_order['expen_year'] . "</td>";
+                        echo "<td>" . number_format($rs_order['total_sum'], 0) . "</td>";
+                        
+                        echo "</tr>";
+                    }
+                    include('../convertnumtoLao.php');
+                    echo "<tr>";
+                                echo "<td  align='right'colspan='2'><b>ລາຄາລວມທັງໝົດ
+                                (
+                                " . Convert($Alltotal) . ")
+                            </b>
+                            <br>
+                            <b>ຍອດເງີນທີ່ຈ່າຍ
+                                (
+                                " . Convert($Alltotal) . " )
+                            </b>
+                            </td>";
+                                echo "<td align='right'colspan='2'> <b>
+                                " . number_format($Alltotal, 0) . " ກີບ
+                            </b>
+                            <br>
+                            <b>
+                                " . number_format($Alltotal, 0) . " ກີບ
+                            </b></td>";
+                                echo "</tr>";
+                    ?>
 				</tbody>
 			</table>
 			<br>

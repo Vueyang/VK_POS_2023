@@ -46,7 +46,7 @@ include('connetdb.php')
             GROUP BY DATE_FORMAT(expen_date, '%d%')
             ORDER BY DATE_FORMAT(expen_date, '%Y-%M-%d') DESC
             ";
-            $result = mysqli_query($conn, $query);
+           // $result = mysqli_query($conn, $query);
             $resultchart = mysqli_query($conn, $query);
             //for chart
             $datesave = array();

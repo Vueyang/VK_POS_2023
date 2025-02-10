@@ -72,7 +72,7 @@
 			   with font-awesome or any other icon font library -->
 				<li class="nav-header">ເມນູຟ່າຍບັນຊີ</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link <?php if ($menu == "Report_Receip") {
+					<a href="Report_Receip.php" class="nav-link <?php if ($menu == "Receip") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>

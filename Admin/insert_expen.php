@@ -13,27 +13,24 @@ $Month = Date("F");
 //exit();
 $sql = "INSERT INTO tb_expens1
   (
-  /*expen_id,*/
   content,
   amount,
   prices,
   total,
-  mem_id,
-  monthdate
+  mem_id
   )
   VALUES
   (
-  /*'$expen_id',*/
   '$content',
   '$amount',
   '$prices',
   '$total',
-  '$mem_id',
-  '$Month'
+  '$mem_id'
   )";
 
   $result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn) . "<br>$sql");
-if($result){
+ 
+  if($result){
     echo "<script type='text/javascript'>";
     echo "window.location = 'list_Expens.php?exchage_add=exchage_id';";
     echo "</script>";
