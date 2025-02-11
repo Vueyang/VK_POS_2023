@@ -214,7 +214,7 @@ include('connetdb.php');
                 </script>
             </p>
                 <hr>
-			<div class="card-body">
+			<div class="">
 				
 						<table class="table table-striped-columns  table-hover" id="datatable">
 							<thead>
@@ -286,7 +286,7 @@ include('connetdb.php');
 															<br>
 															</section>
 															</div>
-	<div class="card-footer"><?php include('footer.php'); ?></div>
+<?php include('footer.php'); ?>
 
 	<script>
 		$(function () {

@@ -241,7 +241,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link <?php if ($menu == "Report_Receip") {
+					<a href="Report_receive_daily.php" class="nav-link <?php if ($menu == "Report_Receip") {
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
