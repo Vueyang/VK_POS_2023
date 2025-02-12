@@ -13,13 +13,16 @@ if ($st == 0) {
 	echo '</font>';
 } elseif ($st == 3) {
 	echo '<font color="blue">';
-	echo 'ສົ່ງເຄື່ອງແລ້ວ';
+	echo 'ສົ່ງເຄື່ອງສຳເລັດແລ້ວ';
 	echo '</font>';
 } elseif ($st == 4) {
 	echo '<font color="green">';
 	echo 'ຂາຍໜ້າຮ້ານຮັບເງີນແລ້ວ';
 	echo '</font>';
+}elseif ($st == 5) {
+	echo '<font color="green">';
+	echo 'ລູກຄ້າສັ່ງຊື້ອອນລາຍ';
+	echo '</font>';
 }
-
 
 ?>

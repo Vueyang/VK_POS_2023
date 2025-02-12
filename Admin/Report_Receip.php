@@ -126,7 +126,7 @@ include('connetdb.php');
 									$datesave = array();
 									$totol = array();
 									while($rs = mysqli_fetch_array($resultchart)){
-									$datesave[] = "\"".$rs['tbl_order_receive']."\"";
+									$datesave[] = "\"".$rs['order_date']."\"";
 									$totol[] = "\"".$rs['pay_amount2']."\"";
 									}
 									$datesave = implode(",", $datesave);

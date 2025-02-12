@@ -11,12 +11,11 @@ include('header.php')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-    <script src="https://unpkg.com/@adminkit/core@latest/dist/js/app.js"></script>
+    <script type="text/javascript" src="css_js/js/chart_line.js"></script>
     <link href="css_js/css/styles.css" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/adminlte.min.css">
 	<link rel="stylesheet" href="assets/adminlte.min.css">
-	<link rel="stylesheet" href="assets/charts.css">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -45,16 +44,25 @@ include('header.php')
   // ຄຳສັ່ງ LIMIT
   $limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
   //  ດຶງຂໍ້ມູນຈາກຖານຂໍ້ມູນ ຄຳສັ່ງສຳລັບກຣາຟ
-  $query_chart = "SELECT DATE_FORMAT(order_date, '%d-%M-%Y') AS order_date, SUM(pay_amount2) AS total_sum
-  FROM tbl_order_receive GROUP BY DATE(order_date) ORDER BY order_id DESC $limit";
+  $query_chart = "SELECT DATE_FORMAT(order_date, '%d-%M-%Y') AS order_date, order_status, SUM(pay_amount2) AS total_sum
+    FROM tbl_order_receive WHERE order_status IN (2,4)
+    GROUP BY order_date, order_status 
+    ORDER BY order_date DESC 
+    $limit";
+
   $result_chart = mysqli_query($conn, $query_chart);
-  //print_r($result_chart);
+  if (!$result_chart) {
+    die("Query Failed: " . mysqli_error($conn)); // ກວດສອບ error ຂອງ SQL
+}
    // ຄຳສັ່ງ SQL ສຳລັບດຶງຂໍ້ມູນ
    $query = "SELECT SQL_CALC_FOUND_ROWS *, SUM(pay_amount2) AS total_sum 
    FROM tbl_order_receive 
    GROUP BY order_id
    ORDER BY order_date DESC $limit ";//GROUP BY order_id 
    $result = mysqli_query($conn, $query);
+   if (!$result) {
+    die("Query Failed: " . mysqli_error($conn));
+  }
    $paginationCtrls = '';
    if($last !=1){
     if($pagenum > 1){
@@ -80,17 +88,40 @@ include('header.php')
     }
    }
    // ສ້າງ array ເກັບວັນທີ ແລະ ຍອດລວມ
-   $datesave = [];
-   $totol = [];
-   while($rs = mysqli_fetch_assoc($result_chart)){
-    
-    $datesave[]= '"' . $rs['order_date'] . '"'; // ເພີ່ມວັນທີເຂົ້າ array
-    $total[] = $rs['total_sum']; // ເພີ່ມຍອດລວມເຂົ້າ array
-    //print_r($datesave);
+
+   $date_list = [];
+   $data_sales = [];
+   $data_orders = [];
+   
+   while ($rs = mysqli_fetch_assoc($result_chart)) {
+       $date_list[] = $rs['order_date'];
+   
+       if ($rs['order_status'] == 4) {
+           $data_sales[$rs['order_date']] = $rs['total_sum'];
+       } elseif ($rs['order_status'] == 2) {
+           $data_orders[$rs['order_date']] = $rs['total_sum'];
+       }
    }
-   // ປ່ຽນ array ເປັນ string ທີ່ຄ່າແຍກດ້ວຍ comma
-   $datesave = implode(",", $datesave);
-   $totol = implode(",", $total);
+
+
+// ປ່ຽນ array ເປັນລາຍຊື່ວັນທີ່ທີ່ບໍ່ຊ້ຳ
+$date_sale = array_unique($date_list);
+sort($date_sale); // ຈັດລຽງວັນທີ່
+
+// ສ້າງ array ສຳລັບຂໍ້ມູນ (ຖ້າບໍ່ມີ, ໃຫ້ເປັນ 0)
+$total_sale = [];
+$order_total = [];
+foreach ($date_sale as $date) {
+    $total_sale[] = isset($data_sales[$date]) ? $data_sales[$date] : 0;
+    $order_total[] = isset($data_orders[$date]) ? $data_orders[$date] : 0;
+}
+
+// ປ່ຽນ array ເປັນ string
+$date_sale = '"' . implode('","', $date_sale) . '"';
+$total_sale = implode(",", $total_sale);
+$order_total = implode(",", $order_total);
+  //  var_dump($date_sale, $total_sale, $date_order, $order_total);
+   //var_dump($order_total); //ປະມວນ var_dump($date_sale) ກ່ອນເພື່ອເບິ່ງຂໍ້ມູນເປັນ string ຫຼື ບໍ່.
   ?>
     <div class="container">
         <div class="card mb-4" >
@@ -98,9 +129,8 @@ include('header.php')
                 <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບປະຈຳວັນ</h3>
             </div>
             <div class="card-body">
-                <canvas id="chartjs-line" ></canvas>
+                 <canvas id="chartjs"></canvas>
             </div>
-            
         </div>
         <div class="card">
             <div class="card-body">
@@ -159,24 +189,45 @@ include('header.php')
         </div>
     </div>
     <?php include('footer.php'); ?>
-    <script>
-new Chart(document.getElementById("chartjs-line"), {
+    
+</body>
+
+</html>
+
+
+
+<script>
+// chart colors
+var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d','#5BA3E6','#015DE5','#00bfff','rgba(11, 137, 240, 0.28)','rgba(23, 33, 41, 0.11)'];
+
+var date_sale = [<?php echo $date_sale; ?>];
+var total_sale = [<?php echo $total_sale; ?>];
+var order_total = [<?php echo $order_total; ?>];
+
+console.log("Dates:", date_sale);
+console.log("Sales (Status 4):", total_sale);
+console.log("Orders (Status 2):", order_total);
+
+new Chart(document.getElementById("chartjs"), {
   type: "line",
   data: {
-    labels: <?php echo $datesave;?>,
+    labels: date_sale,
     datasets: [{
-      label: "Sales ($)",
+      label: "ຍອດຂາຍ (KIP)",
       fill: true,
-      backgroundColor: "transparent",
-      borderColor: window.theme.primary,
-      data: <?php echo $total;?>
-    }, {
-      label: "Orders",
+      backgroundColor: "rgba(71, 167, 247, 0.41)",
+      backgroundColor: colors[9],
+      borderColor: "#007bff",
+      data:  total_sale
+    }, 
+    {
+      label: "ຍອດສັ່ງຊື້ (KIP)",
       fill: true,
-      backgroundColor: "transparent",
+      backgroundColor: "rgba(11, 53, 20, 0.41)",
+      backgroundColor: colors[3],
       borderColor: "#adb5bd",
       borderDash: [4, 4],
-      data: [958, 724, 629, 883, 915, 1214, 1476, 1212, 1554, 2128, 1466, 1827]
+      data: order_total
     }]
   },
   options: {
@@ -197,10 +248,9 @@ new Chart(document.getElementById("chartjs-line"), {
     }
   }
 });
+  /* chart.js chart examples */
+
+
+
+
 </script>
-</body>
-
-</html>
-
-
-
