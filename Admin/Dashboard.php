@@ -116,6 +116,7 @@ $row4 = mysqli_fetch_array($result4);
 								Area Chart Example
 							</div>
 							<div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+							
 						</div>
 					</div>
 					<div class="col-xl-6">
@@ -127,6 +128,7 @@ $row4 = mysqli_fetch_array($result4);
 							<div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
 						</div>
 					</div>
+					<?php include('report_p5.php')?>
 				</div>
 			</div>
 		</main>
@@ -147,7 +149,7 @@ $row4 = mysqli_fetch_array($result4);
 			// });
 		});
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"-->
 		crossorigin="anonymous"></script>
 	<script src="css_js/js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

@@ -52,9 +52,6 @@
 
 			font-size: 14px;
 		}
-body {
-  
-}
 	</style>
 
 

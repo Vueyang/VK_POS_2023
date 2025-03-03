@@ -68,7 +68,7 @@ include('connetdb.php')
 						$query = "
 						SELECT total, SUM(total) AS total, DATE_FORMAT(expen_date, '%Y') AS expen_year
 						FROM tb_expens1
-						GROUP BY DATE_FORMAT(expen_date, '%Y%')
+						GROUP BY DATE_FORMAT(expen_date, '%Y')
 						ORDER BY DATE_FORMAT(expen_date, '%Y') DESC
 						";
 						$result = mysqli_query($conn, $query);

@@ -22,8 +22,8 @@
 
 
 <script src="./assets/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="./sets/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap 4
+<script src="./sets/bootstrap.bundle.min.js"></script> -->
 
 <!-- Select2 -->
 <script src="./assets/select2.full.min.js"></script>

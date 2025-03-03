@@ -143,11 +143,10 @@ include('connetdb.php');
 						<h4 style=" margin: 10px;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍປະຈຳວັນ</h4>
 						</div>
 						<form method="GET" class="row mt-2">
-			
-						<div class="col-sm-12">
-						<input type="date" name="dt1" class="form-control" value="<?= isset($_GET['dt1']) ? $_GET['dt1'] : '' ?>" onchange="this.form.submit()">
-						</div>
-			</form>
+							<div class="col-sm-12">
+							<input type="date" name="dt1" class="form-control" value="<?= isset($_GET['dt1']) ? $_GET['dt1'] : '' ?>" onchange="this.form.submit()">
+							</div>
+						</form>
 					</div>
 					
 				</div>
