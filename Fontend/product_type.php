@@ -54,7 +54,7 @@
 						</div>
 						<div class="shop-body">
 							<h3><?=$row['type_name']?></h3>
-							<a href="Show_all_product.php?id<?=$row['type_id']?>" name="search_type"
+							<a href="Show_all_product.php?id=<?=$row['type_id']?>" name="search_type"
 								class="cta-btn">Shop
 								now
 								<i class="fa fa-arrow-circle-right"></i></a>

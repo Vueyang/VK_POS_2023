@@ -26,7 +26,36 @@ include('connetdb.php');
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
+<style type="text/css">
+	
 
+	@media print {
+		body {
+			background-color: #FFF;
+		}
+		
+		button {
+			visibility: hidden;
+		}
+		.H{
+			visibility: hidden;
+		}
+		.button_print{
+			visibility: hidden;
+		}
+		.card-footer{
+			visibility: hidden;
+		}
+		@page {
+			margin: 0;
+			padding: 0;
+		}
+
+		.cash {
+			display: none;
+		}
+	}
+</style>
 <body>
 
 	<!-- Main content -->
@@ -135,7 +164,7 @@ include('connetdb.php');
             ?>
            <div align="center" class="card-header">
 				<div class="row">
-					<div class="col-md-12" style="display:flex;" >
+					<div class="col-md-12 H" style="display:flex;" >
 						<a href="Report_Expens_admin.php?p=daily" class="btn btn-info" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ວັນ</a> 
 						<a href="report_monthly.php?p=monthy" class="btn btn-success" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ເດືອນ</a> 
 						<a href="report_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i>ປີ</a>
@@ -268,7 +297,7 @@ include('connetdb.php');
 
 							</tbody>
 						</table>
-						
+						<div class="con">
 						<div class="card-footer" align="end">
 								<div id="pagination_controls">
 
@@ -278,6 +307,7 @@ include('connetdb.php');
 							</div>
 
 					</div>
+					<br>
 					<div align="center" class="button_print my-12">
 					<a href="Record_Expens_daily.php?expen_date=<?= $dt1 ?>&act=view" target="_blank"
 															class="button_print btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ພີມອອກ</a>
@@ -285,7 +315,11 @@ include('connetdb.php');
 															<br>
 															</section>
 															</div>
+					</div>
+					
+					
 <?php include('footer.php'); ?>
+
 
 	<script>
 		$(function () {

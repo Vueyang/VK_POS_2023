@@ -89,7 +89,11 @@ if(!empty($daily)){
       if (!$result) {
         die("Query Failed: " . mysqli_error($conn));
       }
-      $paginationCtrls = '';
+      
+}
+
+
+$paginationCtrls = '';
       if($last !=1){
       if($pagenum > 1){
         $previonus = $pagenum - 1;
@@ -112,7 +116,6 @@ if(!empty($daily)){
         $paginationCtrls .= '&nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a>';
       }
     }
-}
    // ສ້າງ array ເກັບວັນທີ ແລະ ຍອດລວມ
 
    $date_list = [];
@@ -137,20 +140,8 @@ if(!empty($daily)){
       } 
     }
    }else{
-     while ($rs = mysqli_fetch_assoc($result_chart_date)) {
-       if ($rs) {
-           $date_list[] = $rs['order_date'];
-           if ($rs['order_status'] == 4) {
-               $data_sales[$rs['order_date']] += $rs['total_sum'];
-               $total_sell+= $rs['total_sum'];
-           } elseif ($rs['order_status'] == 2) {
-               $data_orders[$rs['order_date']] += $rs['total_sum'];
-               $total_order += $rs['total_sum'];
-           }
-       } else {
+     
          echo "ການສົ່ງຄຳສັ່ງຂໍ້ມູນລົ້ມເຫຼວ: " . mysqli_error($conn);
-       } 
-     }
    }
     //var_dump($total_sell, $total_order);
     //  echo "<pre>";

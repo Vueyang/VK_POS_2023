@@ -29,20 +29,59 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
-
+	<link href="fonts/fontawesome-webfont.ttf" rel="stylesheet">
+	<link href="/fonts/NotoSansLao-VariableFont_wdth,wght.ttf" rel="stylesheet">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Kanit:400" rel="stylesheet">
+
+<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../Admin/font/NotoSansLao-VariableFont_wdth,wght.ttf">
+<link rel="stylesheet" href="../Admin/font-awesome/fonts/fontawesome-webfont.eot">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
+<!-- ckeditor -->
+<script src="assets/ckeditor.js"></script>
+
+<style>
+	body {
+		
+		font-family: "Noto Sans Lao", sans-serif;
+		  font-optical-sizing: auto;
+		  font-weight: <weight>;
+		  font-style: normal;
+		  font-variation-settings:"wdth" 100;
+
+		font-size: 14px;
+	}
+</style>
+
 
 </head>
-<style>
-* {
+<!-- <style type="text/css">
+	*{
+			font-family: "Noto Sans Lao", sans-serif;
+  			font-optical-sizing: auto;
+  			font-weight: <weight>;
+  			font-style: normal;
+  			font-variation-settings:"wdth" 100;
+
+			font-size: 14px;
+		}
+</style> -->
+<!-- <style>
+*{
 	font-family: 'Noto Sans Lao', sans-serif;
 }
-</style>
+</style> -->
 
 <body>
 	<!-- HEADER -->
@@ -78,7 +117,7 @@
 									</div>
 									<div class="shop-body">
 										<h3><?=$row['type_name']?></h3>
-										<a href="Show_all_product.php?id<?=$row['type_id']?>" name="search_type"
+										<a href="Show_all_product.php?id=<?=$row['type_id']?>" name="search_type"
 											class="cta-btn">Shop
 											now
 											<i class="fa fa-arrow-circle-right"></i></a>
@@ -177,7 +216,7 @@
 												</div>
 												<div class="add-to-cart">
 													<button class="add-to-cart-btn"><a
-															href="product.php?id<?=$row['pro_id']?>">ເບີ່ງລາຍລະອຽດ</a><i
+															href="product.php?id=<?=$row['pro_id']?>">ເບີ່ງລາຍລະອຽດ</a><i
 															class="fa fa-shopping-cart"></i>
 													</button>
 												</div>

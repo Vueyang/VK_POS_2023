@@ -47,6 +47,15 @@
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 			   with font-awesome or any other icon font library -->
+			   <li class="nav-header">Home</li>
+				<li class="nav-item">
+					<a href="Home.php" class="nav-link <?php if ($menu == "Home") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-Home-alt"></i>
+						<p>Home</p>
+					</a>
+				</li>
 				<li class="nav-header">Dashboard</li>
 				<li class="nav-item">
 					<a href="Dashboard.php" class="nav-link <?php if ($menu == "Dashboard") {
@@ -245,7 +254,7 @@
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
-						<p>ລາຍງານລາຍຮັບ</p>
+						<p>ລາຍງານລາຍຈ່າຍ/ລາຍຮັບ</p>
 					</a>
 				</li>
 				<li class="nav-item">

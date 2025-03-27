@@ -1,3 +1,9 @@
+<?php 
+	error_reporting(error_reporting() & ~E_NOTICE);
+	session_start();
+	require('connetdb.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +29,18 @@
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 </head>
-
+<?php 
+	$type_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+	if($type_id == 0){
+		$type_id1 = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
+		if($type_id1 == 0 ){
+			die("ບໍ່ມີ type_id ທີ່ຖືກສົ່ງມາ");
+		}
+	}
+	$sql = "SELECT * FROM product_new JOIN type_product ON product_new.type_id = type_product.type_id
+			WHERE type_product.type_id = $type_id ORDER BY product_new.pro_id DESC";
+			$result = mysqli_query($conn, $sql);
+?>
 <body>
 	<div class="section">
 		<!-- container -->
@@ -33,7 +50,8 @@
 
 				<div class="col-md-12">
 					<div class="section-title text-center">
-						<h3 class="title">Related Products</h3>
+						<h3 class="title">ສີນຄ້າທີກ່ຽວຂ້ອງ</h3> 
+						<!-- Related Products -->
 					</div>
 				</div>
 

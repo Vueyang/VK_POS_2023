@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('connetdb.php');
+<?php 
+error_reporting(error_reporting() & ~E_NOTICE);
+session_start();
+include('connetdb.php');
 $menu = "index";
 ?>
 
@@ -31,17 +34,35 @@ $menu = "index";
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Kanit:400" rel="stylesheet">
+
+<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../Admin/font/NotoSansLao-VariableFont_wdth,wght.ttf">
+<link rel="stylesheet" href="../Admin/font-awesome/fonts/fontawesome-webfont.eot">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
+<!-- ckeditor -->
+<script src="assets/ckeditor.js"></script>
+
+<style>
+	body {
+		
+		font-family: "Noto Sans Lao", sans-serif;
+		  font-optical-sizing: auto;
+		  font-weight: <weight>;
+		  font-style: normal;
+		  font-variation-settings:"wdth" 100;
+
+		font-size: 14px;
+	}
+</style>
 </head>
-<?php
-include('connetdb.php');
-?>
+<!-- <?php
+// include('connetdb.php');
+?> -->
 
 <body>
 	<!-- NAVIGATION -->
@@ -54,10 +75,14 @@ include('connetdb.php');
 	</nav>
 	<!-- SECTION -->
 	<?php
-$pr_id = @$_GET['id'];
+	$pr_id = isset($_GET['id']) ? mysqli_real_escape_string($conn, $_GET['id']) : null;
+	// $type_id = @$_POST["id"];
+// $pr_id = mysqli_real_escape_string($conn, $_GET['id']);
+// echo($pr_id);
 $sql = "SELECT * FROM product_new, type_product WHERE product_new.type_id = type_product.type_id and product_new.pro_id ='$pr_id'";
 $request = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($request);
+// var_dump($pr_id);
 ?>
 	<div class="section">
 		<!-- container -->
@@ -71,17 +96,17 @@ $row = mysqli_fetch_array($request);
 							<img src="../Admin/image/<?=$row['image']?>" alt="">
 						</div>
 
-						<!--<div class="product-preview">
-							<img src="../Admin/image/<?=$row['image']?>" alt="">
-						</div>
-
 						<div class="product-preview">
 							<img src="../Admin/image/<?=$row['image']?>" alt="">
 						</div>
 
 						<div class="product-preview">
 							<img src="../Admin/image/<?=$row['image']?>" alt="">
-						</div>-->
+						</div>
+
+						<div class="product-preview">
+							<img src="../Admin/image/<?=$row['image']?>" alt="">
+						</div>
 					</div>
 				</div>
 				<!-- /Product main img -->
@@ -89,7 +114,7 @@ $row = mysqli_fetch_array($request);
 				<!-- Product thumb imgs -->
 				<div class="col-md-2  col-md-pull-5">
 					<div id="product-imgs">
-						<!--<div class="product-preview">
+						<div class="product-preview">
 							<img src="./img/product01.png" alt="">
 						</div>
 
@@ -103,7 +128,7 @@ $row = mysqli_fetch_array($request);
 
 						<div class="product-preview">
 							<img src="./img/product08.png" alt="">
-						</div>-->
+						</div>
 					</div>
 				</div>
 				<!-- /Product thumb imgs -->
@@ -133,13 +158,25 @@ $row = mysqli_fetch_array($request);
 							<label>
 								Size
 								<select class="input-select">
-									<option value="0">X</option>
+									<option value="0">S</option>
+									<option value="0">M</option>
+									<option value="0">N</option>
+									<option value="0">L</option>
+									<option value="0">ML</option>
+									<option value="0">XL</option>
 								</select>
 							</label>
 							<label>
 								Color
 								<select class="input-select">
-									<option value="0">Red</option>
+									<option value="0">ສີແດງ</option>
+									<option value="0">ສີດຳ</option>
+									<option value="0">ສີຂາວ</option>
+									<option value="0">ສີເຫຼືອງ</option>
+									<option value="0">ສີຟ້າ</option>
+									<option value="0">ສີຂຽວ</option>
+									<option value="0">ສີມ່ວງ</option>
+									<option value="0">ສີອອນ</option>
 								</select>
 							</label>
 						</div>
@@ -148,13 +185,55 @@ $row = mysqli_fetch_array($request);
 							<div class="qty-label">
 								Qty
 								<div class="input-number">
+									<input type="number" id="quantity" value="1" min="1" name="add_qty">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+							<?php if($row['amount'] > 0) {?>
+							<button class="add-to-cart-btn" >
+								<i class="fa fa-shopping-cart"></i>
+								<a href="product.php?id=<?=$row['pro_id'];?>&act=add">ເພີ່ມເຂົ້າໄປກະຕ່າ</a>
+							</button>
+							<?php } ?>
+						</div>
+
+
+						<!-- <div class="add-to-cart">
+							<div class="qty-label">
+								Qty
+								<div class="input-number">
+									<input type="number" id="quantity" value="1" min="1" name="add_qty">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+							<?php if ($row['amount'] > 0) { ?>
+								<a href="product.php?id=<?= $row['pro_id'] ?>&act=add&qty=1" class="add-to-cart-btn">
+									<i class="fa fa-shopping-cart"></i>
+									ເພີ່ມເຂົ້າໄປກະຕ່າ
+								</a>
+							<?php } else { ?>
+								<button class="add-to-cart-btn" disabled>
+									<i class="fa fa-shopping-cart"></i>
+									ສິນຄ້າຫມົດ
+								</button>
+							<?php } ?>
+						</div> -->
+						<!-- <div class="add-to-cart">
+							<div class="qty-label">
+								Qty
+								<div class="input-number">
 									<input type="number">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 							</div>
-							<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-						</div>
+							<button class="add-to-cart-btn">
+							<i class="fa fa-shopping-cart"></i>
+							<a href="add_to_cart.php?id=<?=$pr_id?>">ສັ່ງຊື້ເລີຍ</a>
+							</button>
+						</div> -->
 
 						<ul class="product-btns">
 							<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
@@ -163,7 +242,7 @@ $row = mysqli_fetch_array($request);
 
 						<ul class="product-links">
 							<li>Category:</li>
-							<li><a href="#">Headphones</a></li>
+							<li><a href="Show_all_product.php?id=<?=$row['type_id']?>"><?=$row['type_name']?></a></li>
 							<li><a href="#">Accessories</a></li>
 						</ul>
 
@@ -467,7 +546,57 @@ $row = mysqli_fetch_array($request);
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/main.js"></script>
+	<!-- <script>
+    // ຄົ້ນຫາ element ທີ່ຕ້ອງການ
+    const quantityInput = document.getElementById('quantity');
+    const qtyUp = document.querySelector('.qty-up');
+    const qtyDown = document.querySelector('.qty-down');
 
+    // ເພີ່ມຈຳນວນເມື່ອກົດປຸ່ມ (+)
+    qtyUp.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 0;
+    });
+
+    // ລົບຈຳນວນເມື່ອກົດປຸ່ມ (-)
+    qtyDown.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) { // ຮັບປະກັນວ່າຈຳນວນບໍ່ຕ່ຳກວ່າ 1
+            quantityInput.value = currentValue - 0;
+        }
+    });
+</script>	 -->
+<script>
+// Get elements
+const quantityInput = document.getElementById('quantity');
+const qtyUp = document.querySelector('.qty-up');
+const qtyDown = document.querySelector('.qty-down');
+
+// Increment quantity
+qtyUp.addEventListener('click', () => {
+    let currentValue = parseInt(quantityInput.value);
+    quantityInput.value = currentValue + 0;
+    updateAddToCartLink(currentValue + 0);
+});
+
+// Decrement quantity
+qtyDown.addEventListener('click', () => {
+    let currentValue = parseInt(quantityInput.value);
+    if (currentValue > 1) {
+        quantityInput.value = currentValue - 0;
+        updateAddToCartLink(currentValue - 0);
+    }
+});
+
+// Update the "Add to Cart" link with the new quantity
+function updateAddToCartLink(quantity) {
+    const addToCartBtn = document.querySelector('.add-to-cart-btn');
+    if (addToCartBtn) {
+        const productId = <?= $row['pro_id'] ?>;
+        addToCartBtn.href = `product.php?id=${productId}&act=add&qty=${quantity}`;
+    }
+}
+</script>
 </body>
 
 </html>

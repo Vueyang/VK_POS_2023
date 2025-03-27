@@ -1,3 +1,10 @@
+<?php
+	ob_start(); // Enable output buffering (optional)
+	session_start(); // Start the session
+	
+	// Your PHP code here
+	error_reporting(error_reporting() & ~E_NOTICE);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +29,33 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Kanit:400" rel="stylesheet">
+
+<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../Admin/font/NotoSansLao-VariableFont_wdth,wght.ttf">
+<link rel="stylesheet" href="../Admin/font-awesome/fonts/fontawesome-webfont.eot">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
+<!-- ckeditor -->
+<script src="assets/ckeditor.js"></script>
+
 	<style>
+		*{
+			font-family: "Noto Sans Lao", sans-serif;
+		}
+		body {
+		
+		font-family: "Noto Sans Lao", sans-serif;
+		  font-optical-sizing: auto;
+		  font-weight: <weight>;
+		  font-style: normal;
+		  font-variation-settings:"wdth" 100;
+
+		font-size: 14px;
+	}
 	.header_nav h3 {
 		top: 20%;
 		left: 40%;
@@ -60,13 +93,94 @@
 	}
 	</style>
 </head>
-<style>
-* {
-	font-family: 'Noto Sans Lao', sans-serif;
+
+<?php
+
+include('connetdb.php');
+// Database connection (assuming $conn is already defined)
+$p_id = mysqli_real_escape_string($conn, $_GET['id']);
+$actdd = mysqli_real_escape_string($conn, $_GET['add']);
+$act = mysqli_real_escape_string($conn, $_GET['act']);
+
+
+// if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
+//     $product_id = intval($_GET['id']); // Sanitize the product ID
+
+//     // Initialize the cart if it doesn't exist
+//     if (!isset($_SESSION['cart'])) {
+//         $_SESSION['cart'] = [];
+//     }
+
+//     // Add the product to the cart or increment its quantity
+//     // if (isset($_SESSION['cart'][$product_id])) {
+// 	// 	if($_SESSION['cart'] < 0){
+// 	// 		$_SESSION['cart'][$product_id]++;
+// 	// 	}else{
+// 	// 		$_SESSION['cart'][$product_id] = 1;
+// 	// 	}
+//     //     // $_SESSION['cart'][$product_id]++;
+//     // } else {
+//     //     $_SESSION['cart'][$product_id] = 1;
+//     // }
+// }
+
+
+// Sanitize input
+if (isset($_GET['pro_id'])) {
+    $product_id = mysqli_real_escape_string($conn, $_GET['pro_id']);
+} else {
+    $product_id = null;
 }
-</style>
-<?php 
-$url = $_SERVER['REQUEST_URI']?>
+
+// Handle actions (add, remove, update)
+if (isset($_GET['act'])) {
+    $act = mysqli_real_escape_string($conn, $_GET['act']);
+
+    if ($act == 'remove' && !empty($product_id)) {
+        // Remove product from cart
+        unset($_SESSION['cart'][$product_id]);
+		header('Location: Show_all_product.php?id=' . $product_id);
+    }
+}
+
+if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
+    $product_id = intval($_GET['id']); // Sanitize the product ID
+    $quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
+
+    // Initialize the cart if it doesn't exist
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+// echo($quantity);
+    // Add the product to the cart or update its quantity
+    if (isset($_SESSION['cart'][$product_id])) {
+        $_SESSION['cart'][$product_id] = $quantity;
+    } else {
+        $_SESSION['cart'][$product_id] += $quantity;
+    }
+
+    // Redirect back to the product page or cart page
+    header('Location: product.php?id=' . $product_id);
+     exit();
+}
+// if ($actdd == 'add' && !empty($p_id)) {
+//     if (isset($_SESSION['cart'][$p_id])) {
+//         $_SESSION['cart'][$p_id]++; // Increment quantity if product exists
+//     } else {
+//         $_SESSION['cart'][$p_id] = 1; // Initialize quantity to 1 if product doesn't exist
+//     }
+// }
+//  if ($act == 'remove' && !empty($product_id)) {
+//      unset($_SESSION['cart'][$product_id]); // Remove product from cart
+//  }
+// $add_qty = isset($_GET['add_qty']) ? mysqli_real_escape_string($conn, $_GET['add_qty']) : '';
+//  if ($act == 'update') {
+//     $amount_array = $_POST['amount'];
+//     foreach ($amount_array as $add_qty => $amount) {
+//         $_SESSION['cart'][$add_qty] = $amount; // Update product quantity
+//     }
+//  }
+?>
 
 <body>
 
@@ -125,51 +239,61 @@ $url = $_SERVER['REQUEST_URI']?>
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-							<!-- Cart -->
-							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-									<i class="fa fa-shopping-cart"></i>
-									<span>ກະຕ່າຂອງເຈົ້າ</span>
-									<div class="qty">3</div>
-								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price"><span class="qty">1x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name"><a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price"><span class="qty">3x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete"><i class="fa fa-close"></i></button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>ລວມຈຳນວນເງີນທີ່ສັ່ງຊື້ທາງໝົດ</small>
-										<h5>ຈຳນວນເງີນ: $3920.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">ເບີ່ງກະຕ່າຂອງເຈົ້າ</a>
-										<a href="#">ຊຳລະເງີນເງິນ <i class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
-							</div>
+						<!-- Cart Dropdown -->
+						<div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-shopping-cart"></i>
+        <span>ກະຕ່າຂອງເຈົ້າ</span>
+        <div class="qty"><?= array_sum($_SESSION['cart'] ?? []); ?></div> <!-- Display total items in cart -->
+    </a>
+    <div class="cart-dropdown">
+        <div class="cart-list">
+            <?php
+            $qtysum = 0; // Calculate total quantity
+            $total = 0;
+            if (!empty($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $product_id => $qty) {
+                    $sql = "SELECT * FROM product_new, type_product 
+                            WHERE product_new.type_id = type_product.type_id 
+                            AND product_new.pro_id = '$product_id'";
+                    $query = mysqli_query($conn, $sql);
+                    if ($query && mysqli_num_rows($query) > 0) {
+                        $row = mysqli_fetch_array($query);
+                        $sum = $row['price'] * $qty; // Calculate total price for this product
+                        $total += $sum; // Add to the overall total
+						$qtysum += $row['amount'];
+                        ?>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="../Admin/image/<?= $row['image'] ?>" alt="">
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name"><a href="#"><?= $row['pro_name'];?></a></h3>
+                                <h4 class="product-price"><span class="qty"><?= $qty ?>x</span><?= number_format($row['price'], 0) ?> LAK</h4>
+                            </div>
+                            <button class="delete">
+                                <a href='nav.php?pro_id=<?= $product_id ?>&act=remove'>
+                                    <i class="fa fa-close"></i>
+                                </a>
+                            </button>
+                        </div>
+                    <?php }
+                }
+            } else {
+                echo "<p>ກະຕ່າຂອງເຈົ້າຍັງວ່າງເປົ່າ</p>";
+            }
+            ?>
+        </div>
+        <div class="cart-summary">
+            <small>ລວມຈຳນວນເງີນທີ່ສັ່ງຊື້ທາງໝົດ</small>
+            <h5>ຈຳນວນເງີນ: LAK <?= number_format($total, 0) ?></h5> <!-- Display total price -->
+        </div>
+        <div class="cart-btns">
+            <a href="#">ເບີ່ງກະຕ່າຂອງເຈົ້າ</a>
+            <a href="#">ຊຳລະເງີນເງິນ <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
 							<!-- /Cart -->
 
 							<!-- Menu Tootle -->

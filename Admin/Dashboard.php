@@ -128,7 +128,6 @@ $row4 = mysqli_fetch_array($result4);
 							<div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
 						</div>
 					</div>
-					<?php include('report_p5.php')?>
 				</div>
 			</div>
 		</main>

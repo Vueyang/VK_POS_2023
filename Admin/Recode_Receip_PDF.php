@@ -4,7 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
-ob_start();
+
 $mem_id = $_SESSION['mem_id'];
 $menu = "Report_Receip";
 include('connetdb.php');
@@ -27,7 +27,8 @@ include('connetdb.php');
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+  <!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css"> -->
 	<script src="js/jquery.js" type="text/javascript"></script>
 	<link href="/font/NotoSansLao-VariableFont_wdth,wght.ttf" rel="stylesheet">
 
@@ -36,7 +37,7 @@ include('connetdb.php');
  <!-- <script src="css_js/js/exporting.js"></script> -->
 <script src="css_js/js/export-data.js"></script>
 <script src="css_js/js/accessibility.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/boostarp.css">
 </head> 
 <style type="text/css">
 	*{
@@ -85,6 +86,19 @@ include('connetdb.php');
 		border-left: 1px solid #333;
         text-align:center;
 	}
+  .button_print{
+		text-align: center;
+		height:0px;
+		margin-top:0px;
+		
+	}
+	
+	.button_print_1{
+		margin-top:0px;
+		cursor: pointer;
+	}
+	.button_print_1:hover {
+}
 
 	@media print {
 		body {
@@ -212,44 +226,41 @@ $order_total = implode(",", $order_total);
   ?>
     
         
-        <div class="container" ><br>
-		<table cellpadding="0" cellspacing="0" align="center" width="1000">
-			<tr>
-				<td align="center" style="font-size: 16px;">ສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ</td>
-			</tr>
-			<tr>
-				<td align="center" style="font-size: 16px;">ສັນຕິພາບ ເອກະລາດ ປະຊາທິປະໄຕ ເອກະພາບ ວັດທະນະຖາວອນ</td>
-			</tr>
-		</table>
-		<table cellpadding="0" cellspacing="0" align="center" width="1000">
-			<tr>
-				<td style="font-size: 16px;">ຮ້ານ VK_POS</td>
-				<td align="right"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 14px;">ຕັ້ງຢູ່ສາມແຍກຕະຫຼາດເກົ່າເມືອງລ້ອງຊານ ບ້ານ ຄອນວັດ, ເມືອງ ລ້ອງຊານ, ແຂວງ ໄຊສົມບູນ</td>
-				<td align="right"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 12px;">ໂທ: 020 78665114, 020 78779149</td>
-				<td align="right"></td>
-			</tr>
-		</table>
-			<table cellpadding="0" cellspacing="0" align="center" width="100%">
-				<tr>
-					<td align="center" style="font-size: 20px; color:#06D001;"> <?php echo $text?></td>
-				</tr>
-				<tr>
-					<td align="center" style="font-size: 16px;">ຜູ້ທຳລາຍການ: <?php echo "<lable style='color:#FF5580'>". $_SESSION['mem_username'] . "</lable>"; ?></td>
-				</tr>
-        
-			</table>
-      <?php
-      $ch = ''
-      ?>
-      <figure class="highcharts-figure">
-                <div id="Highcharts"></div>
-                </figure>
+    <div class="container" ><br>
+      <table cellpadding="0" cellspacing="0" align="center" width="1000">
+        <tr>
+          <td align="center" style="font-size: 16px;">ສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ</td>
+        </tr>
+        <tr>
+          <td align="center" style="font-size: 16px;">ສັນຕິພາບ ເອກະລາດ ປະຊາທິປະໄຕ ເອກະພາບ ວັດທະນະຖາວອນ</td>
+        </tr>
+      </table>
+      <table cellpadding="0" cellspacing="0" align="center" width="1000">
+        <tr>
+          <td style="font-size: 16px;">ຮ້ານ VK_POS</td>
+          <td align="right"></td>
+        </tr>
+        <tr>
+          <td style="font-size: 14px;">ຕັ້ງຢູ່ສາມແຍກຕະຫຼາດເກົ່າເມືອງລ້ອງຊານ ບ້ານ ຄອນວັດ, ເມືອງ ລ້ອງຊານ, ແຂວງ ໄຊສົມບູນ</td>
+          <td align="right"></td>
+        </tr>
+        <tr>
+          <td style="font-size: 12px;">ໂທ: 020 78665114, 020 78779149</td>
+          <td align="right"></td>
+        </tr>
+      </table>
+        <table cellpadding="0" cellspacing="0" align="center" width="100%">
+          <tr>
+            <td align="center" style="font-size: 20px; color:#06D001;"> <?php echo $text?></td>
+          </tr>
+          <tr>
+            <td align="center" style="font-size: 16px;">ຜູ້ທຳລາຍການ: <?php echo "<lable style='color:#FF5580'>". $_SESSION['mem_username'] . "</lable>"; ?></td>
+          </tr>
+          
+        </table>
+        <figure class="highcharts-figure mt-2">
+            <div id="Highcharts"></div>
+        </figure>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -296,15 +307,16 @@ $order_total = implode(",", $order_total);
                       
                       ?>
                     </tbody>
+                   
                 </table>
-                
-                
-        
-       
+                <div class="button_print my-12">
+                  <a href="report_pdf/Recode_receive_detail.pdf"><button class="btn btn-primary my-12 button_print_1">ລາຍງານເປັນ PDF</button> </a>
+              </div>
+        <br>
                     </div>
                     
         
-
+<br>
         <script>
 Highcharts.chart('Highcharts', {
     chart: {
@@ -361,30 +373,15 @@ $mpdf = new mPDF();
 
 $html = ob_get_contents();
 $mpdf->WriteHTML($html);
-$mpdf->Output('report_pdf/Recode_receive_detail.pdf', 'F');
+$mpdf->Output('report_pdf/Recode_receive_detail.pdf', 'D');
 ob_end_flush();
 
 ?>
-<div class="button_print my-12">
-	        <a href="report_pdf/Recode_receive_detail.pdf"><button class="btn btn-primary my-12 button_print_1">ລາຍງານເປັນ PDF</button> </a>
-        </div>
-        <br>
+
 
 
 
 
 <style>
-	.button_print{
-		text-align: center;
-		height:0px;
-		margin-top:0px;
-		
-	}
 	
-	.button_print_1{
-		margin-top:0px;
-		cursor: pointer;
-	}
-	.button_print_1:hover {
-}
 </style>

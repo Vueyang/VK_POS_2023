@@ -33,7 +33,7 @@ $menu = "list_sale";
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 
-
+	<link href="/font/NotoSansLao-VariableFont_wdth,wght.ttf" rel="stylesheet">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -41,86 +41,110 @@ $menu = "list_sale";
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-</head>
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Kanit:400" rel="stylesheet">
+
+<link href="assets/tagsinput.css?v=11" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../Admin/font/NotoSansLao-VariableFont_wdth,wght.ttf">
+<link rel="stylesheet" href="../Admin/font-awesome/fonts/fontawesome-webfont.eot">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
+<!-- ckeditor -->
+<script src="assets/ckeditor.js"></script>
+
+<style>
+	body {
+		
+		font-family: "Noto Sans Lao", sans-serif;
+		  font-optical-sizing: auto;
+		  font-weight: <weight>;
+		  font-style: normal;
+		  font-variation-settings:"wdth" 100;
+
+		font-size: 14px;
+	}
+</style>
+
+</head>
 <body>
 	<!-- HEADER -->
 	<!-- container -->
 	<!-- NAV -->
-	<?php
-		$type_id = @$_POST["id"];
-		$sql = "SELECT * FROM product_new, type_product WHERE product_new.type_id = type_product.type_id ORDER BY pro_id";
-		$result = mysqli_query($conn, $sql);
-		?>
-
 	<?php 
 
-$query=mysqli_query($conn,"SELECT COUNT(pro_id) FROM `product_new`");
+// ຮັບຄ່າ type_id ຈາກ URL
+$type_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+ if ($type_id == 0) {
+	// ກວດສອບວ່າ type_id ມີຢູ່ໃນຖານຂໍ້ມູນ
+	$type_id1 = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
+	if ($type_id1 == 0) {
+		die("ບໍ່ມີ type_id ທີ່ຖືກສົ່ງມາ.");
+	}
+ }
 
+// ນັບຈຳນວນແຖວທັງໝົດ
+$query = mysqli_query($conn, "SELECT COUNT(product_new.pro_id) FROM product_new 
+                              JOIN type_product ON product_new.type_id = type_product.type_id 
+                              WHERE type_product.type_id = $type_id");
 $row = mysqli_fetch_row($query);
-
 $rows = $row[0];
-$page_rows = 6;  //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
-$last = ceil($rows/$page_rows);
-if($last < 1){
-$last = 1;
+
+// ກຳນົດການແບ່ງຫນ້າ
+$page_rows = 10;
+$last = ceil($rows / $page_rows);
+if ($last < 1) {
+    $last = 1;
 }
-$pagenum = 1;
-if(isset($_GET['pn'])){
-$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-}
+
+$pagenum = isset($_GET['pn']) ? intval($_GET['pn']) : 1;
 if ($pagenum < 1) {
-$pagenum = 1;
+    $pagenum = 1;
+} else if ($pagenum > $last) {
+    $pagenum = $last;
 }
-else if ($pagenum > $last) {
-$pagenum = $last;
-}
-$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-$nquery=mysqli_query($conn,"SELECT * from  product_new ORDER BY pro_id DESC $limit");
 
+$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+
+// ດຶງຂໍ້ມູນປະເພດສິນຄ້າ
+$sql = "SELECT * FROM product_new 
+        JOIN type_product ON product_new.type_id = type_product.type_id 
+        WHERE type_product.type_id = $type_id 
+        ORDER BY product_new.pro_id DESC 
+        $limit";
+$result = mysqli_query($conn, $sql);
+
+// ສ້າງປຸ່ມແບ່ງຫນ້າ
 $paginationCtrls = '';
-if($last != 1){
-if ($pagenum > 1) {
-$previous = $pagenum - 1;
-$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-info">Previous</a> &nbsp; ';
+if ($last != 1) {
+    if ($pagenum > 1) {
+        $previous = $pagenum - 1;
+        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$previous.'" class="btn btn-info">Previous</a> &nbsp; ';
+    }
 
+    for ($i = $pagenum - 4; $i < $pagenum; $i++) {
+        if ($i > 0) {
+            $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
+        }
+    }
 
-for($i = $pagenum-4; $i < $pagenum; $i++){
-if($i > 0){
-$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
-}
-}
-}
+    $paginationCtrls .= '<a href="" class="btn btn-danger">'.$pagenum.'</a> &nbsp; ';
 
+    for ($i = $pagenum + 1; $i <= $last; $i++) {
+        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
+        if ($i >= $pagenum + 4) {
+            break;
+        }
+    }
 
-//$paginationCtrls .= ''.$pagenum.' &nbsp; ';
-
-
-$paginationCtrls .= '<a href=""class="btn btn-danger">'.$pagenum.'</a> &nbsp; ';
-
-
-
-
-for($i = $pagenum+1; $i <= $last; $i++){
-$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
-if($i >= $pagenum+4){
-break;
-}
+    if ($pagenum != $last) {
+        $next = $pagenum + 1;
+        $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$next.'" class="btn btn-info">Next</a> ';
+    }
 }
 
-
-if ($pagenum != $last) {
-$next = $pagenum + 1;
-
-
-$paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-info">Next</a> ';
-}
-}
 ?>
-
-
-
-
 
 	<head>
 		<?php include('nav.php')?>
@@ -138,62 +162,23 @@ $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" clas
 					<div class="aside">
 						<h3 class="aside-title">Categories</h3>
 						<div class="checkbox-filter">
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-1">
-								<label for="category-1">
-									<span></span>
-									Laptops
-									<small>(120)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-2">
-								<label for="category-2">
-									<span></span>
-									Smartphones
-									<small>(740)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-3">
-								<label for="category-3">
-									<span></span>
-									Cameras
-									<small>(1450)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-4">
-								<label for="category-4">
-									<span></span>
-									Accessories
-									<small>(578)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-5">
-								<label for="category-5">
-									<span></span>
-									Laptops
-									<small>(120)</small>
-								</label>
-							</div>
-
-							<div class="input-checkbox">
-								<input type="checkbox" id="category-6">
-								<label for="category-6">
-									<span></span>
-									Smartphones
-									<small>(740)</small>
-								</label>
-							</div>
+						<?php 
+		$rqcategory = "SELECT * FROM type_product ORDER BY type_id";
+		$resultcategory = mysqli_query($conn, $rqcategory);
+							//  var_dump($resultcategory);
+							while($rowcategory=mysqli_fetch_array($resultcategory)){ 
+							echo "<div class='input-checkbox'>";
+							echo "<input type='checkbox' id='category-1'>";
+							echo "<label for='category-1'>";
+							echo "<span></span>";
+							echo $rowcategory['type_name'];
+									// echo "<small>(120)</small>";
+							echo "</label>";
+							echo "</div>";
+						 } ?>
 						</div>
 					</div>
+						
 					<!-- /aside Widget -->
 
 					<!-- aside Widget -->
@@ -341,11 +326,11 @@ $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" clas
 					<!-- /store top filter -->
 
 					<!-- store products -->
-					<?php if ($row >0) {?>
+					<!-- <?php if ($row >0) {?> -->
 					<div class="row">
 						<?php
+
 					while($row=mysqli_fetch_array($result)){
-							//$formattedNum = number_format($row['price'],0,",",".");
 					?>
 						<!-- product -->
 						<div class="col-sm-4 col-xs-6">
@@ -381,7 +366,7 @@ $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" clas
 								</div>
 								<div class="add-to-cart">
 									<button class="add-to-cart-btn"><a
-											href="product.php?id<?=$row['pro_id']?>">ເບີ່ງລາຍລະອຽດ</a><i
+											href="product.php?id=<?=$row['pro_id']?>">ເບີ່ງລາຍລະອຽດ</a><i
 											class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
@@ -407,7 +392,9 @@ $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" clas
 						<center>
 							<div id="pagination_controls">
 
-								<?php echo $paginationCtrls; ?>
+								<?php echo $paginationCtrls; 
+								mysqli_close($conn);
+								?>
 
 							</div>
 						</center>
