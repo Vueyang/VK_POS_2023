@@ -1,24 +1,7 @@
 <?php
-// require_once('TCPDF/tcpdf.php');
-
-// // สร้างเอกสาร PDF
-// $pdf = new TCPDF();
-// $pdf->AddPage();
-
-// // เพิ่มชื่อหัวข้อ
-// $pdf->SetFont('helvetica', 'B', 16);
-// $pdf->Cell(0, 10, 'รายงานสรุปยอดขาย', 0, 1, 'C');
-
-// // ใส่ภาพกราฟที่สร้างไว้ (ควรสร้างภาพกราฟไว้ล่วงหน้า)
-// $graphImage = 'chart.png'; // เปลี่ยนเป็นพาธที่ถูกต้อง
-// $pdf->Image($graphImage, 30, 50, 150, 0, 'PNG');
-
-// // บันทึกไฟล์ PDF
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-$mpdf = new \Mpdf\Mpdf(['default_font_size' => 9,
-'default_font' => 'dejavusans']);
+
 error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
 ob_start();
@@ -36,10 +19,10 @@ include('connetdb.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Preview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="css_js/js/chart_line.js"></script>
+    <!-- <script type="text/javascript" src="css_js/js/chart_line.js"></script>
     <link href="css_js/css/styles.css" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/adminlte.min.css">
-	<link rel="stylesheet" href="assets/adminlte.min.css">
+	<link rel="stylesheet" href="assets/adminlte.min.css"> -->
   <link rel="stylesheet" href="css_js/css/chart.css"></link>
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@100..900&display=swap" rel="stylesheet">
@@ -67,24 +50,60 @@ include('connetdb.php');
 		}
 	body {
 		background-color: #CCC;
-		width: 100%;
-		height: 100%;
+		/* width: 100%;
+		height: 100%; */
 		padding: 0;
 		margin: 0;
-    font-family: "Noto Sans Lao", sans-serif;
-  			font-optical-sizing: auto;
-  			font-weight: <weight>;
-  			font-style: normal;
-  			font-variation-settings:"wdth" 100;
-
-			font-size: 14px;
 	}
 
 	div {
+		margin-top: 10px;
 		background-color: #FFF;
+		/* padding: 50px; */
+		/* width: 1000px;
+		height: 90vh; */
+		display: block;
+		margin: auto;
 	}
 
-	
+	button {
+		font-family: "noto Sans Lao";
+	}
+
+	.tb_detail {
+		border-top: 1px solid #333;
+		border-right: 1px solid #333;
+	}
+
+	.tb_detail th {
+		border-bottom: 1px solid #333;
+		border-left: 1px solid #333;
+	}
+
+	.tb_detail td {
+		border-bottom: 1px solid #333;
+		border-left: 1px solid #333;
+        text-align:center;
+	}
+
+	@media print {
+		body {
+			background-color: #FFF;
+		}
+
+		button {
+			visibility: hidden;
+		}
+
+		@page {
+			margin: 20px;
+			padding: 20px;
+		}
+
+		.cash {
+			display: none;
+		}
+	}
 </style>
 
 <body>
@@ -223,8 +242,12 @@ $order_total = implode(",", $order_total);
 				<tr>
 					<td align="center" style="font-size: 16px;">ຜູ້ທຳລາຍການ: <?php echo "<lable style='color:#FF5580'>". $_SESSION['mem_username'] . "</lable>"; ?></td>
 				</tr>
+        
 			</table>
-              <figure class="highcharts-figure">
+      <?php
+      $ch = ''
+      ?>
+      <figure class="highcharts-figure">
                 <div id="Highcharts"></div>
                 </figure>
                 <table class="table table-bordered">
@@ -279,15 +302,7 @@ $order_total = implode(",", $order_total);
         
        
                     </div>
-                    <?php
-// $pdf->Output('report.pdf', 'I');
-$html = ob_get_contents();
-
-$mpdf->WriteHTML($html);
-$mpdf->Output('report_pdf/Recode_receive_detail.pdf');
-ob_end_flush();
-
-?>
+                    
         
 
         <script>
@@ -339,6 +354,17 @@ Highcharts.chart('Highcharts', {
 
 </body>
 </html>
+
+<?php
+// $pdf->Output('report.pdf', 'I');
+$mpdf = new mPDF();
+
+$html = ob_get_contents();
+$mpdf->WriteHTML($html);
+$mpdf->Output('report_pdf/Recode_receive_detail.pdf', 'F');
+ob_end_flush();
+
+?>
 <div class="button_print my-12">
 	        <a href="report_pdf/Recode_receive_detail.pdf"><button class="btn btn-primary my-12 button_print_1">ລາຍງານເປັນ PDF</button> </a>
         </div>
