@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2024 at 07:47 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 7.4.30
+-- Generation Time: Mar 29, 2025 at 12:15 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,21 +86,50 @@ CREATE TABLE `product_new` (
 --
 
 INSERT INTO `product_new` (`pro_id`, `pro_name`, `type_id`, `price`, `amount`, `detail`, `image`, `inser_date`) VALUES
-(000001, 'Canon', 000004, 8500000.00, 50, 'dkjfiogkdfsgdf\r\ngsfdgfdsg\r\nsdgdsfget', 'pro_6484917b131a1.jpg', '2023-07-23 14:15:41'),
-(000003, 'Iphone 12', 000005, 15000000.00, 49, 'hhhhhhhhhhhhhhhh\r\nlkkkkkkkkk\r\nuuuuuuuuuuuu', 'pro_648491bac0509.jpg', '2023-07-18 15:07:47'),
-(000005, 'mouse', 000001, 150000.00, 51, 'khhhhhhhhhhhkdfgh\r\ngtgorektphdhglfdhd\r\nerhtgdfhet\r\ngdhtehdf\r\nsgdgtrehrtdy\r\ndgfgtreyhjwregs\r\negteryhetr', 'pro_6484920937ef2.jpg', '2023-08-05 15:58:12'),
+(000001, 'Canon', 000004, 8500000.00, 49, 'dkjfiogkdfsgdf\r\ngsfdgfdsg\r\nsdgdsfget', 'pro_6484917b131a1.jpg', '2023-07-23 14:15:41'),
+(000003, 'Iphone 12', 000005, 15000000.00, 17, 'hhhhhhhhhhhhhhhh\r\nlkkkkkkkkk\r\nuuuuuuuuuuuu', 'pro_648491bac0509.jpg', '2023-07-18 15:07:47'),
+(000005, 'mouse', 000001, 150000.00, 31, 'khhhhhhhhhhhkdfgh\r\ngtgorektphdhglfdhd\r\nerhtgdfhet\r\ngdhtehdf\r\nsgdgtrehrtdy\r\ndgfgtreyhjwregs\r\negteryhetr', 'pro_6484920937ef2.jpg', '2023-08-05 15:58:12'),
 (000007, 'keybroad', 000002, 180000.00, 5, 'frrghgdfdgsdfg\r\nsfgsdgtr\r\nfsdfdsg\r\nasdfrtgse\r\nfsdfwrtr\r\ngsdfg', 'pro_6484931234dde.jpg', '2023-07-23 13:22:50'),
-(000008, 'lanovo', 000007, 5400000.00, 48, '', 'pro_6484934787797.jpg', '2023-07-24 14:43:25'),
-(000009, 'Iphone 13', 000005, 15000000.00, 1, '', 'pro_64856ba6635ad.jpg', '2023-08-01 14:59:52'),
-(000010, 'Canon', 000004, 5000000.00, 26, '', 'pro_64856db86802d.jpg', '2023-08-01 14:57:44'),
+(000008, 'lanovo', 000007, 5400000.00, 44, '', 'pro_6484934787797.jpg', '2023-07-24 14:43:25'),
+(000009, 'Iphone 13', 000005, 15000000.00, 0, '', 'pro_64856ba6635ad.jpg', '2023-08-01 14:59:52'),
+(000010, 'Canon', 000004, 5000000.00, 23, '', 'pro_64856db86802d.jpg', '2023-08-01 14:57:44'),
 (000011, 'dell', 000007, 5400000.00, 48, 'dell core i7', 'pro_6491ab30dc7fe.jpg', '2023-07-20 15:17:25'),
-(000012, 'LED', 000003, 2000000.00, 34, 'tieojfsdgiuregmls\r\n', 'pro_6499b3983cffa.jpg', '2023-07-20 14:35:28'),
-(000013, 'Aser', 000007, 5000000.00, 46, 'test meiaafkfdgilksjgdssgsdgsdf', 'pro_649fe87e308ec.jpg', '2023-08-07 14:36:44'),
-(000014, 'Asu', 000007, 6000000.00, 27, 'iytryiyoirjhkdjhtiod', 'pro_649fe8afdd14e.jpg', '2023-07-17 13:11:52'),
-(000016, 'laptops', 000007, 8000000.00, 13, 'jlhkopkpfgplhryt', 'pro_649fe94e88a1b.jpg', '2023-07-24 14:39:43'),
-(000017, 'lenovo', 000007, 5000000.00, 20, 'toioodugopguigsfgls', 'pro_649fecfcd538b.jpg', '2023-08-05 16:27:30'),
-(000018, 'dell 1', 000007, 5800000.00, 47, 'gfhfgjfgdgdfgjfjuty', 'pro_649fed487d4ab.jpg', '2023-08-05 16:29:13'),
+(000012, 'LED', 000003, 2000000.00, 6, 'tieojfsdgiuregmls\r\n', 'pro_6499b3983cffa.jpg', '2023-07-20 14:35:28'),
+(000013, 'Aser', 000007, 5000000.00, 42, 'test meiaafkfdgilksjgdssgsdgsdf', 'pro_649fe87e308ec.jpg', '2023-08-07 14:36:44'),
+(000014, 'Asu', 000007, 6000000.00, 22, 'iytryiyoirjhkdjhtiod', 'pro_649fe8afdd14e.jpg', '2023-07-17 13:11:52'),
+(000016, 'laptops', 000007, 8000000.00, 10, 'jlhkopkpfgplhryt', 'pro_649fe94e88a1b.jpg', '2023-07-24 14:39:43'),
+(000017, 'lenovo', 000007, 5000000.00, 16, 'toioodugopguigsfgls', 'pro_649fecfcd538b.jpg', '2023-08-05 16:27:30'),
+(000018, 'dell 1', 000007, 5800000.00, 42, 'gfhfgjfgdgdfgjfjuty', 'pro_649fed487d4ab.jpg', '2023-08-05 16:29:13'),
 (000019, 'dell 2', 000007, 5000000.00, 32, 'trefsfdfhdgfgdfgdgdg', 'pro_649fed7d080ee.jpg', '2023-08-06 03:09:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_color`
+--
+
+CREATE TABLE `tbl_color` (
+  `color_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `color_name` varchar(200) NOT NULL,
+  `cus_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `pro_id` int(6) UNSIGNED ZEROFILL NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_color`
+--
+
+INSERT INTO `tbl_color` (`color_id`, `color_name`, `cus_id`, `pro_id`) VALUES
+(000001, 'ແດງ', 000000, 000000),
+(000002, 'ຟ້າ', 000000, 000000),
+(000003, 'ດຳ', 000000, 000000),
+(000004, 'ນໍ້າເງີນ', 000000, 000000),
+(000005, 'ເທົາ', 000000, 000000),
+(000006, 'ອອນ', 000000, 000000),
+(000007, 'ຂຽວ', 000000, 000000),
+(000008, 'ເຫຼືອງ', 000000, 000000),
+(000009, 'ຂາວ', 000000, 000000),
+(000010, 'ມ່ວງ', 000000, 000000);
 
 -- --------------------------------------------------------
 
@@ -117,6 +146,8 @@ CREATE TABLE `tbl_customer` (
   `cus_village` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ບ້ານ',
   `cus_district` int(100) NOT NULL COMMENT 'ເມືອງ',
   `cus_provice` int(100) NOT NULL COMMENT 'ແຂວງ',
+  `color` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ສີ',
+  `size` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ເບີ',
   `login_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -155,6 +186,17 @@ INSERT INTO `tbl_employee` (`en_id`, `gender`, `en_name`, `en_lastname`, `date_o
 (000008, '1', 'ມະນີວັນ', 'ວີໄລ', '1999-02-12', '2078665218', 'ttttt@gmail.com', 'test111', 'test222', 'test333', 'ພະນັກງານຢືນຢັນ', 'ພະນັກງານຢືນຢັນ', '115639083020240507_110806.jfif', '2024-05-07 11:08:06'),
 (000009, '0', 'ຄຳດີ', 'ຄຳພົງ', '1998-02-06', '2078665217', 'ttttt2023@gmail.com', 'test1111', 'test2222', 'test3333', 'ພະນັກງານສາງ', 'ພະນັກງານສາງ', '172259723320240507_110931.jfif', '2024-05-07 11:09:31'),
 (000010, '0', 'laiblau', 'yang', '1996-09-06', '2078665216', 'ttttt2021@gmail.com', 'test11111', 'test22222', 'test33333', 'ພະນັກງານຈັດຊື້', 'ພະນັກງານຈັດຊື້', '90341420120240507_111127.jfif', '2024-05-07 11:11:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_images`
+--
+
+CREATE TABLE `tbl_images` (
+  `img_id` int(6) NOT NULL,
+  `img_name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -227,7 +269,16 @@ INSERT INTO `tbl_order_detail` (`d_id`, `order_id`, `pro_id`, `p_c_qty`, `total_
 (000003, 000001, 000016, 11, 8000000, 88000000),
 (000004, 000001, 000019, 10, 5000000, 50000000),
 (000005, 000002, 000010, 10, 5000000, 50000000),
-(000006, 000002, 000012, 15, 2000000, 30000000);
+(000006, 000002, 000012, 15, 2000000, 30000000),
+(000007, 000003, 000017, 2, 5000000, 10000000),
+(000008, 000004, 000017, 2, 5000000, 10000000),
+(000009, 000009, 000018, 5, 5800000, 29000000),
+(000010, 000010, 000013, 4, 5000000, 20000000),
+(000011, 000010, 000014, 4, 6000000, 24000000),
+(000012, 000010, 000016, 3, 8000000, 24000000),
+(000013, 000010, 000010, 3, 5000000, 15000000),
+(000014, 000010, 000008, 4, 5400000, 21600000),
+(000015, 000011, 000014, 1, 6000000, 6000000);
 
 -- --------------------------------------------------------
 
@@ -253,7 +304,40 @@ CREATE TABLE `tbl_order_receive` (
 
 INSERT INTO `tbl_order_receive` (`order_id`, `mem_id`, `receive_name`, `order_status`, `b_name`, `pay_amount`, `pay_amount2`, `order_date`, `Month`) VALUES
 (000001, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 100000000.00, 100000000.00, '2024-06-27 23:22:19', 'June'),
-(000002, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 80000000.00, 80000000.00, '2024-06-28 08:58:09', 'June');
+(000002, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 80000000.00, 80000000.00, '2024-06-28 08:58:09', 'June'),
+(000003, 000001, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 10000000.00, 10000000.00, '2025-01-29 08:07:12', 'January'),
+(000004, 000001, 'ລູກຄ້າສັງຊື້', 2, 'ຊຳລະອອນລາຍ', 10000000.00, 10000000.00, '2025-02-11 16:14:28', 'February'),
+(000011, 000001, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 6000000.00, 6000000.00, '2025-03-12 09:50:41', 'March'),
+(000006, 000030, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 11000000.00, 11000000.00, '2025-02-18 10:46:31', ''),
+(000007, 000030, 'ລູກຄ້າສັງຊື້', 2, 'ຊຳລະອອນລາຍ', 50000000.00, 50000000.00, '2025-02-18 10:43:22', ''),
+(000009, 000001, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 29000000.00, 29000000.00, '2025-02-24 10:23:41', 'February'),
+(000010, 000001, 'ລູກຄ້າໜ້າຮ້ານ', 4, 'ຊຳລະໜ້າຮ້ານ', 100000000.00, 100000000.00, '2025-02-24 10:25:57', 'February');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_size`
+--
+
+CREATE TABLE `tbl_size` (
+  `size_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `size_name` varchar(200) NOT NULL,
+  `cus_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  `pro_id` int(6) UNSIGNED ZEROFILL NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_size`
+--
+
+INSERT INTO `tbl_size` (`size_id`, `size_name`, `cus_id`, `pro_id`) VALUES
+(000001, 'XS', 000000, 000000),
+(000002, 'SS', 000000, 000000),
+(000003, 'S', 000000, 000000),
+(000004, 'M', 000000, 000000),
+(000005, 'L', 000000, 000000),
+(000007, 'XL', 000000, 000000),
+(000008, 'XXL', 000000, 000000);
 
 -- --------------------------------------------------------
 
@@ -287,7 +371,6 @@ CREATE TABLE `tb_expens1` (
   `prices` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `mem_id` int(6) UNSIGNED ZEROFILL NOT NULL,
-  `monthdate` datetime NOT NULL DEFAULT current_timestamp(),
   `expen_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -295,11 +378,15 @@ CREATE TABLE `tb_expens1` (
 -- Dumping data for table `tb_expens1`
 --
 
-INSERT INTO `tb_expens1` (`expen_id`, `content`, `amount`, `prices`, `total`, `mem_id`, `monthdate`, `expen_date`) VALUES
-(000000, 'mouse', 12, 250000, 3000000, 000001, '0000-00-00 00:00:00', '2024-09-15 13:11:54'),
-(000001, 'computer', 10, 5500000, 55000000, 000001, '0000-00-00 00:00:00', '2024-09-15 13:10:11'),
-(000002, ' ເຈ້ຍ', 10, 150000, 1500000, 000001, '2024-08-01 08:01:09', '2024-08-01 15:01:09'),
-(000003, 'ບີກ', 10, 100000, 1000000, 000001, '2024-07-02 08:01:09', '2024-07-02 15:01:09');
+INSERT INTO `tb_expens1` (`expen_id`, `content`, `amount`, `prices`, `total`, `mem_id`, `expen_date`) VALUES
+(000001, 'computer', 10, 5500000, 55000000, 000001, '2024-09-15 13:10:11'),
+(000002, ' ເຈ້ຍ', 10, 150000, 1500000, 000001, '2024-08-01 15:01:09'),
+(000003, 'ບີກ', 10, 100000, 1000000, 000001, '2024-07-02 15:01:09'),
+(000005, 'ນໍ້າດື່ມ', 100, 10000, 1000000, 000001, '2025-02-01 06:24:51'),
+(000007, 'MONITOR', 12, 2500000, 30000000, 000001, '2025-02-03 02:46:45'),
+(000008, 'ເຈ້ຍເກາະ', 12, 10000, 120000, 000001, '2025-02-03 05:28:31'),
+(000009, 'ເຈ້ຍ A4', 20, 50000, 1000000, 000001, '2025-02-03 05:29:38'),
+(000010, 'ເຈ້ຍ A3', 20, 65000, 1300000, 000001, '2025-02-04 07:21:36');
 
 -- --------------------------------------------------------
 
@@ -350,7 +437,14 @@ ALTER TABLE `product_image`
 -- Indexes for table `product_new`
 --
 ALTER TABLE `product_new`
-  ADD PRIMARY KEY (`pro_id`);
+  ADD PRIMARY KEY (`pro_id`),
+  ADD UNIQUE KEY `color_id` (`pro_id`);
+
+--
+-- Indexes for table `tbl_color`
+--
+ALTER TABLE `tbl_color`
+  ADD PRIMARY KEY (`color_id`);
 
 --
 -- Indexes for table `tbl_customer`
@@ -363,6 +457,12 @@ ALTER TABLE `tbl_customer`
 --
 ALTER TABLE `tbl_employee`
   ADD PRIMARY KEY (`en_id`);
+
+--
+-- Indexes for table `tbl_images`
+--
+ALTER TABLE `tbl_images`
+  ADD PRIMARY KEY (`img_id`);
 
 --
 -- Indexes for table `tbl_member`
@@ -387,6 +487,12 @@ ALTER TABLE `tbl_order_detail`
 --
 ALTER TABLE `tbl_order_receive`
   ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `tbl_size`
+--
+ALTER TABLE `tbl_size`
+  ADD PRIMARY KEY (`size_id`);
 
 --
 -- Indexes for table `tb_exchage`
@@ -429,6 +535,12 @@ ALTER TABLE `product_new`
   MODIFY `pro_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'ລະຫັດສີນຄ້າ', AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `tbl_color`
+--
+ALTER TABLE `tbl_color`
+  MODIFY `color_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
@@ -441,6 +553,12 @@ ALTER TABLE `tbl_employee`
   MODIFY `en_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `tbl_images`
+--
+ALTER TABLE `tbl_images`
+  MODIFY `img_id` int(6) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
@@ -450,19 +568,31 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_order_detail`
 --
 ALTER TABLE `tbl_order_detail`
-  MODIFY `d_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `d_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_order_receive`
 --
 ALTER TABLE `tbl_order_receive`
-  MODIFY `order_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_size`
+--
+ALTER TABLE `tbl_size`
+  MODIFY `size_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_exchage`
 --
 ALTER TABLE `tb_exchage`
   MODIFY `exchage_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_expens1`
+--
+ALTER TABLE `tb_expens1`
+  MODIFY `expen_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `type_product`

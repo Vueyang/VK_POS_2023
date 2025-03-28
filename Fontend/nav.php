@@ -143,6 +143,7 @@ if (isset($_GET['act'])) {
     }
 }
 
+
 if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
     $product_id = intval($_GET['id']); // Sanitize the product ID
     $quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
@@ -151,18 +152,41 @@ if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
-// echo($quantity);
+
     // Add the product to the cart or update its quantity
     if (isset($_SESSION['cart'][$product_id])) {
-        $_SESSION['cart'][$product_id] = $quantity;
-    } else {
+        // If product already exists in cart, increase the quantity
         $_SESSION['cart'][$product_id] += $quantity;
+    } else {
+        // If product doesn't exist in cart, add it with the specified quantity
+        $_SESSION['cart'][$product_id] = $quantity;
     }
 
     // Redirect back to the product page or cart page
     header('Location: product.php?id=' . $product_id);
-     exit();
+    exit();
 }
+
+// if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
+//     $product_id = intval($_GET['id']); // Sanitize the product ID
+//     $quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
+
+//     // Initialize the cart if it doesn't exist
+//     if (!isset($_SESSION['cart'])) {
+//         $_SESSION['cart'] = [];
+//     }
+// // echo($quantity);
+//     // Add the product to the cart or update its quantity
+//     if (isset($_SESSION['cart'][$product_id])) {
+//         $_SESSION['cart'][$product_id] = $quantity;
+//     } else {
+//         $_SESSION['cart'][$product_id] += $quantity;
+//     }
+
+//     // Redirect back to the product page or cart page
+//     header('Location: product.php?id=' . $product_id);
+//      exit();
+// }
 // if ($actdd == 'add' && !empty($p_id)) {
 //     if (isset($_SESSION['cart'][$p_id])) {
 //         $_SESSION['cart'][$p_id]++; // Increment quantity if product exists

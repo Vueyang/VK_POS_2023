@@ -367,7 +367,9 @@ if ($last != 1) {
 								<div class="add-to-cart">
 									<button class="add-to-cart-btn"><a
 											href="product.php?id=<?=$row['pro_id']?>">ເບີ່ງລາຍລະອຽດ</a><i
-											class="fa fa-shopping-cart"></i></button>
+											class="fa fa-shopping-cart"></i>
+											<input type="hidden" name="t_id" value="<?php echo $type_id; ?>">
+										</button>
 								</div>
 							</div>
 						</div>

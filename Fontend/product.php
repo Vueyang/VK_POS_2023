@@ -75,10 +75,11 @@ $menu = "index";
 	</nav>
 	<!-- SECTION -->
 	<?php
+	$type_id = isset($_GET['t_id']) ? mysqli_real_escape_string($conn, $_GET['t_id']) : null;
 	$pr_id = isset($_GET['id']) ? mysqli_real_escape_string($conn, $_GET['id']) : null;
 	// $type_id = @$_POST["id"];
 // $pr_id = mysqli_real_escape_string($conn, $_GET['id']);
-// echo($pr_id);
+  echo($type_id);
 $sql = "SELECT * FROM product_new, type_product WHERE product_new.type_id = type_product.type_id and product_new.pro_id ='$pr_id'";
 $request = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($request);
@@ -154,38 +155,84 @@ $row = mysqli_fetch_array($request);
 						</div>
 						<p><?=$row['detail']?></p>
 
-						<div class="product-options">
+						 <div class="product-options">
 							<label>
 								Size
-								<select class="input-select">
-									<option value="0">S</option>
-									<option value="0">M</option>
-									<option value="0">N</option>
-									<option value="0">L</option>
-									<option value="0">ML</option>
-									<option value="0">XL</option>
-								</select>
-							</label>
+								<select class="input-select" name="selected_size" onchange="this.form.submit()">
+										<option value="0">ເລືອກເບີ</option>
+										<?php 
+										$sqlsize = "SELECT * FROM tbl_size ORDER BY size_id DESC";
+										$resultsize = mysqli_query($conn, $sqlsize);
+										
+										if(mysqli_num_rows($resultsize) > 0) {
+											while($row = mysqli_fetch_assoc($resultsize)) {
+												echo '<option value="'.$row['size_id'].'">'.$row['size_name'].'</option>';
+											}
+										} else {
+											// ຖ້າບໍ່ມີຂໍ້ມູນໃນຖານຂໍ້ມູນ, ໃຫ້ເລືອກເບີເດີມ
+											echo '
+											<option value="1">M</option>
+											<option value="2">N</option>
+											<option value="3">L</option>
+											<option value="4">ML</option>
+											<option value="5">XL</option>
+											';
+										}
+										?>
+									</select>
+							</label> 
 							<label>
 								Color
-								<select class="input-select">
-									<option value="0">ສີແດງ</option>
-									<option value="0">ສີດຳ</option>
-									<option value="0">ສີຂາວ</option>
-									<option value="0">ສີເຫຼືອງ</option>
-									<option value="0">ສີຟ້າ</option>
-									<option value="0">ສີຂຽວ</option>
-									<option value="0">ສີມ່ວງ</option>
-									<option value="0">ສີອອນ</option>
+								<select class="input-select" name="selected_color" onchange="this.form.submit()">
+									<option value="0">ເລືອກສີ</option>
+									<?php
+									$sqlcolor = "SELECT * FROM tbl_color ORDER BY color_id";
+									$resultcolor = mysqli_query($conn, $sqlcolor);
+									if(mysqli_num_rows($resultcolor) > 0){
+										while($row = mysqli_fetch_assoc($resultcolor)){
+											echo '<option value = "'.$row['color_id'].'">'.$row['color_name']. '</option>';
+										}
+									}else{
+										echo '<option value="0">ສີດຳ</option>
+											<option value="0">ສີຂາວ</option>
+											<option value="0">ສີເຫຼືອງ</option>
+											<option value="0">ສີຟ້າ</option>
+											<option value="0">ສີຂຽວ</option>
+											<option value="0">ສີມ່ວງ</option>
+											<option value="0">ສີອອນ</option>';
+									}
+									?>
+									
 								</select>
 							</label>
 						</div>
-
 						<div class="add-to-cart">
 							<div class="qty-label">
 								Qty
 								<div class="input-number">
-									<input type="number" id="quantity" value="1" min="1" name="add_qty">
+									<input type="number" id="quantity" value="1" min="1" max="<?php echo $row['amount']; ?>" name="add_qty">
+									<span class="qty-up">+</span>
+									<span class="qty-down">-</span>
+								</div>
+							</div>
+							<?php if($row['amount'] > 0) {?>
+							<button class="add-to-cart-btn">
+								<i class="fa fa-shopping-cart"></i>
+								<a href="product.php?id=<?=$row['pro_id'];?>&act=add&qty=" onclick="this.href=this.href+document.getElementById('quantity').value">ເພີ່ມເຂົ້າໄປກະຕ່າ</a>
+								<input type="hidden" name="t_id" value="<?php echo $type_id; ?>">
+							</button>
+							<?php } else { ?>
+							<button class="add-to-cart-btn" disabled>
+								<i class="fa fa-shopping-cart"></i>
+								ສິນຄ້າຫມົດ
+							</button>
+							<?php } ?>
+						</div>
+						<!-- <div class="add-to-cart">
+							<div class="qty-label">
+								Qty
+								<div class="input-number">
+									<input type="number" id="quantity" value="1" min="0" name="add_qty">
 									<span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
@@ -194,9 +241,10 @@ $row = mysqli_fetch_array($request);
 							<button class="add-to-cart-btn" >
 								<i class="fa fa-shopping-cart"></i>
 								<a href="product.php?id=<?=$row['pro_id'];?>&act=add">ເພີ່ມເຂົ້າໄປກະຕ່າ</a>
+								<input type="hidden" name="t_id" value="<?php echo $type_id; ?>">
 							</button>
 							<?php } ?>
-						</div>
+						</div> -->
 
 
 						<!-- <div class="add-to-cart">
