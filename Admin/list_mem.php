@@ -21,6 +21,7 @@ include('connetdb.php')
 	<!-- Main content -->
 	<br>
 	<section class="content ">
+		<div class="container">
 		<div class="card card-gray">
 			<div class="card-header ">
 				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນສະມາຊິກ</h3>
@@ -382,6 +383,7 @@ include('connetdb.php')
 			
 		</div>
 		<?php include('frm_add_member.php') ?>
+		</div>
 	</section>
 
 	<?php include('footer.php'); ?>

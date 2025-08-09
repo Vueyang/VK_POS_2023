@@ -35,95 +35,153 @@ $rs_enber = mysqli_query($conn, $query_enber);
 	}
 </style>
 <!-- /.content -->
-<section class="content" style="padding: 20px 20px;">
+<section class="content">
+	<div class="container">
 	<div class="card card-gray">
 		<div class="alert  card-header h4 text-center">
 			<h5>ໜ້າເພີ່ມຂໍ້ມູນພະນັກງານ</h5>
 		</div>
 		<div class=" col-sm-12" style=" padding: 10px 20px;">
 			<form action="insert_employee.php" method="POST" enctype="multipart/form-data">
-
-				<label for="" class="col-sm-2 col-form-label">ຊື່ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="en_name" class="form-control" id="en_name" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ນາມສະກຸນ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="en_lastname" class="form-control" id="en_lastname" placeholder=""
-							value="" required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ເພດ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<select class="form-select" name="gender" id="gender" required>
-							<option value="">-- ກະລຸນາເລືອກເພດ --</option>
-							<option value="0">ຊາຍ</option>
-							<option value="1">ຍິງ</option>
-						</select>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ວັນທີເດືອນປີເກິດ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="date" name="date_of_birth" class="form-control" id="date_of_birth" placeholder=""
-							value="" required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ເບີໂທ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="en_phone" class="form-control" id="en_phone" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">Email </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="en_email" class="form-control" id="en_email" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ບ້ານ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="village" class="form-control" id="village" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ເມືອງ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="district" class="form-control" id="district" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ແຂວງ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="provice" class="form-control" id="provice" placeholder="" value=""
-							required>
-					</div>
-				</div>
-				<label for="" class="col-sm-2 col-form-label">ຕຳແໜ່ງ </label>
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<input type="text" name="position" class="form-control" id="position" placeholder="ຕຳແໜ່ງ"
-							value="" required>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label bel for="" class="col-sm-2 col-form-label">ໜ້າທີຮັບຜິດຊອບ </label>
-					<div class="form-group row">
-						<div class="col-sm-12">
-							<input type="text" name="responsible" class="form-control" id="responsible"
-								placeholder="ໜ້າທີຮັບຜິດຊອບ" value="" required>
+				<div class="row">
+					<div class="col">
+						<label for="" class=" col-form-label">ຊື່ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="en_name" class="form-control" id="en_name" placeholder="" value=""
+									required>
+							</div>
 						</div>
 					</div>
+					<div class="col">
+						<label for="" class="col-form-label">ນາມສະກຸນ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="en_lastname" class="form-control" id="en_lastname" placeholder=""
+									value="" required>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class=" col-form-label">ເງີນເດືອນ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="salary" class="form-control" id="salary" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col">
+						<label for="" class="col-form-label">ເພດ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<select class="form-select" name="gender" id="gender" required>
+									<option value="">-- ກະລຸນາເລືອກເພດ --</option>
+									<option value="0">ຊາຍ</option>
+									<option value="1">ຍິງ</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class="col-form-label">ວັນທີເດືອນປີເກິດ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="date" name="date_of_birth" class="form-control" id="date_of_birth" placeholder=""
+									value="" required>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class=" col-form-label">ເບີໂທ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="en_phone" class="form-control" id="en_phone" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="" class="col-form-label">Email </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="en_email" class="form-control" id="en_email" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class="col-form-label">ບ້ານ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="village" class="form-control" id="village" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class=" col-form-label">ເມືອງ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="district" class="form-control" id="district" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="" class="col-form-label">ແຂວງ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<input type="text" name="provice" class="form-control" id="provice" placeholder="" value=""
+									required>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label for="" class="col-form-label">ພະແນກ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<select class="form-select" name="position" id= "position" aria-label="Default select example">
+									<option selected>---ພະແນນ---</option>
+									<option>ບໍລິຫານ</option>
+									<option>HR</option>
+									<option>ບັນຊີ</option>
+									<option>ຈັດຊື້</option>
+									<option>ສາງ</option>
+									<option>ຂາຍ</option>
+									<option>ການຕະຫຼາດ</option>";
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label bel for="" class="col-form-label">ຕຳແໜ່ງ </label>
+						<div class="form-group row">
+							<div class="col-sm-12">
+								<select class= "form-select" name="responsible" id="responsible" aria-label="Default select example">
+									<option>---ຕຳແໜ່ງ---</option>
+								  	<option>ຜູ້ຈັດການ(Admin)</option>
+									<option>HR</option>
+									<option>ພະນັກງານບັນຊີ</option>
+									<option>ພະນັກງານຈັດຊື້</option>
+									<option>ພະນັກງານສາງ</option>
+									<option>ພະນັກງານຂາຍໜ້າຮ້ານ</option>
+									<option>ພະນັກງານຢືນຢັນ</option>";
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>				
+				<div class="form-group row">
+					
 					<label for="" class="col-sm-2 col-form-label">ຮູບ</label>
 					<div class="form-group row">
 						<div class="col-sm-12">
@@ -140,6 +198,7 @@ $rs_enber = mysqli_query($conn, $query_enber);
 					</div>
 			</form>
 		</div>
+	</div>
 	</div>
 </section>
 <?php include('footer.php'); ?>

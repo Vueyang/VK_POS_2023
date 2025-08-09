@@ -13,8 +13,9 @@ $district = mysqli_real_escape_string($conn, $_POST["district"]);
 $provice = mysqli_real_escape_string($conn, $_POST["provice"]);
 $position = mysqli_real_escape_string($conn, $_POST["position"]);
 $responsible = mysqli_real_escape_string($conn, $_POST["responsible"]);
+$salary = mysqli_real_escape_string($conn, $_POST["salary"]);
 //$en_password = mysqli_real_escape_string($conn, (sha1($_POST["en_password"])));
-
+echo($responsible);
 
 $date1 = date("Ymd_His");
 $numrand = (mt_rand());
@@ -67,6 +68,7 @@ $sql = "INSERT INTO tbl_employee
   provice,
   position,
   responsible,
+  salary,
   en_image
   )
   VALUES
@@ -81,7 +83,8 @@ $sql = "INSERT INTO tbl_employee
   '$district',
   '$provice',
   '$position',
-  $responsible,
+  '$responsible',
+  $salary,
   '$newname'
   )";
 

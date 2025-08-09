@@ -48,16 +48,16 @@ if (isset($_POST['mem_username'])) {
       //var_dump($_SESSION);
       //exit();
       if ($_SESSION["ref_l_id"] == "1") { //ຖ້າເປັນ admin ໃຫ້ເຂົ້າໄປໜ້າ admin_page.php
-        echo "Are Your Admin";
+        //echo "Are Your Admin";
        // exit();
         Header("Location:Admin/Dashboard.php");
 
       } elseif ($_SESSION["ref_l_id"] == "2") {
 
-        Header("Location:HR/Dashboard.php");
+        Header("Location:Admin/Dashboard_HR.php");
       } elseif ($_SESSION["ref_l_id"] == "3") {
 
-        Header("Location: banxi/Dashboard.php");
+        Header("Location: Admin/Dashboard_BanXin.php");
       } elseif ($_SESSION["ref_l_id"] == "4") {
 
         Header("Location:Admin/list_employee.php");

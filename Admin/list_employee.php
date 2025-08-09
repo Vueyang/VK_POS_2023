@@ -53,7 +53,7 @@ include('connetdb.php')
 								if ($last != 1) {
 									if ($pagenum > 1) {
 										$previous = $pagenum - 1;
-										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">Previous</a> &nbsp; ';
+										$paginationCtrls .= '<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $previous . '" class="btn btn-info">ໜ້າກ່ອນໜ້າ</a> &nbsp; ';
 								
 								
 										for ($i = $pagenum - 4; $i < $pagenum; $i++) {
@@ -84,7 +84,7 @@ include('connetdb.php')
 										$next = $pagenum + 1;
 								
 								
-										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a> ';
+										$paginationCtrls .= ' &nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">ໜ້າຖັດໄປ</a> ';
 									}
 									
 								}
@@ -98,6 +98,7 @@ include('connetdb.php')
 	<!-- Main content -->
 	<br>
 	<section class="content ">
+        <div class="container">
 		<div class="card card-gray">
 			<div class="card-header ">
 				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນພະນັກງານ</h3>
@@ -167,6 +168,7 @@ include('connetdb.php')
 									<th>ຊື່ ແລະ ນາມສະກຸນ</th>
 									<th>ເບີໂທ</th>
 									<th>ອີແມວ</th>
+									<th>ພະແນກ</th>
 									<th>ໜຳແໜ່ງ</th>
 									<th>review</th>
 
@@ -186,11 +188,11 @@ include('connetdb.php')
 											$gender="";
 										} 
 										?>
-										<tr>
+										<tr class="center">
 											<td>
 												<?= $l += 1 ?>
 											</td>
-											<td><img src="./image/<?= $rs["en_image"] ?>" width="100px" height="90px"> </td>
+											<td><img src="./image/<?= $rs["en_image"] ?>" width="90px" height="90px"> </td>
 											<td>
 											<?= $gender?>	
 											</td>
@@ -207,8 +209,19 @@ include('connetdb.php')
 												<?= $rs['position']; ?>
 											</td>
 											<td>
+												<?= $rs['responsible']; ?>
+											</td>
+											<td>
 												<div class="grid d-flex hstack gap-3 justify-content-center"
 													style="--bs-columns: 4; --bs-gap: 5rem;">
+													<div>
+														<input type="hidden" name="en_id" value="<?php echo $rs['en_id']; ?>">
+														<input type="hidden" name="ref_l_id"
+															value="<?php echo $rs['ref_l_id']; ?>">
+														<a href="detail_employee.php?id=<?= $rs['en_id'] ?>"
+															class="btn btn-warning grid d-flex hstack gap-2"><i class="fa-regular fa-eye"></i>
+															</a>
+													</div>
 													<div>
 														<input type="hidden" name="en_id" value="<?php echo $rs['en_id']; ?>">
 														<input type="hidden" name="ref_l_id"
@@ -216,14 +229,14 @@ include('connetdb.php')
 														<a href="edit_employee.php?id=<?= $rs['en_id'] ?>"
 															class="btn btn-warning grid d-flex hstack gap-2"><i
 																class="fas fa-pencil-alt"></i>
-															ແກ້ໄຂ</a>
+															</a>
 													</div>
 													<div>
 														<a href="delete_employee.php?id=<?= $rs['en_id']; ?> &&employee=del"
 															class="del-btn btn btn-danger grid d-flex hstack gap-2"
 															onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
 																class="fas fas fa-trash"></i>
-															ລືບ</a>
+															</a>
 													</div>
 												</div>
 
@@ -248,7 +261,7 @@ include('connetdb.php')
 			</div>
 
 		</div>
-		
+		</div>
 	</section>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>

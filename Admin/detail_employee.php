@@ -58,12 +58,12 @@ $row = mysqli_fetch_array($rs_member);
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ຊື່ </label>
-						<input type="text" name="en_name" class="form-control" id="en_name" placeholder=""
+						<input type="text" name="en_name" disabled="disablied" class="form-control" id="en_name" placeholder=""
 							value="<?php echo $row['en_name']; ?>">
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ນາມສະກຸນ </label>
-							<input type="text" name="en_lastname" class="form-control" id="en_lastname" placeholder=""
+							<input type="text" name="en_lastname" disabled="disablied" class="form-control" id="en_lastname" placeholder=""
 								value="<?php echo $row['en_lastname']; ?>">
 						</div>
 					</div>
@@ -71,7 +71,7 @@ $row = mysqli_fetch_array($rs_member);
 					<div class="row">
 						<div class="col">
 							<label for="" class="col-form-label">ເພດ </label>
-							<select name="gender" id="gender" class="form-control" required>
+							<select name="gender" id="gender" disabled="disablied" class="form-control" required>
 								<?php
 								if ($row['gender'] == 0) {
 									echo "<option>---ເລືອກເພດ---</option>
@@ -91,41 +91,41 @@ $row = mysqli_fetch_array($rs_member);
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ວັນທີເດືອນປີ </label>
-							<input type="date" name="date_of_birth" class="form-control" id="en_phone" placeholder=""
+							<input type="date" name="date_of_birth" disabled="disablied" class="form-control" id="en_phone" placeholder=""
 								value="<?php echo $row['date_of_birth']; ?>">
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ເບີໂທ </label>
-							<input type="text" name="en_phone" class="form-control" id="en_phone" placeholder=""
+							<input type="text" name="en_phone" class="form-control" disabled="disablied" id="en_phone" placeholder=""
 								value="<?php echo $row['en_phone']; ?>">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
 							<label for="" class="col-form-label">ບ້ານ </label>
-							<input type="text" name="village" class="form-control" id="village" placeholder=""
+							<input type="text" name="village" class="form-control" disabled="disablied" id="village" placeholder=""
 								value="<?php echo $row['village']; ?>">
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ເມືອງ </label>
-							<input type="text" name="district" class="form-control" id="district" placeholder=""
+							<input type="text" name="district" class="form-control" disabled="disablied" id="district" placeholder=""
 							value="<?php echo $row['district']; ?>">
 						</div>
 						<div class="col">
 							<label for="" class="col-form-label">ແຂວງ </label>
-							<input type="text" name="provice" class="form-control" id="provice" placeholder=""
+							<input type="text" name="provice" class="form-control" disabled="disablied" id="provice" placeholder=""
 							value="<?php echo $row['provice']; ?>">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
 						<label for="" class=" col-form-label">ອິແມວ </label>
-						<input type="text" name="en_email" class="form-control" id="en_email" placeholder=""
+						<input type="text" name="en_email" class="form-control" disabled="disablied" id="en_email" placeholder=""
 							value="<?php echo $row['en_email']; ?>">
 						</div>
 					<div class="col">
 						<label for="" class=" col-form-label">ພະແນກ </label>
-						<select name="position" class="form-control" required aria-label="Default select example">
+						<select name="position" class="form-control" disabled="disablied" required aria-label="Default select example">
 							<option value="<?= $row['position']; ?>">
 							<?php 
 								if ($row['position'] == "ຜູ້ຈັດການ(Admin)") {
@@ -207,7 +207,7 @@ $row = mysqli_fetch_array($rs_member);
 					</div>
 					<div class="col">
 						<label for="" class=" col-form-label">ຕຳແໜ່ງ </label>
-						<select name="responsible" class="form-control" required aria-label="Default select example">
+						<select name="responsible" class="form-control" disabled="disablied" required aria-label="Default select example">
 							<option value="<?= $row['responsible']; ?>">
 							<?php 
 								if ($row['responsible'] == "ຜູ້ຈັດການ(Admin)") {
@@ -291,35 +291,23 @@ $row = mysqli_fetch_array($rs_member);
 					<div class="row">
 						<div class="col">
 						<label for="" class=" col-form-label">ເງີນເດືອນ </label>
-						<input type="text" name="salary" class="form-control" id="salary" placeholder=""
+						<input type="text" name="salary" class="form-control" disabled="disablied" id="salary" placeholder=""
 							value="<?php echo $row['salary']; ?>">
 						</div>
 					</div>
 					<hr>
 					<div class="row " >
 						<div class="col">
-							<label for="" class="rounded mx-auto d-block">ຮູບເກົ່າ</label><hr>
+							<label for="" class="rounded mx-auto d-block">ຮູບ</label><hr>
 							<div class=" align-self-center " >
 								<img src="./image/<?php echo $row['en_image']; ?>" class="rounded mx-auto d-block" width="150px" >
 								<input type="hidden" name="en_image2" value="<?php echo $row['en_image']; ?>">
 							</div>
 						</div>
-						<div class="col">
-							<label for="" class="rounded mx-auto d-block">ຮູບໃໝ່</label><hr>
-							<div class="justify-content-md-center">
-							<img id="blah" src="./image/" alt="your image" class="rounded mx-auto d-block" width="200" />
-							<div class="custom-file mb-4 mt-4">
-								<input type="file" class="rounded mx-auto d-block" name="en_image" onchange="readURL(this);">
-							</div>
-						</div>
 					</div>
 					</div>
-					
-					
-					
 					<div class="button mb-4 mt-4">
 						<a class=" btn btn-danger" href="list_employee.php" role="button">ຍົກເລີກ</a>
-						<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>ບັນທືກ</button>
 					</div>
 					
 				</form>
