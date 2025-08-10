@@ -162,7 +162,7 @@ sort($date_sale); // ຈັດລຽງວັນທີ່
     <div class="container">
         <div class="card mb-4" >
             <div class="card-header" style="background-color:#6c757d" >
-                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບປະຈຳປີ</h3>
+                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳປີ</h3>
             </div>
             <div align="center" class="card-header">
               <div class="row">
@@ -172,7 +172,7 @@ sort($date_sale); // ຈັດລຽງວັນທີ່
                   </form>
                   <a href="Report_receive_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i> ປີ</a>
                   <div align="center" style=" left: 20px; text-align: center; width:60%;">
-                    <h4 style=" margin: 10px;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍປະຈຳປີ</h4>
+                    <h4 style=" margin: 10px;">ລາຍງານຂໍ້ມູນລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳປີ</h4>
                   </div>
                   <form method="GET">
                     <input type="hidden" name="p" value="<?=$_GET['p']??''?>">

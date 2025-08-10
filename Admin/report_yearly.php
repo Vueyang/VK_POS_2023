@@ -2,7 +2,7 @@
 error_reporting(error_reporting() & ~E_NOTICE);
 session_start();
 $mem_id=$_SESSION['mem_id'];
-$menu = "list_Expens";
+$menu = "Report_Receip";
 include('connetdb.php')
 	?>
 <?php include("header.php"); ?>

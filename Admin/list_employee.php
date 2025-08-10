@@ -143,10 +143,10 @@ include('connetdb.php')
 									</form>
 								</div>	
 								<div class="col" align="end">
-									<form class="form-group my-3" action = "Report_employee.php" method="GET">
+									<form class="form-group my-3" action = "Report_employee_admin.php" method="GET">
 										<div class="row">
 											<div class="col-12">
-					<a href="Report_employee.php?en_id=<?php echo $rs['en_id']; ?>&act=view" target="_blank"
+					<a href="Report_employee_admin.php?en_id=<?php echo $rs['en_id']; ?>&act=view" target="_blank"
 						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
 												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
 											</div>

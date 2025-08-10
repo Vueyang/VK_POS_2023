@@ -254,7 +254,7 @@
 						echo "active";
 					} ?> ">
 						<i class="nav-icon fas fa-clipboard-list"></i>
-						<p>ລາຍງານລາຍຈ່າຍ/ລາຍຮັບ</p>
+						<p>ລາຍງານລາຍຮັບ</p>
 					</a>
 				</li>
 				<li class="nav-item">

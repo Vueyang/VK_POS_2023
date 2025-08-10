@@ -168,7 +168,7 @@ $order_total = implode(",", $order_total);
     <div class="container">
         <div class="card mb-4" >
             <div class="card-header" style="background-color:#6c757d" >
-                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບປະຈຳວັນ</h3>
+                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳວັນ</h3>
             </div>
             <div align="center" class="card-header">
               <div class="row">
@@ -178,7 +178,7 @@ $order_total = implode(",", $order_total);
                   </form>
                   <a href="Report_receive_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i> ປີ</a>
                   <div align="center" style=" left: 20px; text-align: center; width:60%;">
-                    <h4 style=" margin: 10px;">ລາຍງານຂໍ້ມູນລາຍຈ່າຍປະຈຳວັນ</h4>
+                    <h4 style=" margin: 10px;">ລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳວັນ</h4>
                   </div>
                   <form method="GET" class="row mt-2">
                     <div class="col-sm-12">
