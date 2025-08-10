@@ -19,12 +19,12 @@ include('connetdb.php')
 							$query1 = mysqli_query($conn, "SELECT COUNT(en_id) FROM `tbl_employee`");
 
 							$row = mysqli_fetch_row($query1);
-							//echo "<pre>";
-//print_r($row);
+							echo "<pre>";
+print_r($row);
 //print_r($_SESSION['cart']);
 //print_r($_POST);
-//echo "</pre>";
-//exit();
+echo "</pre>";
+exit();
 							$rows = $row[0];
 							$page_rows = 6; //จำนวนข้อมูลที่ต้องการให้แสดงใน 1 หน้า  ตย. 5 record / หน้า 
 							$last = ceil($rows / $page_rows);
@@ -137,10 +137,10 @@ include('connetdb.php')
 									</form>
 								</div>	
 								<div class="col" align="end">
-									<form class="form-group my-3" action = "Report_enployee.php" method="GET">
+									<form class="form-group my-3" action = "Report_employee.php" method="GET">
 										<div class="row">
 											<div class="col-12">
-					<a href="Report_enployee_admin.php?en_id=<?php echo $rs_order['en_id']; ?>&act=view" target="_blank"
+					<a href="Report_employee_admin.php?en_id=<?php echo $rs_order['en_id']; ?>&act=view" target="_blank"
 						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ພີມອອກ</a>
 												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
 											</div>
@@ -165,6 +165,7 @@ include('connetdb.php')
 									<th>ເບີໂທ</th>
 									<th>ອີແມວ</th>
 									<th>ທີຢູ່</th>
+									<th>ພະແນກ</th>
 									<th>ໜຳແໜ່ງ</th>
 								</tr>
 
@@ -201,6 +202,9 @@ include('connetdb.php')
 											</td>
 											<td>
 												<?= $rs['village']; ?>, <?= $rs['district']; ?>, <?= $rs['provice']; ?>
+											</td>
+											<td>
+												<?= $rs['responsible']; ?>
 											</td>
 											<td>
 												<?= $rs['position']; ?>

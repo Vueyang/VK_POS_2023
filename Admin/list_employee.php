@@ -12,8 +12,10 @@ include('connetdb.php')
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="./css_js/css/styles.css" rel="stylesheet" />
 	<link rel="stylesheet" href="./assets/adminlte.min.css">
-	<link rel="stylesheet" href="./assets/adminlte.min.css">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+	<style>
+	 
+</style>
 </head>
 <?php
 							$query1 = mysqli_query($conn, "SELECT COUNT(en_id) FROM `tbl_employee`");
@@ -99,7 +101,7 @@ include('connetdb.php')
 	<br>
 	<section class="content ">
         <div class="container">
-		<div class="card card-gray">
+		<div class="card card-gray" style="aling:center">
 			<div class="card-header ">
 				<h3 class="card-title" style="font-size: 2rem;">ຂໍ້ມູນພະນັກງານ</h3>
 				<div align="right">
@@ -144,7 +146,7 @@ include('connetdb.php')
 									<form class="form-group my-3" action = "Report_enployee.php" method="GET">
 										<div class="row">
 											<div class="col-12">
-					<a href="Report_enployee.php?en_id=<?php echo $rs_order['en_id']; ?>&act=view" target="_blank"
+					<a href="Report_enployee.php?en_id=<?php echo $rs['en_id']; ?>&act=view" target="_blank"
 						class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
 												<!--<input type="submit" value="ລາຍງານ" class="btn btn-success " >-->
 											</div>
@@ -188,7 +190,7 @@ include('connetdb.php')
 											$gender="";
 										} 
 										?>
-										<tr class="center">
+										<tr class="center" >
 											<td>
 												<?= $l += 1 ?>
 											</td>
