@@ -16,6 +16,7 @@
 <body>
 
 	<!-- Main content -->
+	 <div class="container">
 	<section class="content">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -131,6 +132,7 @@ FROM tbl_order as o WHERE o.order_status=1 ORDER BY order_date DESC";
 		</div>
 
 	</section>
+	</div>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>
 	<script>
