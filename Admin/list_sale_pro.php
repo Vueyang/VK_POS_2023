@@ -3,7 +3,7 @@ $menu = "sale_pro";
 ?>
 
 
-<?php include("header.php"); ?>
+<?php include("header.php"); include('connetdb.php') ?>
 <?php
 
 
@@ -95,6 +95,7 @@ if ($last != 1) {
 </section>-->
 
 <!-- Main content -->
+ <div class="container">
 <section class="content">
 
 	<div class="card card-gray">
@@ -194,6 +195,7 @@ if ($last != 1) {
 			</div>
 		</div>
 </section>
+</div>
 <!-- /.content -->
 
 

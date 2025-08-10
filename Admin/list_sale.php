@@ -1,5 +1,5 @@
 <?php $menu = "list_sale" ?>;
-<?php include("header.php"); ?>
+<?php include("header.php"); include('connetdb.php')?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,7 @@
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -49,6 +50,7 @@
 		</div>
 
 	</section>
+	</div>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>
 	<script>

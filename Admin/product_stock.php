@@ -36,6 +36,7 @@ $menu = "product_stock";
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -231,7 +232,7 @@ $menu = "product_stock";
 		</div>
 
 	</section>
-
+</div>
 
 
 	<?php include('footer.php'); ?>

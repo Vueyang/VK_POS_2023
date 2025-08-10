@@ -2,7 +2,7 @@
 $menu = "sale_pro";
 ?>
 
-<?php include("header.php"); ?>
+<?php include("header.php"); include('connetdb.php')?>
 
 <?php
 
@@ -31,6 +31,7 @@ $mem_address = $_SESSION['mem_address'];
 </section>-->
 
 <!-- Main content -->
+ <div class="container">
 <section class="content mt-4">
 	<div class="card card-gray ">
 		<div class="card-header ">
@@ -144,6 +145,7 @@ $mem_address = $_SESSION['mem_address'];
 		<div class="card-footer">
 		</div>
 </section>
+</div>
 <!-- /.content -->
 <?php include('footer.php'); ?>
 <script>

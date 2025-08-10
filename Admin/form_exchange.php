@@ -20,6 +20,7 @@ include('connetdb.php')
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -151,7 +152,7 @@ include('connetdb.php')
 													<input type="hidden" name="exchage_id" value="<?php echo $rs['exchage_id']; ?>">
 													<button type="button" class="btn btn-warning" data-bs-toggle="modal"
 														data-bs-target="#myModal<?= $rs['exchage_id'] ?>">
-														<i class="fas fa-pencil-alt"></i>ແກ້ໄຂ
+														<i class="fas fa-pencil-alt"></i>
 													</button>
 												</div>
 												<div>
@@ -160,7 +161,7 @@ include('connetdb.php')
 														class="del-btn btn btn-danger grid d-flex hstack gap-2"
 														onclick="return confirm('ທ່ານຕ້ອງການລືບຂໍ້ມູນ ຫຼື ບໍ່ !!!')"><i
 															class="fas fas fa-trash"></i>
-														ລືບ</a>
+														</a>
 												</div>
 											</div>
 
@@ -245,7 +246,7 @@ include('connetdb.php')
 		</div>
 		<?php include('form_add_exchage.php') ?>
 	</section>
-
+</div>
 	<?php include('footer.php'); ?>
 	<script>
 		$(function () {
