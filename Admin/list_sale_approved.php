@@ -1,5 +1,6 @@
 <?php $menu = "list_sale_approved" ?>;
-<?php include("header.php"); ?>
+<?php include("header.php"); 
+include('connetdb.php')?>
 <!DOCTYPE html>
 <html lang="en">
 

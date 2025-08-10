@@ -29,6 +29,7 @@ ob_start();
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -167,7 +168,7 @@ ob_start();
 			
 		</div>
 	</section>
-
+</div>
 	<?php include('footer.php'); ?>
 	<script>
 		$(function () {

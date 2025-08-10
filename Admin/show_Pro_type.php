@@ -37,6 +37,7 @@ $menu = "pro_type"
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -267,6 +268,7 @@ $menu = "pro_type"
 		</div>
 
 	</section>
+	</div>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>
 	<script>

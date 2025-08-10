@@ -37,6 +37,7 @@ $menu = "Report_Pro_type"
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -58,7 +59,7 @@ $menu = "Report_Pro_type"
 									</form>
    								</div>
 								<div class="col" align="end">
-									<form class="form-group my-3" action = "show_Pro_type.php" method="GET">
+									<form class="form-group my-3" action = "Report_Pro_type.php" method="GET">
 										<div class="row">
 											<div class="col-1">
 												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >
@@ -196,6 +197,7 @@ $menu = "Report_Pro_type"
 		</div>
 
 	</section>
+	</div>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>
 	<script>

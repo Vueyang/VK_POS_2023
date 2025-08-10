@@ -1,5 +1,6 @@
 <?php
-$menu = "report_p5"
+$menu = "report_p5";
+include('connetdb.php');
 	?>
 <?php include("header.php"); ?>
 <?php
@@ -32,6 +33,7 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 	</div><!-- /.container-fluid -->
 </section>
 <!-- Main content -->
+ <div class="container">
 <section class="content">
 	<div class="card card-gray">
 		<div class="card-header ">
@@ -78,6 +80,7 @@ $rs_my_order = mysqli_query($conn, $query_my_order);
 	<div class="card-footer"></div>
 
 </section>
+</div>	
 <!-- /.content -->
 
 

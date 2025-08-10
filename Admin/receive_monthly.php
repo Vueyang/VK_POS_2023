@@ -16,13 +16,11 @@ include('header.php')
 	<link rel="stylesheet" href="assets/adminlte.min.css">
 	<link rel="stylesheet" href="assets/adminlte.min.css">
   <link rel="stylesheet" href="css_js/css/chart.css"></link>
-
+	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <script src="css_js/js/highcharts.js"></script>
- <!-- <script src="css_js/js/exporting.js"></script> -->
+<script src="css_js/js/exporting.js"></script>
 <script src="css_js/js/export-data.js"></script>
- <script src="css_js/js/accessibility.js"></script> 
-
-
+<script src="css_js/js/accessibility.js"></script>
 
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -30,11 +28,9 @@ include('header.php')
 <body>
   <?php
   //ທ່ານຊ່ວຍແກ້ໄຂ code ໃນການຄົ້ນຫາຕາມວັນທີ 
-   $daily = isset($_GET['dt1']) ? mysqli_real_escape_string($conn, $_GET['dt1']) : '';
-   //$condition = !empty($daily) ? "AND DATE(order_date) = '$daily'" : '';
-
+  $month = isset($_GET['selected_month']) ? mysqli_real_escape_string($conn, $_GET['selected_month']) : "";
 // ນັບຈຳນວນ order_id ທີ່ບໍ່ຊ້ຳກັນ
- $queryCount = mysqli_query($conn, "SELECT COUNT(DISTINCT(order_id)) FROM tbl_order_receive");
+ $queryCount = mysqli_query($conn, "SELECT COUNT(DISTINCT DATE_FORMAT(order_date, '%Y-%m')) FROM tbl_order_receive");
  $row = mysqli_fetch_row($queryCount);
 $rows = $row[0];
 
@@ -60,26 +56,42 @@ $pagenum = 1;
 
 // ຄຳສັ່ງ LIMIT
 $limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-if(!empty($daily)){
-      $query_chart = "SELECT SQL_CALC_FOUND_ROWS *, DATE_FORMAT(order_date, '%d-%M-%Y') AS order_date, SUM(pay_amount2) AS total_sum 
-      FROM tbl_order_receive  WHERE DATE(order_date) = '$daily'
-      GROUP BY order_date
-      ORDER BY order_id DESC $limit ";//GROUP BY order_id 
+if(!empty($month)){
+      $query_chart = "SELECT 
+        DATE_FORMAT(order_date, '%m-%Y') AS order_month, 
+        SUM(pay_amount2) AS total_sum, 
+        SUM(CASE WHEN order_status = 4 THEN pay_amount2 ELSE 0 END) AS total_sales, 
+        SUM(CASE WHEN order_status = 2 THEN pay_amount2 ELSE 0 END) AS total_orders 
+        FROM tbl_order_receive WHERE DATE_FORMAT(order_date, '%Y-%m') = '$month'
+        GROUP BY DATE_FORMAT(order_date, '%Y-%m') 
+        ORDER BY order_month DESC $limit";
 
       $result_chart = mysqli_query($conn, $query_chart);
-      $result = mysqli_query($conn, $query_chart);
+      
       if (!$result_chart) {
         die("Query Failed: " . mysqli_error($conn)); // ກວດສອບ error ຂອງ SQL
       }
+      // ຄຳສັ່ງ SQL ສຳລັບດຶງຂໍ້ມູນ
+      // $query = "SELECT SQL_CALC_FOUND_ROWS *, SUM(pay_amount2) AS total_sum 
+      // FROM tbl_order_receive  WHERE DATE(order_date) = '$daily'
+      // GROUP BY order_date
+      // ORDER BY order_id DESC $limit ";//GROUP BY order_id 
+      // $result = mysqli_query($conn, $query);
+      $result = mysqli_query($conn, $query_chart);
       if (!$result) {
       die("Query Failed: " . mysqli_error($conn));
       }
 }else{
-  //  ດຶງຂໍ້ມູນຈາກຖານຂໍ້ມູນ ຄຳສັ່ງສຳລັບກຣາຟ
-      $query_chart = "SELECT SQL_CALC_FOUND_ROWS*, DATE_FORMAT(order_date, '%d-%M-%Y') AS order_date, SUM(pay_amount2) AS total_sum
-      FROM tbl_order_receive WHERE order_date
-      GROUP BY order_date
-      ORDER BY order_id DESC $limit";
+ // ດຶງຂໍ້ມູນເປັນເດືອນ
+$query_chart = "SELECT SQL_CALC_FOUND_ROWS *,
+        DATE_FORMAT(order_date, '%m-%Y') AS order_month, 
+        SUM(pay_amount2) AS total_sum, 
+        SUM(CASE WHEN order_status = 4 THEN pay_amount2 ELSE 0 END) AS total_sales, 
+        SUM(CASE WHEN order_status = 2 THEN pay_amount2 ELSE 0 END) AS total_orders 
+        FROM tbl_order_receive 
+        GROUP BY DATE_FORMAT(order_date, '%m-%Y') 
+        ORDER BY order_date DESC $limit";
+
 
       $result_chart = mysqli_query($conn, $query_chart);
       if (!$result_chart) {
@@ -89,11 +101,17 @@ if(!empty($daily)){
       if (!$result) {
         die("Query Failed: " . mysqli_error($conn));
       }
-      
-}
 
-
-$paginationCtrls = '';
+      // // ຄຳສັ່ງ SQL ສຳລັບດຶງຂໍ້ມູນ
+      // $query = "SELECT SQL_CALC_FOUND_ROWS *, SUM(pay_amount2) AS total_sum 
+      // FROM tbl_order_receive WHERE order_id
+      // GROUP BY order_date
+      // ORDER BY order_id DESC $limit ";//GROUP BY order_id 
+      // $result = mysqli_query($conn, $query);
+      // if (!$result) {
+      //   die("Query Failed: " . mysqli_error($conn));
+      // }
+      $paginationCtrls = '';
       if($last !=1){
       if($pagenum > 1){
         $previonus = $pagenum - 1;
@@ -116,59 +134,53 @@ $paginationCtrls = '';
         $paginationCtrls .= '&nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pn=' . $next . '" class="btn btn-info">Next</a>';
       }
     }
+}
    // ສ້າງ array ເກັບວັນທີ ແລະ ຍອດລວມ
+$date_list = [];
+$data_sales = [];
+$data_orders = [];
+$total_sell = 0;
+$total_order = 0;
+// ດຶງແຖວຂໍ້ມູນອອກມາ
+while ($rs = mysqli_fetch_assoc($result_chart)) {
+    if ($rs) {
+      // ປ່ຽນຮູບແບບວັນທີຈາກ 2-2025 ເປັນ February 2025
+      $month_year = $rs['order_month']; // ດຶງຂໍ້ມູນວັນທີຈາກຖານຂໍ້ມູນ
+      $month = DateTime::createFromFormat('m-Y', $month_year); // ປ່ຽນຮູບແບບວັນທີ
+      $formatted_date = $month->format('F Y'); // ປ່ຽນເປັນ February 2025
 
-   $date_list = [];
-   $data_sales = [];
-   $data_orders = [];
-   $total_sell = 0;
-   $total_order = 0;
-  // ດຶງແຖວຂໍ້ມູນອອກມາ
-   if(!empty($result_chart)){
-    while ($rs = mysqli_fetch_assoc($result_chart)) {
-      if ($rs) {
-          $date_list[] = $rs['order_date'];
-          if ($rs['order_status'] == 4) {
-              $data_sales[$rs['order_date']] += $rs['total_sum'];
-              $total_sell += $rs['total_sum'];
-          } elseif ($rs['order_status'] == 2) {
-              $data_orders[$rs['order_date']] += $rs['total_sum'];
-              $total_order += $rs['total_sum'];
-          }
-      } else {
+      $date_list[] = $formatted_date; // ເກັບເດືອນໃນຮູບແບບໃໝ່
+        $data_sales[$rs['order_month']] = $rs['total_sales']; // ຍອດຂາຍ
+        $data_orders[$rs['order_month']] = $rs['total_orders']; // ຍອດສັ່ງຊື້
+        $total_sell += $rs['total_sales'];
+        $total_order += $rs['total_orders'];
+    } else {
         echo "ການສົ່ງຄຳສັ່ງຂໍ້ມູນລົ້ມເຫຼວ: " . mysqli_error($conn);
-      } 
     }
-   }else{
-     
-         echo "ການສົ່ງຄຳສັ່ງຂໍ້ມູນລົ້ມເຫຼວ: " . mysqli_error($conn);
-   }
-    //var_dump($total_sell, $total_order);
-    //  echo "<pre>";
-    //  var_dump($date_list, $data_sales, $data_orders );
-    //  echo "</pre>";
-
+}
 // ປ່ຽນ array ເປັນລາຍຊື່ວັນທີ່ທີ່ບໍ່ຊ້ຳ
 $date_sale = array_unique($date_list);
 sort($date_sale); // ຈັດລຽງວັນທີ່
+// var_dump($result_chart);
 
-// ສ້າງ array ສຳລັບຂໍ້ມູນ (ຖ້າບໍ່ມີ, ໃຫ້ເປັນ 0)
-$total_sale = [];
-$order_total = [];
-foreach ($date_sale as $date) {
-    $total_sale[] = isset($data_sales[$date]) ? $data_sales[$date] : 0;
-    $order_total[] = isset($data_orders[$date]) ? $data_orders[$date] : 0;
-}
+ $total_sale = [];
+ $order_total = [];
+ foreach ($date_sale as $date) {
+     $total_sale[] = isset($data_sales[$date]) ? $data_sales[$date] : 0;
+     $order_total[] = isset($data_orders[$date]) ? $data_orders[$date] : 0;
+ }
+ // ປ່ຽນ array ເປັນ string
 
-// ປ່ຽນ array ເປັນ string
-$date_sale = json_encode($date_sale); // ໃຊ້ json_encode ເພື່ອປ່ຽນ array ເປັນ JSON
-$total_sale = implode(",", $total_sale);
-$order_total = implode(",", $order_total);
+ $date_sale = json_encode($date_sale); // ໃຊ້ json_encode ເພື່ອປ່ຽນ array ເປັນ JSON
+ $total_sale = implode(",", $data_sales);
+ $order_total = implode(",", $data_orders);
+ 
+// var_dump($total_sell, $total_order)
   ?>
     <div class="container">
         <div class="card mb-4" >
             <div class="card-header" style="background-color:#6c757d" >
-                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳວັນ</h3>
+                <h3 class="card-title" style="color:white; font-size: 1.5rem;">ຂໍ້ມູນລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳເດືອນ</h3>
             </div>
             <div align="center" class="card-header">
               <div class="row">
@@ -178,13 +190,25 @@ $order_total = implode(",", $order_total);
                   </form>
                   <a href="receive_yearly.php?p=yearly" class="btn btn-warning" style=" margin: 10px;"><i class='fas fa-chart-bar'></i> ປີ</a>
                   <div align="center" style=" left: 20px; text-align: center; width:60%;">
-                    <h4 style=" margin: 10px;">ລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳວັນ</h4>
+                    <h4 style=" margin: 10px;">ຂໍ້ມູນລາຍງານລາຍຮັບຈາກຍອດສັ່ງຊື້ແລະຍອດຂາຍໜ້າຮ້ານປະຈຳເດືອນ</h4>
                   </div>
-                  <form method="GET" class="row mt-2">
-                    <div class="col-sm-12">
-                      <input type="date" name="dt1" class="form-control" value="<?= isset($_GET['dt1']) ? $_GET['dt1'] : '' ?>" onchange="this.form.submit()">
-                    </div>
-                  </form>
+                  <form method="GET">
+					<input type="hidden" name="p" value="<?=$_GET['p']??''?>">
+					<select class="form-select" name="selected_month" onchange="this.form.submit()">
+						<option value="">ເລືອກເດືອນ</option>
+						<?php 
+						$monthQuery = "SELECT DISTINCT DATE_FORMAT(order_date, '%Y-%m') AS order_month 
+									FROM tbl_order_receive 
+									ORDER BY order_month DESC";
+						$monthResult = mysqli_query($conn, $monthQuery);
+						while ($row = mysqli_fetch_assoc($monthResult)) {
+							$selected = ($_GET['selected_month'] ?? '') == $row['order_month'] ? 'selected' : '';
+							$monthName = date('F Y', strtotime($row['order_month'].'-01'));
+							echo '<option value="'.$row['order_month'].'" '.$selected.'>'.$monthName.'</option>';
+						}
+						?>
+					</select>
+			</form>
                 </div>
                 
               </div>
@@ -196,14 +220,13 @@ $order_total = implode(",", $order_total);
         <figure class="highcharts-figure">
                 <div id="Highcharts"></div>
             
+        
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ລຳດັບ</th>
-                            <th>ລາຍການ</th>
-                            <th>ລາຍຮັບ</th>
+                            <th>ເດືອນປີ</th>
                             <th>ລາຍຮັບລວມ</th>
-                            <th>ວັນເດືອນປີທີ່</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -215,16 +238,17 @@ $order_total = implode(",", $order_total);
                         $total += $row['total_sum'];
                         echo "<tr>";
                         echo "<td>" . $i++ . "</td>";
-                        echo "<td>" . htmlspecialchars($row['receive_name']) . "</td>";
-                        echo "<td>" . number_format($row['pay_amount'], 0) . "</td>";
+                        $month_year = $row['order_month']; // ດຶງຂໍ້ມູນວັນທີຈາກຖານຂໍ້ມູນ
+                      $month = DateTime::createFromFormat('m-Y', $month_year); // ປ່ຽນຮູບແບບວັນທີ
+                      $formatted_month = $month->format('F Y'); // ປ່ຽນເປັນ February 2025nth']. '-01'));
+									echo "<td>" . $formatted_month . "</td>";
                         echo "<td>" . number_format($row['total_sum'], 0) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['order_date']) . "</td";
                         echo "</tr>";
                       }
                       $total_SUMALL = $total;
                       include('../convertnumtoLao.php');
                       echo "<tr>";
-                        echo "<td align='right' colspan='4'><b>ລາຄາລວມທັງໝົດ
+                        echo "<td align='right' colspan='2'><b>ລາຄາລວມທັງໝົດ
                         (
                         " .Convert($total_SUMALL) . ")
                         </b>
@@ -248,14 +272,14 @@ $order_total = implode(",", $order_total);
                       <?php echo $paginationCtrls;?>
                     </div>
                 </div>
-                
-        </figure>
-        <!-- <div align="center" class="button_print my-12">
-					<a href="Recode_Receip_PDF.php?order_date=<?= $daily ?>&act=view" target="_blank"
-															class="button_print btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ລາຍງານ</a>
-															</div> -->
+            </div>
+       
+    </figure>
+    <div align="center" class="button_print my-12">
+					<a href="Recode_Receive_m_PDF.php?expen_date=<?= $dt1 ?>&act=view" target="_blank"
+															class="button_print btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ພີມອອກ</a>
+															</div>
                               <br>
-    </div>
     <?php include('footer.php'); ?>
     
 </body>
@@ -280,13 +304,13 @@ Highcharts.chart('Highcharts', {
     yAxis: [{ // Primary axis
         className: 'highcharts-color-0',
         title: {
-            text: 'ຍອດສັ່ງຊື້ = <?php echo number_format($total_order, 0);?> (KIP):'
+            text: 'ຍອດສັ່ງຊື້ (KIP): <?php echo number_format($total_order, 0); ?>'
         }
     }, { // Secondary axis
         className: 'highcharts-color-1',
         opposite: true,
         title: {
-            text: 'ຍອດຂາຍ = <?php echo number_format($total_sell, 0);?> (KIP)'
+            text: 'ຍອດຂາຍ (KIP): <?php echo number_format($total_sell, 0); ?>'
         }
     }],
     plotOptions: {
@@ -306,65 +330,4 @@ Highcharts.chart('Highcharts', {
         yAxis: 1
     }]
 });
-
-
-
-
-
-
-
-// chart colors
-// var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d','#5BA3E6','#015DE5','#00bfff','rgba(11, 137, 240, 0.28)','rgba(23, 33, 41, 0.11)'];
-
-// var date_sale_sell = [<?php echo $date_sale; ?>];
-// var total_sale_sell= [<?php echo $total_sale; ?>];
-// var order_total_sell = [<?php echo $order_total; ?>];
-
-// console.log("Dates:", date_sale_sell);
-// console.log("Sales (Status 4):", total_sale_sell);
-// console.log("Orders (Status 2):", order_total_sell);
-
-// new Chart(document.getElementById("chartjs"), {
-//   type: "line",
-//   data: {
-//     labels: date_sale_sell,
-//     datasets: [{
-//       label: "ຍອດຂາຍ (KIP)",
-//       fill: true,
-//       backgroundColor: "rgba(71, 167, 247, 0.41)",
-//       backgroundColor: colors[9],
-//       borderColor: "#007bff",
-//       data:  total_sale_sell
-//     }, 
-//     {
-//       label: "ຍອດສັ່ງຊື້ (KIP)",
-//       fill: true,
-//       backgroundColor: "rgba(11, 53, 20, 0.41)",
-//       backgroundColor: colors[3],
-//       borderColor: "#adb5bd",
-//       borderDash: [4, 4],
-//       data: order_total_sell
-//     }]
-//   },
-//   options: {
-//     scales: {
-//       xAxes: [{
-//         reverse: true,
-//         gridLines: {
-//           color: "rgba(0,0,0,0.05)"
-//         }
-//       }],
-//       yAxes: [{
-//         borderDash: [5, 5],
-//         gridLines: {
-//           color: "rgba(0,0,0,0)",
-//           fontColor: "#fff"
-//         }
-//       }]
-//     }
-//   }
-// });
-  /* chart.js chart examples */
-
-
 </script>

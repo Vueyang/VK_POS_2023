@@ -15,6 +15,7 @@ $date_to_date = date('Y/m/d', strtotime($dt2 . "+1 days")); //ຈາກ query �
 $rs_my_order = mysqli_query($conn, $query_my_order);*/
 //echo ($rs_my_order);//test query
 //$rs_my_order = mysqli_query($conn, $query_my_order);
+include('connetdb.php');
 ?>
 <?php
 $nquery = mysqli_query($conn, "SELECT COUNT(order_id) FROM 'tbl_order_receive'");
@@ -106,7 +107,7 @@ $row = mysqli_fetch_row($nquery);
 									</form>
    								</div>
 								<div class="col" align="end">
-									<form class="form-group my-3" action = "list_sale.php" method="GET">
+									<form class="form-group my-3" action = "Report_list_sale.php" method="GET">
 										<div class="row">
 											<div class="col-1">
 												<input type="submit" value="ເບີ່ງທັງໝົດ" class="btn btn-primary " >

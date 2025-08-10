@@ -18,6 +18,7 @@
 
 	<!-- Main content -->
 	<br>
+	<div class="container">
 	<section class="content ">
 		<div class="card card-gray">
 			<div class="card-header ">
@@ -49,6 +50,7 @@
 		</div>
 
 	</section>
+	</div>
 	<!-- /.content -->
 	<?php include('footer.php'); ?>
 	<script>
