@@ -172,7 +172,7 @@
             .offset-xl-10{margin-left:83.333333%}
             .offset-xl-11{margin-left:91.666667%}}
             .table{width:100%;margin-bottom:1rem;color:#212529;background-color:transparent}
-            .table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6; background-color: #dee2e6; align-content: center;}
+            .table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6; background-color: #0c0c0c; align-content: center;}
             .table thead th{vertical-align:bottom;border-bottom:2px solid #dee2e6}
             .table tbody+tbody{border-top:2px solid #dee2e6}
             .table-sm td,.table-sm th{padding:.3rem}
