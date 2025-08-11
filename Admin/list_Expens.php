@@ -14,8 +14,8 @@ include('connetdb.php')
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="./css_js/css/styles.css" rel="stylesheet" />
-	<link rel="stylesheet" href="./assets/adminlte.min.css">
-	<link rel="stylesheet" href="./assets/adminlte.min.css">
+	<!-- <link rel="stylesheet" href="./assets/adminlte.min.css">
+	<link rel="stylesheet" href="./assets/adminlte.min.css"> -->
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -210,7 +210,7 @@ include('connetdb.php')
 				
 			<div class="card-body">
 
-						<table id="datatablesSimples" class="table table-striped-columns  table-hover">
+						<table id="datatablesSimples" class=" table table-bordered">
 							<thead>
 
 								<tr>
@@ -256,14 +256,14 @@ include('connetdb.php')
 													<input type="hidden" name="expen_id" value="<?php echo $rs['expen_id']; ?>">
 													<button type="button" class="btn btn-warning" data-bs-toggle="modal"
 														data-bs-target="#myModal<?= $rs['expen_id'] ?>">
-														<i class="fas fa-pencil-alt"></i> ແກ້ໄຂ
+														<i class="fas fa-pencil-alt"></i>
 													</button>
 												</div>
 												<div>
 												<input type="hidden" name="mem_id" value="<?php echo $rs['mem_id']; ?>">
 												<input type="hidden" name="expen_id" value="<?php echo $rs['expen_id']; ?>">
 													<a href="Expens_detail.php?expen_id=<?php echo $rs['expen_id']; ?>&act=view" target="_blank"
-														class="btn btn-success btn-xs"><i class="nav-icon fas fa-clipboard-list"></i> ເບີ່ງລາຍການ</a>
+														class="btn btn-success btn-xs"><i class="fa-regular fa-eye"></i> </a>
 												</div>						
 						<!--<div>
 												<input type="hidden" name="exchage_id" value="<?php echo $rs['expen_id']; ?>">

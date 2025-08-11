@@ -20,7 +20,7 @@ include('header.php')
   <script src="css_js/js/highcharts.js"></script>
  <!-- <script src="css_js/js/exporting.js"></script> -->
 <script src="css_js/js/export-data.js"></script>
- <script src="css_js/js/accessibility.js"></script> 
+ <script src="css_js/js/accessibility.js"></script> s
 
 
 
