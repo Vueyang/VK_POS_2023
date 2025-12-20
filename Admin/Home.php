@@ -39,8 +39,8 @@ $row4 = mysqli_fetch_array($result4);
 ?>
 <style>
 	img{
-		width: 100px;
-		height: 100px;
+		width: 100%;
+		height: 100%;
 	}
 </style>
 <body>
@@ -56,7 +56,7 @@ $row4 = mysqli_fetch_array($result4);
 					<div class="col-xl-2 col-md-4" >
 						<div class="card bg-secondary  text-white mb-4">
 							<div class="card-body">
-								<h4>ເມນູຟ່າຍບັນຊີ</h4>
+								<h4>ຟ່າຍບັນຊີ</h4>
 								<img src="image/accont.png" alt="image/accont.png">
 								<a class="btn small text-white stretched-link"
 									href="Report_Receip.php"></a>
@@ -70,10 +70,10 @@ $row4 = mysqli_fetch_array($result4);
 					<div class="col-xl-2 col-md-6" >
 						<div class="card bg-secondary  text-white mb-4">
 							<div class="card-body">
-								<h4>ເມນູຟ່າຍບັນຊີ</h4>
-								<img src="image/accont.png" alt="image/accont.png">
+								<h4>ຟ່າຍ HR</h4>
+								<img src="image/hr.png" alt="image/hr.png" >
 								<a class="btn small text-white stretched-link"
-									href="Report_Receip.php"></a>
+									href="Dashboard_HR.php"></a>
 								<!-- <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
 							</div>
 							

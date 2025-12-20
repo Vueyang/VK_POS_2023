@@ -171,12 +171,19 @@
 				</li>
 			</ul>
 			<hr>
-			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
+			<!---<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
-			   with font-awesome or any other icon font library -->
-				<li class="nav-header">ການຕັ້ງຄ່າຂໍ້ມູນລະບົບ</li>
-
+			   with font-awesome or any other icon font library 
+				<li class="nav-header">ເມນູ HR</li>
+				<li class="nav-item">
+					<a href="Dashboard_HR.php" class="nav-link <?php if ($menu == "Dashboard_HR") {
+						echo "active";
+					} ?> ">
+						<i class="nav-icon fas fa-tachometer-alt"></i>
+						<p>Dashboard_HR</p>
+					</a>
+				</li>
 				<li class="nav-item">
 					<a href="list_mem.php" class="nav-link <?php if ($menu == "member") {
 						echo "active";
@@ -193,7 +200,7 @@
 						<p>ຂໍ້ມູນພະນັກງານ </p>
 					</a>
 				</li>
-			</ul>
+			</ul>-->
 
 			<hr>
 			<ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu"

@@ -57,7 +57,7 @@ if (isset($_POST['mem_username'])) {
         Header("Location:Admin/Dashboard_HR.php");
       } elseif ($_SESSION["ref_l_id"] == "3") {
 
-        Header("Location: Admin/Dashboard_BanXin.php");
+        Header("Location: Admin/Dashboard_BanXi.php");
       } elseif ($_SESSION["ref_l_id"] == "4") {
 
         Header("Location:Admin/list_employee.php");

@@ -30,7 +30,7 @@ if ($user_level == 1) {
     include("sidebar_HR.php"); 
 } elseif ($user_level == 3) {
     // ສຳລັບລະດັບ ບັນຊີ (Finance)
-    include("sidebar_3.php"); 
+    include("sidebar_Banxi.php"); 
 } elseif ($user_level == 4) {
     // ສຳລັບລະດັບ 4
     include("sidebar_4.php"); // ສົມມຸດວ່າທ່ານມີ sidebar_4.php
