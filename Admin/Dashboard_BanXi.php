@@ -14,8 +14,34 @@ include('connetdb.php') ?>
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <?php
+
+$tatol = "SELECT SUM(pay_amount2) AS total_sum FROM tbl_order_receive";
+$result = mysqli_query($conn, $tatol);
+if (!$result) {
+	die("Query Failed: " . mysqli_error($conn)); // ກວດສອບ error ຂອງ SQL
+}
+$row = mysqli_fetch_array($result);
+$total_sum = $row['total_sum'];
+
+
+
+$tatol1 = "SELECT SUM(total) AS total_sum1 FROM tb_expens1";
+$result1 = mysqli_query($conn, $tatol1);
+if (!$result1) {
+	die("Query Failed: " . mysqli_error($conn)); // ກວດສອບ error ຂອງ SQL
+}
+$row1 = mysqli_fetch_array($result1);
+$total_sum1 = $row1['total_sum1'];
+
+///////////////////
+
+
+
+	//   echo($total_sum);
+	//   print($total_sum);
+	//   exit();
 // Function Status pedding status(1)
-$sql1 = "SELECT COUNT(order_id) AS amount_no FROM tbl_order WHERE order_status = '1'";
+$sql1 = "SELECT COUNT(order_id) AS amount_no FROM tbl_order_receive WHERE order_status = '1'";
 $result1 = mysqli_query($conn, $sql1);
 $row1 = mysqli_fetch_array($result1);
 
@@ -48,65 +74,29 @@ $row4 = mysqli_fetch_array($result4);
 				</ol>
 				<div class="row">
 
-					<div class="col-xl-3 col-md-6">
+					<div class="col-xl-6 col-md-6">
 						<div class="card bg-warning text-white mb-4">
 							<div class="card-body">
-								<h4>ລໍຖ້າການຢືນຢັນ</h4>
+								<h4>ລາຍຈ່າຍ</h4>
 								<h3>
-									<?php echo $row1['amount_no'] ?> ຄົນ
+									<?php echo number_format($total_sum1, 0) ?> ກີບ
 								</h3>
 							</div>
 
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link"
-									href="list_sale_approved.php">ເບີ່ງລາຍລະອຽດ</a>
-								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-							</div>
 						</div>
 					</div>
-					<div class="col-xl-3 col-md-6">
+					<div class="col-xl-6 col-md-6">
 						<div class="card bg-success text-white mb-4">
 							<div class="card-body">
-								<h4>ຢືນຢັນສຳເລັດ</h4>
+								<h4> ລາຍຮັບ</h4>
 								<h3>
-									<?php echo $row2['amount_success'] ?> ຄົນ
+									<?php echo number_format($total_sum, 0) ?> ກີບ
 								</h3>
 							</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link"
-									href="pay_order_subccess.php">ເບີ່ງລາຍລະອຽດ</a>
-								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-							</div>
+							
 						</div>
 					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-danger text-white mb-4">
-							<div class="card-body">
-								<h4>ຍົກເລີກ</h4>
-								<h3>
-									<?php echo $row3['amount_cancel'] ?> ຄົນ
-								</h3>
-							</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="cancel_order.php">ເບີ່ງລາຍລະອຽດ</a>
-								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-primary text-white mb-4">
-							<div class="card-body">
-								<h4>ຈຳນວນສີນຄ້າຄົງເຫຼືອ < 10</h4>
-										<h3>
-											<?php echo $row4['amount_pro_stock'] ?>
-										</h3>
-							</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="product_stock.php">ເບີ່ງລາຍລະອຽດ</a>
-								<div class="small text-white"><i class="fas fa-angle-right"></i></div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 				<div class="row">
 					<div class="col-xl-6">
