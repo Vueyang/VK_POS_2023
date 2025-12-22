@@ -40,28 +40,28 @@ $total_sum1 = $row1['total_sum1'];
 	//   echo($total_sum);
 	//   print($total_sum);
 	//   exit();
-// Function Status pedding status(1)
-$sql1 = "SELECT COUNT(order_id) AS amount_no FROM tbl_order_receive WHERE order_status = '1'";
-$result1 = mysqli_query($conn, $sql1);
-$row1 = mysqli_fetch_array($result1);
+// // Function Status pedding status(1)
+// $sql1 = "SELECT COUNT(order_id) AS amount_no FROM tbl_order_receive WHERE order_status = '1'";
+// $result1 = mysqli_query($conn, $sql1);
+// $row1 = mysqli_fetch_array($result1);
 
 
-// Function Status success status(2)
-$sql2 = "SELECT COUNT(order_id) AS amount_success FROM tbl_order WHERE order_status = '2'";
-$result2 = mysqli_query($conn, $sql2);
-$row2 = mysqli_fetch_array($result2);
+// // Function Status success status(2)
+// $sql2 = "SELECT COUNT(order_id) AS amount_success FROM tbl_order WHERE order_status = '2'";
+// $result2 = mysqli_query($conn, $sql2);
+// $row2 = mysqli_fetch_array($result2);
 
 
-// Function Status success status(0)
-$sql3 = "SELECT COUNT(order_id) AS amount_cancel FROM tbl_order WHERE order_status = '0'";
-$result3 = mysqli_query($conn, $sql3);
-$row3 = mysqli_fetch_array($result3);
+// // Function Status success status(0)
+// $sql3 = "SELECT COUNT(order_id) AS amount_cancel FROM tbl_order WHERE order_status = '0'";
+// $result3 = mysqli_query($conn, $sql3);
+// $row3 = mysqli_fetch_array($result3);
 
 
-// Function Product Stock < 10 
-$sql4 = "SELECT COUNT(pro_id) AS amount_pro_stock FROM product_new WHERE amount < 10";
-$result4 = mysqli_query($conn, $sql4);
-$row4 = mysqli_fetch_array($result4);
+// // Function Product Stock < 10 
+// $sql4 = "SELECT COUNT(pro_id) AS amount_pro_stock FROM product_new WHERE amount < 10";
+// $result4 = mysqli_query($conn, $sql4);
+// $row4 = mysqli_fetch_array($result4);
 ?>
 
 <body>

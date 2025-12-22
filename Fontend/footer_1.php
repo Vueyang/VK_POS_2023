@@ -33,20 +33,19 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<div class="col-md-3 col-xs-6">
+				<div class="col-md-4 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">About Us</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-							incididunt ut.</p>
+						<h3 class="footer-title">ກ່ຽວກັບ</h3>
+						<p></p>
 						<ul class="footer-links">
-							<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-							<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-							<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+							<li><a href="https://maps.app.goo.gl/pXEe6GATqks857BB9"><i class="fa fa-map-marker"></i>ຖະໜົນ</a></li>
+							<li><a href="https://web.whatsapp.com/"><i class="fa fa-phone"></i>+856 2078665114</a></li>
+							<li><a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"><i class="fa fa-envelope-o"></i>nkaujkiabvang20212022@gmail.com</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-xs-6">
+				<!-- <div class="col-md-3 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-title">Categories</h3>
 						<ul class="footer-links">
@@ -57,32 +56,32 @@
 							<li><a href="#">Accessories</a></li>
 						</ul>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="clearfix visible-xs"></div>
 
-				<div class="col-md-3 col-xs-6">
+				<div class="col-md-4 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">Information</h3>
+						<h3 class="footer-title">ຂໍ້ມູນພາຍໃນ</h3>
 						<ul class="footer-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Orders and Returns</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
+							<li><a href="#">ກ່ຽວກັບພວກເຮົາ</a></li>
+							<li><a href="#">ຕິດຕໍ່ພວກເຮົາ</a></li>
+							<li><a href="#">ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ</a></li>
+							<li><a href="#">ຄໍາສັ່ງແລະການສົ່ງຄືນ</a></li>
+							<li><a href="#">ຂໍ້ກຳນົດ ແລະເງື່ອນໄຂ</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<div class="col-md-3 col-xs-6">
+				<div class="col-md-4 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-title">Service</h3>
+						<h3 class="footer-title">ບໍລິການ</h3>
 						<ul class="footer-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">View Cart</a></li>
-							<li><a href="#">Wishlist</a></li>
-							<li><a href="#">Track My Order</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="#">ວິທີການຂາຍ</a></li>
+							<li><a href="#">ບໍລິການສົ່ງສິນຄ້າ</a></li>
+							<li><a href="#">ການຊື້ສິນຄ້າ</a></li>
+							<li><a href="#">ທີປືກສາການຂາຍ</a></li>
+							<li><a href="#">ອື່ນໆ</a></li>
 						</ul>
 					</div>
 				</div>
@@ -112,7 +111,7 @@
 						Copyright &copy;<script>
 						document.write(new Date().getFullYear());
 						</script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-							aria-hidden="true"></i> by <a href="#" target="_blank">Colorlib</a>
+							aria-hidden="true"></i> by <a href="#" target="_blank">ບໍລີສັດ VK</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</span>
 				</div>
