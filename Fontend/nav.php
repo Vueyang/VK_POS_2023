@@ -95,115 +95,7 @@
 </head>
 
 <?php
-
 include('connetdb.php');
-// Database connection (assuming $conn is already defined)
-$p_id = mysqli_real_escape_string($conn, $_GET['id']);
-$actdd = mysqli_real_escape_string($conn, $_GET['add']);
-$act = mysqli_real_escape_string($conn, $_GET['act']);
-
-
-// if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
-//     $product_id = intval($_GET['id']); // Sanitize the product ID
-
-//     // Initialize the cart if it doesn't exist
-//     if (!isset($_SESSION['cart'])) {
-//         $_SESSION['cart'] = [];
-//     }
-
-//     // Add the product to the cart or increment its quantity
-//     // if (isset($_SESSION['cart'][$product_id])) {
-// 	// 	if($_SESSION['cart'] < 0){
-// 	// 		$_SESSION['cart'][$product_id]++;
-// 	// 	}else{
-// 	// 		$_SESSION['cart'][$product_id] = 1;
-// 	// 	}
-//     //     // $_SESSION['cart'][$product_id]++;
-//     // } else {
-//     //     $_SESSION['cart'][$product_id] = 1;
-//     // }
-// }
-
-
-// Sanitize input
-if (isset($_GET['pro_id'])) {
-    $product_id = mysqli_real_escape_string($conn, $_GET['pro_id']);
-} else {
-    $product_id = null;
-}
-
-// Handle actions (add, remove, update)
-if (isset($_GET['act'])) {
-    $act = mysqli_real_escape_string($conn, $_GET['act']);
-
-    if ($act == 'remove' && !empty($product_id)) {
-        // Remove product from cart
-        unset($_SESSION['cart'][$product_id]);
-		header('Location: Show_all_product.php?id=' . $product_id);
-    }
-}
-
-
-if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
-    $product_id = intval($_GET['id']); // Sanitize the product ID
-    $quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
-
-    // Initialize the cart if it doesn't exist
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-
-    // Add the product to the cart or update its quantity
-    if (isset($_SESSION['cart'][$product_id])) {
-        // If product already exists in cart, increase the quantity
-        $_SESSION['cart'][$product_id] += $quantity;
-    } else {
-        // If product doesn't exist in cart, add it with the specified quantity
-        $_SESSION['cart'][$product_id] = $quantity;
-    }
-
-    // Redirect back to the product page or cart page
-    header('Location: product.php?id=' . $product_id);
-    exit();
-}
-
-// if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
-//     $product_id = intval($_GET['id']); // Sanitize the product ID
-//     $quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
-
-//     // Initialize the cart if it doesn't exist
-//     if (!isset($_SESSION['cart'])) {
-//         $_SESSION['cart'] = [];
-//     }
-// // echo($quantity);
-//     // Add the product to the cart or update its quantity
-//     if (isset($_SESSION['cart'][$product_id])) {
-//         $_SESSION['cart'][$product_id] = $quantity;
-//     } else {
-//         $_SESSION['cart'][$product_id] += $quantity;
-//     }
-
-//     // Redirect back to the product page or cart page
-//     header('Location: product.php?id=' . $product_id);
-//      exit();
-// }
-// if ($actdd == 'add' && !empty($p_id)) {
-//     if (isset($_SESSION['cart'][$p_id])) {
-//         $_SESSION['cart'][$p_id]++; // Increment quantity if product exists
-//     } else {
-//         $_SESSION['cart'][$p_id] = 1; // Initialize quantity to 1 if product doesn't exist
-//     }
-// }
-//  if ($act == 'remove' && !empty($product_id)) {
-//      unset($_SESSION['cart'][$product_id]); // Remove product from cart
-//  }
-// $add_qty = isset($_GET['add_qty']) ? mysqli_real_escape_string($conn, $_GET['add_qty']) : '';
-//  if ($act == 'update') {
-//     $amount_array = $_POST['amount'];
-//     foreach ($amount_array as $add_qty => $amount) {
-//         $_SESSION['cart'][$add_qty] = $amount; // Update product quantity
-//     }
-//  }
 ?>
 
 <body>
@@ -243,81 +135,136 @@ if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
 						</div>
 					</div>
 					<!-- /LOGO -->
+					<?php
+    // ດຶງປະເພດສີນຄ້າທັງໝົດ
+						$sqltype ="SELECT * FROM type_product ORDER BY type_name ASC";
+						$rsptype = mysqli_query($conn, $sqltype) or die("Error :" . mysqli_error($conn));
+					?>
 
-					<!-- SEARCH BAR -->
-					<div class="col-md-6">
-						<div class="header-search">
-							<form>
-								<select class="input-select">
-									<option value="0">All Categories</option>
-									<option value="1">Category 01</option>
-									<option value="1">Category 02</option>
-								</select>
-								<input class="input" placeholder="Search here">
-								<button class="search-btn">Search</button>
-							</form>
-						</div>
+				<div class="col-md-6">
+					<div class="header-search">
+						<form action="Show_all_product.php" method="GET">
+							<select class="input-select" name="type_id">
+								<option value="">ທັງໝົດ (All)</option>
+								<?php while($row_t = mysqli_fetch_array($rsptype)) { ?>
+									<option value="<?= $row_t['type_id'] ?>">
+										<?= $row_t['type_name'] ?>
+									</option>
+								<?php } ?>
+							</select>
+							
+							<input class="input" name="search_text" placeholder="ຄົ້ນຫາສີນຄ້າຢູ່ບ່ອນນີ້...">
+							<button type="submit" class="search-btn">ຄົ້ນຫາ</button>
+						</form>
 					</div>
+				</div>
 					<!-- /SEARCH BAR -->
+					<?php
+					// Database connection (assuming $conn is already defined)
+					$p_id = mysqli_real_escape_string($conn, $_GET['id']);
+					$actdd = mysqli_real_escape_string($conn, $_GET['add']);
+					$act = mysqli_real_escape_string($conn, $_GET['act']);
 
+					// Sanitize input
+					if (isset($_GET['pro_id'])) {
+						$product_id = mysqli_real_escape_string($conn, $_GET['pro_id']);
+					} else {
+						$product_id = null;
+					}
+
+					// Handle actions (add, remove, update)
+					if (isset($_GET['act'])) {
+						$act = mysqli_real_escape_string($conn, $_GET['act']);
+
+						if ($act == 'remove' && !empty($product_id)) {
+							// Remove product from cart
+							unset($_SESSION['cart'][$product_id]);
+							header('Location: Show_all_product.php?id=' . $product_id);
+						}
+					}
+
+
+					if (isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == 'add') {
+						$product_id = intval($_GET['id']); // Sanitize the product ID
+						$quantity = isset($_GET['qty']) ? intval($_GET['qty']) : 1; // Default to 1 if quantity is not provided
+
+						// Initialize the cart if it doesn't exist
+						if (!isset($_SESSION['cart'])) {
+							$_SESSION['cart'] = [];
+						}
+
+						// Add the product to the cart or update its quantity
+						if (isset($_SESSION['cart'][$product_id])) {
+							// If product already exists in cart, increase the quantity
+							$_SESSION['cart'][$product_id] += $quantity;
+						} else {
+							// If product doesn't exist in cart, add it with the specified quantity
+							$_SESSION['cart'][$product_id] = $quantity;
+						}
+
+						// Redirect back to the product page or cart page
+						header('Location: product.php?id=' . $product_id);
+						exit();
+					}
+					?>
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
 						<!-- Cart Dropdown -->
-						<div class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-        <i class="fa fa-shopping-cart"></i>
-        <span>ກະຕ່າຂອງເຈົ້າ</span>
-        <div class="qty"><?= array_sum($_SESSION['cart'] ?? []); ?></div> <!-- Display total items in cart -->
-    </a>
-    <div class="cart-dropdown">
-        <div class="cart-list">
-            <?php
-            $qtysum = 0; // Calculate total quantity
-            $total = 0;
-            if (!empty($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $product_id => $qty) {
-                    $sql = "SELECT * FROM product_new, type_product 
-                            WHERE product_new.type_id = type_product.type_id 
-                            AND product_new.pro_id = '$product_id'";
-                    $query = mysqli_query($conn, $sql);
-                    if ($query && mysqli_num_rows($query) > 0) {
-                        $row = mysqli_fetch_array($query);
-                        $sum = $row['price'] * $qty; // Calculate total price for this product
-                        $total += $sum; // Add to the overall total
-						$qtysum += $row['amount'];
-                        ?>
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="../Admin/image/<?= $row['image'] ?>" alt="">
-                            </div>
-                            <div class="product-body">
-                                <h3 class="product-name"><a href="#"><?= $row['pro_name'];?></a></h3>
-                                <h4 class="product-price"><span class="qty"><?= $qty ?>x</span><?= number_format($row['price'], 0) ?> LAK</h4>
-                            </div>
-                            <button class="delete">
-                                <a href='nav.php?pro_id=<?= $product_id ?>&act=remove'>
-                                    <i class="fa fa-close"></i>
-                                </a>
-                            </button>
-                        </div>
-                    <?php }
-                }
-            } else {
-                echo "<p>ກະຕ່າຂອງເຈົ້າຍັງວ່າງເປົ່າ</p>";
-            }
-            ?>
-        </div>
-        <div class="cart-summary">
-            <small>ລວມຈຳນວນເງີນທີ່ສັ່ງຊື້ທາງໝົດ</small>
-            <h5>ຈຳນວນເງີນ: LAK <?= number_format($total, 0) ?></h5> <!-- Display total price -->
-        </div>
-        <div class="cart-btns">
-            <a href="#">ເບີ່ງກະຕ່າຂອງເຈົ້າ</a>
-            <a href="#">ຊຳລະເງີນເງິນ <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-</div>
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<i class="fa fa-shopping-cart"></i>
+									<span>ກະຕ່າຂອງເຈົ້າ</span>
+									<div class="qty"><?= array_sum($_SESSION['cart'] ?? []); ?></div> <!-- Display total items in cart -->
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-list">
+										<?php
+										$qtysum = 0; // Calculate total quantity
+										$total = 0;
+										if (!empty($_SESSION['cart'])) {
+											foreach ($_SESSION['cart'] as $product_id => $qty) {
+												$sql = "SELECT * FROM product_new, type_product 
+														WHERE product_new.type_id = type_product.type_id 
+														AND product_new.pro_id = '$product_id'";
+												$query = mysqli_query($conn, $sql);
+												if ($query && mysqli_num_rows($query) > 0) {
+													$row = mysqli_fetch_array($query);
+													$sum = $row['price'] * $qty; // Calculate total price for this product
+													$total += $sum; // Add to the overall total
+													$qtysum += $row['amount'];
+													?>
+													<div class="product-widget">
+														<div class="product-img">
+															<img src="../Admin/image/<?= $row['image'] ?>" alt="">
+														</div>
+														<div class="product-body">
+															<h3 class="product-name"><a href="#"><?= $row['pro_name'];?></a></h3>
+															<h4 class="product-price"><span class="qty"><?= $qty ?>x</span><?= number_format($row['price'], 0) ?> LAK</h4>
+														</div>
+														<button class="delete">
+															<a href='nav.php?pro_id=<?= $product_id ?>&act=remove'>
+																<i class="fa fa-close"></i>
+															</a>
+														</button>
+													</div>
+												<?php }
+											}
+										} else {
+											echo "<p>ກະຕ່າຂອງເຈົ້າຍັງວ່າງເປົ່າ</p>";
+										}
+										?>
+									</div>
+									<div class="cart-summary">
+										<small>ລວມຈຳນວນເງີນທີ່ສັ່ງຊື້ທາງໝົດ</small>
+										<h5>ຈຳນວນເງີນ: LAK <?= number_format($total, 0) ?></h5> <!-- Display total price -->
+									</div>
+									<div class="cart-btns">
+										<a href="#">ເບີ່ງກະຕ່າຂອງເຈົ້າ</a>
+										<a href="#">ຊຳລະເງີນເງິນ <i class="fa fa-arrow-circle-right"></i></a>
+									</div>
+								</div>
+							</div>
 							<!-- /Cart -->
 
 							<!-- Menu Tootle -->

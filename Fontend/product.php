@@ -165,8 +165,8 @@ $row = mysqli_fetch_array($request);
 										$resultsize = mysqli_query($conn, $sqlsize);
 										
 										if(mysqli_num_rows($resultsize) > 0) {
-											while($row = mysqli_fetch_assoc($resultsize)) {
-												echo '<option value="'.$row['size_id'].'">'.$row['size_name'].'</option>';
+											while($row_size = mysqli_fetch_assoc($resultsize)) {
+												echo '<option value="'.$row_size['size_id'].'">'.$row_size['size_name'].'</option>';
 											}
 										} else {
 											// ຖ້າບໍ່ມີຂໍ້ມູນໃນຖານຂໍ້ມູນ, ໃຫ້ເລືອກເບີເດີມ
@@ -189,17 +189,17 @@ $row = mysqli_fetch_array($request);
 									$sqlcolor = "SELECT * FROM tbl_color ORDER BY color_id";
 									$resultcolor = mysqli_query($conn, $sqlcolor);
 									if(mysqli_num_rows($resultcolor) > 0){
-										while($row = mysqli_fetch_assoc($resultcolor)){
-											echo '<option value = "'.$row['color_id'].'">'.$row['color_name']. '</option>';
+										while($row_color = mysqli_fetch_assoc($resultcolor)){
+											echo '<option value = "'.$row_color['color_id'].'">'.$row_color['color_name']. '</option>';
 										}
 									}else{
-										echo '<option value="0">ສີດຳ</option>
-											<option value="0">ສີຂາວ</option>
-											<option value="0">ສີເຫຼືອງ</option>
-											<option value="0">ສີຟ້າ</option>
-											<option value="0">ສີຂຽວ</option>
-											<option value="0">ສີມ່ວງ</option>
-											<option value="0">ສີອອນ</option>';
+										echo '<option value="1">ສີດຳ</option>
+											<option value="2">ສີຂາວ</option>
+											<option value="3">ສີເຫຼືອງ</option>
+											<option value="4">ສີຟ້າ</option>
+											<option value="5">ສີຂຽວ</option>
+											<option value="6">ສີມ່ວງ</option>
+											<option value="7">ສີອອນ</option>';
 									}
 									?>
 									
@@ -221,7 +221,7 @@ $row = mysqli_fetch_array($request);
 								<a href="product.php?id=<?=$row['pro_id'];?>&act=add&qty=" onclick="this.href=this.href+document.getElementById('quantity').value">ເພີ່ມເຂົ້າໄປກະຕ່າ</a>
 								<input type="hidden" name="t_id" value="<?php echo $type_id; ?>">
 							</button>
-							<?php } else { ?>
+							<?php  } else { ?>
 							<button class="add-to-cart-btn" disabled>
 								<i class="fa fa-shopping-cart"></i>
 								ສິນຄ້າຫມົດ
