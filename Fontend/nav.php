@@ -143,9 +143,9 @@ include('connetdb.php');
 
 				<div class="col-md-6">
 					<div class="header-search">
-						<form action="Show_all_product.php" method="GET">
+						<form action="index.php" method="GET">
 							<select class="input-select" name="type_id">
-								<option value="">ທັງໝົດ (All)</option>
+								<option value="">ເລືອນປະເພດ</option>
 								<?php while($row_t = mysqli_fetch_array($rsptype)) { ?>
 									<option value="<?= $row_t['type_id'] ?>">
 										<?= $row_t['type_name'] ?>

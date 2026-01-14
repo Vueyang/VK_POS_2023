@@ -107,10 +107,22 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<!-- product -->
 									<?php
-										$sql = "SELECT * FROM type_product ORDER BY type_id	";
-						
+    									// ຮັບຄ່າຈາກ URL ແລະ ປ້ອງກັນ SQL Injection
+										$type_id = isset($_GET['type_id']) ? mysqli_real_escape_string($conn, $_GET['type_id']) : '';
+
+										if($type_id != ''){
+											// ໃຊ້ WHERE ເພື່ອຄົ້ນຫາຂໍ້ມູນທີ່ກົງກັບ ID ຫຼື ຊື່
+											$sql = "SELECT * FROM type_product 
+													WHERE type_id LIKE '%$type_id%' 
+													OR type_name LIKE '%$type_id%' 
+													ORDER BY type_id ASC";
+										} else {
+											// ຖ້າບໍ່ມີການຄົ້ນຫາ ໃຫ້ສະແດງທັງໝົດ
+											$sql = "SELECT * FROM type_product ORDER BY type_id ASC";
+										}
+
 										$result = mysqli_query($conn, $sql);
-										while($row=mysqli_fetch_array($result)){
+										while($row = mysqli_fetch_array($result)){
 									?>
 									<div class="col-sm-4 col-xs-6 ">
 										<div class="shop">
@@ -120,8 +132,7 @@
 											<div class="shop-body">
 												<h3><?=$row['type_name']?></h3>
 												<a href="Show_all_product.php?id=<?=$row['type_id']?>" name="search_type"
-													class="cta-btn">Shop
-													now
+													class="cta-btn">ເບິ່ງລາຍລະອຽດ
 													<i class="fa fa-arrow-circle-right"></i></a>
 											</div>
 										</div>
@@ -146,22 +157,48 @@
 
 	<!-- SECTION -->
 	<?php
-// ຮັບຄ່າແຍກກັນ
-// ຮັບຄ່າແຍກກັນຢ່າງເດັດຂາດ
+		// ຮັບຄ່າແຍກກັນ
+		// ຮັບຄ່າແຍກກັນຢ່າງເດັດຂາດ
 		$type_new = isset($_GET['type_new']) ? mysqli_real_escape_string($conn, $_GET['type_new']) : '';
 		$type_hot = isset($_GET['type_hot']) ? mysqli_real_escape_string($conn, $_GET['type_hot']) : '';
+		// 1. ຮັບຄ່າ ແລະ ປ້ອງກັນ SQL Injection
+		$search_text = isset($_GET['search_text']) ? mysqli_real_escape_string($conn, $_GET['search_text']) : '';
 
-		// SQL ສຳລັບສີນຄ້າມາໃໝ່
-		$where_new = "";
+		// 2. ສ້າງ Array ເພື່ອເກັບເງື່ອນໄຂ WHERE
+		$conditions = array();
+
+		// ຖ້າມີການເລືອກປະເພດສີນຄ້າ
 		if ($type_new != "") {
-			$where_new = " WHERE p.type_id = '$type_new' ";
+			$conditions[] = "p.type_id = '$type_new'";
 		}
-		$sql_new = "SELECT p.*, t.type_name FROM product_new AS p
+
+		// ຖ້າມີການພິມຄົ້ນຫາ (ຄົ້ນຫາຈາກ ID ຫຼື ຊື່ສີນຄ້າ)
+		if ($search_text != "") {
+			$conditions[] = "(p.pro_id LIKE '%$search_text%' OR p.pro_name LIKE '%$search_text%')";
+		}
+
+		// 3. ລວມເງື່ອນໄຂເຂົ້າກັນ
+		$where_sql = "";
+		if (count($conditions) > 0) {
+			// ໃຊ້ AND ເພື່ອໃຫ້ມັນກັ່ນຕອງທັງສອງຢ່າງພ້ອມກັນ (ຖ້າມີທັງສອງ)
+			$where_sql = " WHERE " . implode(" AND ", $conditions);
+		}
+
+		// 4. ສ້າງ SQL Query
+		$sql_new = "SELECT p.*, t.type_name 
+					FROM product_new AS p
 					INNER JOIN type_product AS t ON p.type_id = t.type_id
-					$where_new
+					$where_sql
 					ORDER BY p.pro_id DESC";
+
 		$result_new = mysqli_query($conn, $sql_new);
-		?>
+
+		// ກວດສອບ Error ຂອງ SQL (ສຳລັບນັກພັດທະນາ)
+		if (!$result_new) {
+			die("Error: " . mysqli_error($conn));
+		}
+
+	?>
 	<div class="section">
 		<div class="container">
 			<div class="row">
