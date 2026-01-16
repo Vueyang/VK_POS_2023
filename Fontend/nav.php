@@ -293,19 +293,12 @@ include('connetdb.php');
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a
-								class="<?= $url[0] == 'index' || $url[0] == 'index' ? 'active-menu-custom' : ''?>"
-								href="index.php">ໜ້າຫຼັກ</a></li>
-						<li><a class="<?= $url[0] == 'promotion' || $url[0] == 'promotion' ? 'active-menu-custom' : ''?>"
-								href="#">ໂປຣໂມຊັນ</a></li>
-						<li><a class="<?= $url[0] == 'about' || $url[0] == 'about' ? 'active-menu-custom' : ''?>"
-								href="#">ກ່ຽວກັບພວກເຮົາ</a></li>
-						<li><a class="<?= $url[0] == '' || $url[0] == 'product_type' ? 'active-menu-custom' : ''?>"
-								href="product_type.php">ປະເພດສີນຄ້າ</a></li>
-						<li><a class="<?= $url[0] == '' || $url[0] == 'product' ? 'active-menu-custom' : ''?>"
-								href="Show_all_product.php">ສີນຄ້າ</a></li>
-						<li><a class="<?= $url[0] == '' || $url[0] == 'accessories' ? 'active-menu-custom' : ''?>"
-								href="#">ອຸປະກອນເສີມ</a></li>
+						<li><a href="index.php">ໜ້າຫຼັກ</a></li>
+						<li><a href="product_type.php">ປະເພດສີນຄ້າ</a></li>
+						<li><a href="Show_all_product.php">ສີນຄ້າ</a></li>
+						<li><a href="promotion.php">ໂປຣໂມຊັນ</a></li>
+						<li><a href="about.php">ກ່ຽວກັບພວກເຮົາ</a></li>
+						<li><a href="#">ອຸປະກອນເສີມ</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -322,3 +315,27 @@ include('connetdb.php');
 </body>
 
 </html>
+<!-- // ໃສ່ script ນີ້ໄວ້ກ່ອນປິດ tag </body> -->
+<script>
+    // ດຶງ URL ປັດຈຸບັນ
+    const currentUrl = window.location.href;
+    const navLinks = document.querySelectorAll(".main-nav li a");
+    let matched = false;
+
+    navLinks.forEach((link) => {
+        // ກວດສອບວ່າ URL ປັດຈຸບັນ ກົງກັບ href ຂອງ Link ບໍ່
+        if (currentUrl.includes(link.getAttribute("href")) && link.getAttribute("href") !== "#") {
+            link.parentElement.classList.add("active");
+            link.classList.add("active-menu-custom");
+            matched = true;
+        }
+    });
+
+    // ຖ້າບໍ່ມີເມນູໃດຖືກ Match (ເຊັ່ນ: ຕອນເຂົ້າເວັບໄຊທ໌ເທື່ອທຳອິດ http://domain.com/)
+    // ໃຫ້ມັນໄປ Active ທີ່ເມນູທຳອິດ (ໜ້າຫຼັກ)
+    if (!matched) {
+        const homeMenu = navLinks[0].parentElement;
+        homeMenu.classList.add("active");
+        navLinks[0].classList.add("active-menu-custom");
+    }
+</script>

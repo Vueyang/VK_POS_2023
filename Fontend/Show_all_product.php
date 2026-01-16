@@ -74,76 +74,39 @@ $menu = "list_sale";
 	<!-- NAV -->
 	<?php 
 
-// ຮັບຄ່າ type_id ຈາກ URL
-$type_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
- if ($type_id == 0) {
-	// ກວດສອບວ່າ type_id ມີຢູ່ໃນຖານຂໍ້ມູນ
-	$type_id1 = isset($_GET['type_id']) ? intval($_GET['type_id']) : 0;
-	if ($type_id1 == 0) {
-		die("ບໍ່ມີ type_id ທີ່ຖືກສົ່ງມາ.");
-	}
- }
+		// 1. ຮັບຄ່າ type_id ຈາກ URL (ກວດສອບທັງ id ແລະ type_id ເພື່ອຄວາມແນ່ນອນ)
+// 1. ຮັບຄ່າ ID ປະເພດສິນຄ້າ
+$type_id = isset($_GET['id']) ? intval($_GET['id']) : (isset($_GET['type_id']) ? intval($_GET['type_id']) : 0);
 
-// ນັບຈຳນວນແຖວທັງໝົດ
-$query = mysqli_query($conn, "SELECT COUNT(product_new.pro_id) FROM product_new 
-                              JOIN type_product ON product_new.type_id = type_product.type_id 
-                              WHERE type_product.type_id = $type_id");
-$row = mysqli_fetch_row($query);
-$rows = $row[0];
-
-// ກຳນົດການແບ່ງຫນ້າ
-$page_rows = 10;
-$last = ceil($rows / $page_rows);
-if ($last < 1) {
-    $last = 1;
+// 2. ສ້າງເງື່ອນໄຂ WHERE
+$where_condition = "";
+if ($type_id > 0) {
+    $where_condition = " WHERE product_new.type_id = $type_id ";
 }
 
-$pagenum = isset($_GET['pn']) ? intval($_GET['pn']) : 1;
-if ($pagenum < 1) {
-    $pagenum = 1;
-} else if ($pagenum > $last) {
-    $pagenum = $last;
-}
+// 3. ກຳນົດຈຳນວນຂໍ້ມູນຕໍ່ໜ້າ (ໃຊ້ຊື່ດຽວກັນທັງໝົດ)
+$perPage = 9; 
 
-$limit = 'LIMIT ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
+// 4. ນັບຈຳນວນແຖວທັງໝົດ
+$sql_count = "SELECT COUNT(product_new.pro_id) FROM product_new $where_condition";
+$query_count = mysqli_query($conn, $sql_count);
+$row_count = mysqli_fetch_row($query_count);
+$total_rows = $row_count[0];
 
-// ດຶງຂໍ້ມູນປະເພດສິນຄ້າ
+// 5. ຄິດໄລ່ການແບ່ງໜ້າ
+$last_page = ceil($total_rows / $perPage);
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) { $page = 1; } elseif ($page > $last_page) { $page = $last_page; }
+
+$start = ($page - 1) * $perPage;
+if($start < 0) { $start = 0; } // ປ້ອງກັນກໍລະນີບໍ່ມີຂໍ້ມູນເລີຍ
+
+// 6. ດຶງຂໍ້ມູນສິນຄ້າ (LIMIT ໃຊ້ $start ແລະ $perPage)
 $sql = "SELECT * FROM product_new 
-        JOIN type_product ON product_new.type_id = type_product.type_id 
-        WHERE type_product.type_id = $type_id 
-        ORDER BY product_new.pro_id DESC 
-        $limit";
-$result = mysqli_query($conn, $sql);
-
-// ສ້າງປຸ່ມແບ່ງຫນ້າ
-$paginationCtrls = '';
-if ($last != 1) {
-    if ($pagenum > 1) {
-        $previous = $pagenum - 1;
-        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$previous.'" class="btn btn-info">Previous</a> &nbsp; ';
-    }
-
-    for ($i = $pagenum - 4; $i < $pagenum; $i++) {
-        if ($i > 0) {
-            $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
-        }
-    }
-
-    $paginationCtrls .= '<a href="" class="btn btn-danger">'.$pagenum.'</a> &nbsp; ';
-
-    for ($i = $pagenum + 1; $i <= $last; $i++) {
-        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$i.'" class="btn btn-primary">'.$i.'</a> &nbsp; ';
-        if ($i >= $pagenum + 4) {
-            break;
-        }
-    }
-
-    if ($pagenum != $last) {
-        $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp;<a href="'.$_SERVER['PHP_SELF'].'?type_id='.$type_id.'&pn='.$next.'" class="btn btn-info">Next</a> ';
-    }
-}
-
+        INNER JOIN type_product ON product_new.type_id = type_product.type_id 
+        $where_condition 
+        ORDER BY product_new.pro_id LIMIT $start, $perPage";
+$result = mysqli_query($conn, $sql) or die("Error Query:" . mysqli_error($conn));
 ?>
 
 	<head>
@@ -163,8 +126,8 @@ if ($last != 1) {
 						<h3 class="aside-title">Categories</h3>
 						<div class="checkbox-filter">
 						<?php 
-		$rqcategory = "SELECT * FROM type_product ORDER BY type_id";
-		$resultcategory = mysqli_query($conn, $rqcategory);
+							$rqcategory = "SELECT * FROM type_product ORDER BY type_id";
+							$resultcategory = mysqli_query($conn, $rqcategory) or die("Error :" . mysqli_error($conn));
 							//  var_dump($resultcategory);
 							while($rowcategory=mysqli_fetch_array($resultcategory)){ 
 							echo "<div class='input-checkbox'>";
@@ -326,12 +289,12 @@ if ($last != 1) {
 					<!-- /store top filter -->
 
 					<!-- store products -->
-					<!-- <?php if ($row >0) {?> -->
+				
 					<div class="row">
 						<?php
 
-					while($row=mysqli_fetch_array($result)){
-					?>
+							while($row=mysqli_fetch_array($result)){
+							?>
 						<!-- product -->
 						<div class="col-sm-4 col-xs-6">
 							<div class="product">
@@ -374,38 +337,36 @@ if ($last != 1) {
 							</div>
 						</div>
 						<!-- /product -->
-
-
-						<!-- /product -->
-
-
-
-						<?php
-					}
-					?>
+						<?php } ?>
 
 					</div>
-					<?php }else{?>
-					<?php }?>
-					<!-- /store products -->
-					<!-- store bottom filter -->
-
-					<div class="card-footer">
-						<center>
-							<div id="pagination_controls">
-
-								<?php echo $paginationCtrls; 
-								mysqli_close($conn);
-								?>
-
-							</div>
-						</center>
-					</div>
-					<!-- /store bottom filter -->
 				</div>
 				<!-- /STORE -->
 			</div>
 			<!-- /row -->
+			 <div class="store-filter clearfix">
+						<ul class="store-pagination">
+							<?php if($page > 1): ?>
+								<li><a href="?id=<?= $type_id ?>&page=<?= $page-1 ?>"><i class="fa fa-angle-left"></i></a></li>
+							<?php endif; ?>
+
+							<?php 
+							for($i = 1; $i <= $last_page; $i++): 
+								if($i >= $page - 2 && $i <= $page + 2): // ສະແດງແຕ່ເລກໃກ້ຄຽງ
+							?>
+								<li class="<?= ($i == $page) ? 'active' : '' ?>">
+									<a href="?id=<?= $type_id ?>&page=<?= $i ?>"><?= $i ?></a>
+								</li>
+							<?php 
+								endif;
+							endfor; 
+							?>
+
+							<?php if($page < $last_page): ?>
+								<li><a href="?id=<?= $type_id ?>&page=<?= $page+1 ?>"><i class="fa fa-angle-right"></i></a></li>
+							<?php endif; ?>
+						</ul>
+					</div>
 		</div>
 		<!-- /container -->
 	</div>
@@ -449,101 +410,7 @@ if ($last != 1) {
 
 	<!-- FOOTER -->
 	<footer id="footer">
-		<!-- top footer -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-3 col-xs-6">
-						<div class="footer">
-							<h3 class="footer-title">About Us</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut.</p>
-							<ul class="footer-links">
-								<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-								<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-								<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-xs-6">
-						<div class="footer">
-							<h3 class="footer-title">Categories</h3>
-							<ul class="footer-links">
-								<li><a href="#">Hot deals</a></li>
-								<li><a href="#">Laptops</a></li>
-								<li><a href="#">Smartphones</a></li>
-								<li><a href="#">Cameras</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="clearfix visible-xs"></div>
-
-					<div class="col-md-3 col-xs-6">
-						<div class="footer">
-							<h3 class="footer-title">Information</h3>
-							<ul class="footer-links">
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Contact Us</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Orders and Returns</a></li>
-								<li><a href="#">Terms & Conditions</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-xs-6">
-						<div class="footer">
-							<h3 class="footer-title">Service</h3>
-							<ul class="footer-links">
-								<li><a href="#">My Account</a></li>
-								<li><a href="#">View Cart</a></li>
-								<li><a href="#">Wishlist</a></li>
-								<li><a href="#">Track My Order</a></li>
-								<li><a href="#">Help</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /top footer -->
-
-		<!-- bottom footer -->
-		<div id="bottom-footer" class="section">
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-4 text-center">
-						<ul class="footer-payments">
-							<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-							<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-							<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-						</ul>
-						<span class="copyright">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-							</script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-								aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /bottom footer -->
+		<?php include('footer_1.php')?>
 	</footer>
 	<!-- /FOOTER -->
 </body>
